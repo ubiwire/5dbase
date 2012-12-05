@@ -60,7 +60,7 @@ $form=$this->beginWidget('CActiveForm', array(
 		<?php // echo $form->labelEx($profile,$field->varname);
 		
 		if (0) {//$widgetEdit = $field->widgetEdit($profile)
-			// echo $widgetEdit;  // todo:�����޸���ʱ֧�����ڵ��������Ժ������޸�profile ֧�ֶ�̬�ֶΡ�wedget �ĳ�bootstrap �ֶ�
+			// echo $widgetEdit;  // todo:完整修改临时支持日期的做法。以后完整修改profile 支持动态字段。wedget 改成bootstrap 字段
 		} elseif ($field->range) {
 			echo $form->dropDownListRow($profile,$field->varname,Profile::range($field->range));
 		} elseif ($field->field_type=="TEXT") {
@@ -106,9 +106,7 @@ $this->widget('bootstrap.widgets.TbMenu', array(
 
 
 
-echo '<pre>' . dump($profile->rules()) . '</pre>'; 
+//echo '<pre>' . dump($profile->rules()) . '</pre>'; 
  
 
 ?>
- 
- 
