@@ -13,7 +13,7 @@
         'htmlOptions' => array('enctype' => 'multipart/form-data'),
             ));
     ?>
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
+    <p class="note"><span class="required">*</span><?php echo Yii::t('org', 'Fields with * are required.') ?></p>
     <?php echo $form->errorSummary($model); ?>
 
 

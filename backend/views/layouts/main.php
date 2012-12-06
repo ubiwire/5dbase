@@ -42,7 +42,7 @@
                                 array('label' => Yii::t('default', 'reward point'), 'url' => '#'),
                                 array('label' => Yii::t('default', 'team manage'), 'items' => array(
                                         array('label' => Yii::t('default', 'update team profile'), 'url' => array('/org/update')),
-                                        array('label' => Yii::t('default', 'member manage'), 'url' => '#')
+                                        array('label' => Yii::t('default', 'member manage'), 'url' =>array( '/user')),
                                 )),
                                 array('label' => Yii::t('default', 'course manage'), 'items' => array(
                                         array('label' => Yii::t('default', 'create course'), 'url' => '#')

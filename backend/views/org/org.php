@@ -4,9 +4,9 @@ $this->breadcrumbs = array(
     Yii::t('org', 'team'),
 );
 $this->menu = array(
-    array('label' => 'Person', 'itemOptions' => array('class' => 'nav-header')),
+    array('label' => Yii::t('default', 'team manage'), 'itemOptions' => array('class' => 'nav-header')),
     array('label' => Yii::t('org', 'edit team'), 'url' => array('update')),
-  
+    array('label' => Yii::t('default', 'member manage'), 'url' => array('/user')),
    
 );
 ?><h1><?php echo Yii::t('org', 'your team'); ?></h1>

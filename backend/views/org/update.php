@@ -3,9 +3,8 @@
 /* @var $model Org */
 
 $this->breadcrumbs=array(
-	'Orgs'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	//'Orgs'=>array('index'),
+	$model->name,
 );
 
 //$this->menu=array(
@@ -16,6 +15,6 @@ $this->breadcrumbs=array(
 //);
 ?>
 
-<h1>Update Org <?php echo $model->id; ?></h1>
+<h1><?php echo Yii::t('org', 'update org'); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
