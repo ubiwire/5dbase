@@ -45,6 +45,15 @@ class Post extends CActiveRecord {
             array('contents, user_id, org_id, create_at', 'required'),
             array('user_id, comments_count, like_count, favorite_count, public, wb_type, refer_id, org_id', 'numerical', 'integerOnly' => true),
             array('update_at', 'safe'),
+            array('file_path',
+                'file',
+                'allowEmpty' => true,
+                'types' => 'jpg,gif,png,jpeg',
+                'maxSize' => 1024 * 1024 * 1,
+                'tooLarge' => 'to big',
+            ),
+            
+            
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, contents, user_id, comments_count, like_count, favorite_count, public, wb_type, refer_id, org_id, create_at, update_at', 'safe', 'on' => 'search'),
@@ -87,6 +96,7 @@ class Post extends CActiveRecord {
             'org_id' => 'Org',
             'create_at' => 'Create At',
             'update_at' => 'Update At',
+            'file_path' => 'File Path',
         );
     }
 

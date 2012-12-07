@@ -21,6 +21,9 @@ $this->widget('zii.widgets.CListView', array(
         'create_at' => Yii::t('post', 'Post time'),
     ),
 ));
+
+
+
 ?>
 
 
