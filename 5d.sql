@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 12 月 05 日 15:08
--- 服务器版本: 5.5.16
--- PHP 版本: 5.3.8
+-- 生成日期: 2012 年 12 月 07 日 14:36
+-- 服务器版本: 5.1.37
+-- PHP 版本: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -33,6 +32,11 @@ CREATE TABLE IF NOT EXISTS `tbl_categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 转存表中的数据 `tbl_categories`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +54,11 @@ CREATE TABLE IF NOT EXISTS `tbl_category` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 转存表中的数据 `tbl_category`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -57,16 +66,34 @@ CREATE TABLE IF NOT EXISTS `tbl_category` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `text` text NOT NULL,
-  `author_id` int(11) NOT NULL,
-  `commentable_id` int(11) NOT NULL DEFAULT '0',
-  `like_count` int(11) NOT NULL DEFAULT '0',
-  `commentable_type` int(11) NOT NULL DEFAULT '0',
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `owner_name` varchar(50) NOT NULL,
+  `owner_id` int(12) NOT NULL,
+  `comment_id` int(12) NOT NULL AUTO_INCREMENT,
+  `parent_comment_id` int(12) DEFAULT NULL,
+  `creator_id` int(12) DEFAULT NULL,
+  `user_name` varchar(128) DEFAULT NULL,
+  `user_email` varchar(128) DEFAULT NULL,
+  `comment_text` text,
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`comment_id`),
+  KEY `owner_name` (`owner_name`,`owner_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- 转存表中的数据 `tbl_comments`
+--
+
+INSERT INTO `tbl_comments` (`owner_name`, `owner_id`, `comment_id`, `parent_comment_id`, `creator_id`, `user_name`, `user_email`, `comment_text`, `create_time`, `update_time`, `status`) VALUES
+('Post', 2, 1, 0, 1, NULL, NULL, '122432423424', 1354888156, NULL, 0),
+('Post', 2, 2, 1, 1, NULL, NULL, '3134534r34r', 1354888176, NULL, 0),
+('Post', 2, 3, 0, 1, NULL, NULL, '1111111111111111', 1354888209, NULL, 0),
+('Post', 2, 4, 0, 1, NULL, NULL, '13r34r34', 1354888215, NULL, 0),
+('Post', 2, 5, 0, 1, NULL, NULL, '234t34f34r', 1354888222, NULL, 0),
+('Post', 2, 6, 0, 7, NULL, NULL, '1324r32r', 1354888429, NULL, 0),
+('Post', 2, 7, 5, 7, NULL, NULL, '32rrwerw', 1354888608, NULL, 0),
+('Post', 2, 8, 0, 7, NULL, NULL, 'ewfr23r', 1354888832, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -94,6 +121,11 @@ CREATE TABLE IF NOT EXISTS `tbl_contacts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 转存表中的数据 `tbl_contacts`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -104,6 +136,11 @@ CREATE TABLE IF NOT EXISTS `tbl_contacts_category` (
   `category_id` int(11) DEFAULT NULL,
   `contact_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `tbl_contacts_category`
+--
+
 
 -- --------------------------------------------------------
 
@@ -119,6 +156,11 @@ CREATE TABLE IF NOT EXISTS `tbl_favorites` (
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `tbl_favorites`
+--
+
 
 -- --------------------------------------------------------
 
@@ -137,6 +179,11 @@ CREATE TABLE IF NOT EXISTS `tbl_integral` (
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `tbl_integral`
+--
+
 
 -- --------------------------------------------------------
 
@@ -158,6 +205,11 @@ CREATE TABLE IF NOT EXISTS `tbl_integral_grant` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 转存表中的数据 `tbl_integral_grant`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -170,6 +222,11 @@ CREATE TABLE IF NOT EXISTS `tbl_mentions` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `tbl_mentions`
+--
+
 
 -- --------------------------------------------------------
 
@@ -223,9 +280,9 @@ CREATE TABLE IF NOT EXISTS `tbl_orgs` (
 --
 
 INSERT INTO `tbl_orgs` (`id`, `name`, `slogan`, `photo_path`, `company_name`, `parent_id`, `create_at`, `update_at`) VALUES
-(1, '营销之道', NULL, '', '', 0, '2012-12-02 01:15:54', '0000-00-00 00:00:00'),
-(2, '营销计划', NULL, '', '', 0, '2012-12-02 01:32:21', '0000-00-00 00:00:00'),
-(3, '狗屁团队', '集结号就是口号', '2068739827.jpg', '知正12341', 0, '2012-12-02 01:36:17', '0000-00-00 00:00:00');
+(1, '营销之道', NULL, '', '', 0, '2012-12-02 01:15:30', '0000-00-00 00:00:00'),
+(2, '营销计划', NULL, '', '', 0, '2012-12-02 01:31:57', '0000-00-00 00:00:00'),
+(3, '你我团队', '集结号就是口号', '66901790.jpg', '知正12341', 0, '2012-12-02 01:35:53', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -246,6 +303,7 @@ CREATE TABLE IF NOT EXISTS `tbl_posts` (
   `org_id` int(11) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `file_path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
@@ -253,9 +311,9 @@ CREATE TABLE IF NOT EXISTS `tbl_posts` (
 -- 转存表中的数据 `tbl_posts`
 --
 
-INSERT INTO `tbl_posts` (`id`, `contents`, `user_id`, `comments_count`, `like_count`, `favorite_count`, `public`, `wb_type`, `refer_id`, `org_id`, `create_at`, `update_at`) VALUES
-(1, '大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-02 12:56:02', '0000-00-00 00:00:00'),
-(2, '大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。', 7, 1, 2, 3, 0, 0, 0, 3, '2012-12-02 12:56:10', '0000-00-00 00:00:00');
+INSERT INTO `tbl_posts` (`id`, `contents`, `user_id`, `comments_count`, `like_count`, `favorite_count`, `public`, `wb_type`, `refer_id`, `org_id`, `create_at`, `update_at`, `file_path`) VALUES
+(1, '大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-02 12:55:38', '0000-00-00 00:00:00', ''),
+(2, '大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。', 7, 1, 2, 3, 0, 0, 0, 3, '2012-12-02 12:55:46', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -278,6 +336,11 @@ CREATE TABLE IF NOT EXISTS `tbl_productions` (
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `tbl_productions`
+--
+
 
 -- --------------------------------------------------------
 
@@ -372,11 +435,11 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `tel`, `activkey`, `create_at`, `lastvisit_at`, `superuser`, `status`, `roles`, `org_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '', '9a24eff8c15a6a141ece27eb6947da0f', '2012-09-03 02:28:54', '2012-11-30 06:24:52', 1, 1, '', 0),
-(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '', '87ebc08a142bf24616e439c950d457f8', '2012-09-03 02:28:54', '2012-11-07 00:25:50', 0, 1, '', 0),
-(3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-03 03:35:30', '0000-00-00 00:00:00', 0, 1, '', 0),
-(4, 'jing', 'aa3f6926fe23b4cd15480ec872616581', 'jk_info@126.com', '', '26bc800dd291790b4eb5eeb91d73a86b', '2012-11-29 12:57:32', '2012-11-29 05:05:05', 0, 1, '', 0),
-(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-02 01:36:17', '2012-12-04 07:04:05', 0, 1, 'manager', 3);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '', '9a24eff8c15a6a141ece27eb6947da0f', '2012-09-03 02:28:30', '2012-11-30 06:24:28', 1, 1, '', 0),
+(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '', '87ebc08a142bf24616e439c950d457f8', '2012-09-03 02:28:30', '2012-11-07 00:25:26', 0, 1, '', 0),
+(3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-03 03:35:06', '0000-00-00 00:00:00', 0, 1, '', 0),
+(4, 'jing', 'aa3f6926fe23b4cd15480ec872616581', 'jk_info@126.com', '', '26bc800dd291790b4eb5eeb91d73a86b', '2012-11-29 12:57:08', '2012-11-29 05:04:41', 0, 1, '', 0),
+(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-02 01:35:53', '2012-12-07 14:04:11', 0, 1, 'manager', 3);
 
 --
 -- 限制导出的表
