@@ -24,7 +24,7 @@ class ApiController extends Controller
     // Actions
     public function actionList()
     {
-         $this->_checkAuth();
+        $this->_checkAuth();
         // Get the respective model instance
     switch($_GET['model'])
     {
@@ -281,19 +281,27 @@ private function _getStatusCodeMessage($status)
 private function _checkAuth()
 {
     // Check if we have the USERNAME and PASSWORD HTTP headers set?
-    if(!(isset($_SERVER['HTTP_X_USERNAME']) and isset($_SERVER['HTTP_X_PASSWORD']))) {
-        // Error: Unauthorized
-        $this->_sendResponse(401);
-        echo "asdfasdf";
-    }
-    $username = $_SERVER['HTTP_X_USERNAME'];
-    $password = $_SERVER['HTTP_X_PASSWORD'];
+    // if(!(isset($_SERVER['HTTP_X_USERNAME']) and isset($_SERVER['HTTP_X_PASSWORD']))) {
+    //     // Error: Unauthorized
+    //     $this->_sendResponse(401);
+        
+    // }
+    // $username = $_SERVER['HTTP_X_USERNAME'];
+    // $password = $_SERVER['HTTP_X_PASSWORD'];
+    $username = 'snfang';
+    $password = 'admin';
     // Find the user
-    $user=User::model()->find('LOWER(username)=?',array(strtolower($username)));
+
+    $user=User::model()->notsafe()->find('LOWER(username)=?',array(strtolower($username)));
+   // var_dump($user);
+    // echo Yii::app()->getModule('user')->encrypting($password);
+    // echo "<br/>";
+    // var_dump($user->attributes);
+    // Yii::app()->end();
     if($user===null) {
         // Error: Unauthorized
         $this->_sendResponse(401, 'Error: User Name is invalid');
-    } else if(!$user->validatePassword($password)) {
+        } else if(Yii::app()->getModule('user')->encrypting($password)!==$user->password) {
         // Error: Unauthorized
         $this->_sendResponse(401, 'Error: User Password is invalid');
     }

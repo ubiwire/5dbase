@@ -45,11 +45,15 @@ return CMap::mergeArray(array(
 		'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
 		'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 		// add rest api by fsn
-		array('api/list', 'pattern'=>'api/<model:\w+>', 'verb'=>'GET'),
-        array('api/view', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'GET'),
-        array('api/update', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'PUT'),
-        array('api/delete', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'DELETE'),
-        array('api/create', 'pattern'=>'api/<model:\w+>', 'verb'=>'POST')
+		// array('api/preflight', 'pattern'=>'api/*', 'verb'=>'OPTIONS'),
+  //        array('api/index', 'pattern'=>'api/*', 'verb'=>'GET'),
+		// array('api/list', 'pattern'=>'api/<model:\w+>', 'verb'=>'GET'),
+  //       array('api/view', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'GET'),
+  //       array('api/update', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'PUT'),
+  //       array('api/delete', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'DELETE'),
+  //       array('api/create', 'pattern'=>'api/<model:\w+>', 'verb'=>'POST'),
+        
+
         // add rest api by fsn
 	),
 	'php.exePath' => '/usr/bin/php'

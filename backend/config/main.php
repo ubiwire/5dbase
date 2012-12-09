@@ -135,6 +135,9 @@ return CMap::mergeArray(
                     'getNameMethod' => 'getFullName',
                     'getSuggestMethod' => 'getSuggest',
                 ),
+                'api' => array(
+                   // 'apiPerPage'=>15,
+                    ),
                 'gii' => array(
                     'class' => 'system.gii.GiiModule',
                     'password' => 'admin',
@@ -143,6 +146,7 @@ return CMap::mergeArray(
                     )
                 )
             ),
+            
             'components' => array(
                 'user' => array(
                     // enable cookie-based authentication
@@ -177,6 +181,20 @@ return CMap::mergeArray(
             /* make sure you have your cache set correctly before uncommenting */
             /* 'cache' => $params['cache.core'], */
             /* 'contentCache' => $params['cache.content'] */
+            // 'log'=>array(
+            //         'class'=>'CLogRouter',
+            //         'routes'=>array(
+            //                        array(
+            //                           'class'=>'CFileLogRoute',
+            //                            'levels'=>'trace, info',
+            //                            'categories'=>'system.*',
+            //                            ),
+            //                        array(
+            //                             'class'=>'CWebLogRoute',
+            //                             ),
+            //                        ),
+            //                  ),
+
             ),
                 ), CMap::mergeArray($mainEnvConfiguration, $mainLocalConfiguration)
 );

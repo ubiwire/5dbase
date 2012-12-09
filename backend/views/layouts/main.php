@@ -38,7 +38,7 @@
                             'items' => array(
                                 array('label' => Yii::t('default', 'index page'), 'url' => array('/site/index')),
                                 //array('label' => Yii::t('default', 'member manage'), 'url' => array('/site/page', 'view' => 'about')),
-                                array('label' => Yii::t('default', 'gift manage'), 'url' => '#'),
+                                array('label' => Yii::t('default', 'product manage'), 'url' => array('/product')),
                                 array('label' => Yii::t('default', 'reward point'), 'url' => '#'),
                                 array('label' => Yii::t('default', 'team manage'), 'items' => array(
                                         array('label' => Yii::t('default', 'update team profile'), 'url' => array('/org/update')),

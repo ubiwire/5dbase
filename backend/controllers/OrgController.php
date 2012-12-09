@@ -96,6 +96,11 @@ class OrgController extends Controller {
         //  $model = $this->loadModel($id);
         $user = $this->loadUser();
         $model = $user->org;
+        if ($model===NULL){
+             $this->redirect(array('/org/create'));
+        }
+        // var_dump($model);
+        // Yii::app()->end();
 
         $image = CUploadedFile::getInstance($model, 'photo_path');
         if (is_object($image) && get_class($image) === 'CUploadedFile') {

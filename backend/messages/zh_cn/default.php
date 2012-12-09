@@ -11,7 +11,7 @@
                         'create course' => '创建课程',
                         'update team profile' => '修改团队信息',
                         'reward point' => '积分管理',
-                       'gift manage' => '礼品管理',
+                       'product manage' => '礼品管理',
                        'Create' => '创建',
                        'Save' => '保存',
                        'team tools' => '团队工具',
