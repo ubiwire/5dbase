@@ -64,6 +64,10 @@ return CMap::mergeArray(
                 'application.models.*',
                 'application.modules.user.models.*',
                 'application.modules.user.components.*',
+                'application.modules.message.models.*',
+                'application.modules.message.components.*',
+                'application.modules.comments.models.*',
+                'application.modules.comments.components.*',
             ),
             /* uncomment and set if required */
             // @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
@@ -137,6 +141,7 @@ return CMap::mergeArray(
                 ),
                 'api' => array(
                    // 'apiPerPage'=>15,
+                    'comment' => 'Comment',
                     ),
                 'gii' => array(
                     'class' => 'system.gii.GiiModule',
