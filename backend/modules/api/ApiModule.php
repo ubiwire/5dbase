@@ -115,15 +115,15 @@ public function _getStatusCodeMessage($status)
 public function _checkAuth()
 {
     // Check if we have the USERNAME and PASSWORD HTTP headers set?
-    if(!(isset($_SERVER['PHP_AUTH_USER']) and isset($_SERVER['PHP_AUTH_PW']))) {
+    if(!(isset($_SERVER['HTTP_PHP_AUTH_USER']) and isset($_SERVER['HTTP_PHP_AUTH_PW']))) {
         // Error: Unauthorized
         $this->_sendResponse(401);
         
     }
     // $username = $_SERVER['HTTP_X_USERNAME'];
     // $password = $_SERVER['HTTP_X_PASSWORD'];
-	$username = $_SERVER['PHP_AUTH_USER'];
-	$password = $_SERVER['PHP_AUTH_PW'];
+	$username = $_SERVER['HTTP_PHP_AUTH_USER'];
+	$password = $_SERVER['HTTP_PHP_AUTH_PW'];
 
     // $username = 'snfang';
     // $password = 'admin';
@@ -142,5 +142,6 @@ public function _checkAuth()
         // Error: Unauthorized
         $this->_sendResponse(401, 'Error: User Password is invalid');
     }
+    return $user;
 }
 }

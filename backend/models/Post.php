@@ -52,8 +52,6 @@ class Post extends CActiveRecord {
                 'maxSize' => 1024 * 1024 * 1,
                 'tooLarge' => 'to big',
             ),
-            
-            
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, contents, user_id, comments_count, like_count, favorite_count, public, wb_type, refer_id, org_id, create_at, update_at', 'safe', 'on' => 'search'),
@@ -124,18 +122,18 @@ class Post extends CActiveRecord {
         $criteria->compare('update_at', $this->update_at, true);
 
         return new CActiveDataProvider($this, array(
-                    'criteria' => $criteria,
-                ));
+            'criteria' => $criteria,
+        ));
     }
 
-    public function recentlyList() {
+    public function recentlyList($org_id) {
         $dataProvider = new CActiveDataProvider('Post', array(
                     'criteria' => array(
-                        'condition' => 'org_id='. Yii::app()->user->org_id,
+                        'condition' => 'org_id=' . $org_id,
                         'order' => 'create_at DESC',
                     ),
                     'pagination' => array(
-                        'pageSize' => 1,
+                        'pageSize' => 15,
                     ),
                 ));
         return $dataProvider->getData();
