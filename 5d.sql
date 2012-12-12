@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 12 月 08 日 17:24
+-- 生成日期: 2012 年 12 月 12 日 17:30
 -- 服务器版本: 5.5.16
 -- PHP 版本: 5.3.8
 
@@ -30,8 +30,19 @@ CREATE TABLE IF NOT EXISTS `tbl_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `org_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `tbl_categories`
+--
+
+INSERT INTO `tbl_categories` (`id`, `org_id`, `name`, `user_id`, `create_at`, `update_at`) VALUES
+(1, 3, '书籍', 7, '2012-12-12 14:56:22', '0000-00-00 00:00:00'),
+(2, 2, '旅游', 1, '2012-12-12 16:02:24', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -70,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `tbl_comments` (
   `status` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`comment_id`),
   KEY `owner_name` (`owner_name`,`owner_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- 转存表中的数据 `tbl_comments`
@@ -84,7 +95,8 @@ INSERT INTO `tbl_comments` (`owner_name`, `owner_id`, `comment_id`, `parent_comm
 ('Post', 2, 5, 0, 1, NULL, NULL, '234t34f34r', 1354888222, NULL, 0),
 ('Post', 2, 6, 0, 7, NULL, NULL, '1324r32r', 1354888429, NULL, 0),
 ('Post', 2, 7, 5, 7, NULL, NULL, '32rrwerw', 1354888608, NULL, 0),
-('Post', 2, 8, 0, 7, NULL, NULL, 'ewfr23r', 1354888832, NULL, 0);
+('Post', 2, 8, 0, 7, NULL, NULL, 'ewfr23r', 1354888832, NULL, 0),
+('Post', 2, 9, 0, 7, NULL, NULL, 'sdf2rfwrf', 1355024289, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -133,44 +145,6 @@ CREATE TABLE IF NOT EXISTS `tbl_favorites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(1) NOT NULL DEFAULT '0',
   `post_id` int(1) NOT NULL DEFAULT '0',
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `tbl_integral`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_integral` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` datetime NOT NULL,
-  `total` int(11) NOT NULL DEFAULT '0',
-  `usage` int(11) NOT NULL DEFAULT '0',
-  `org_id` int(11) NOT NULL DEFAULT '0',
-  `status` int(1) NOT NULL DEFAULT '0',
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `tbl_integral_grant`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_integral_grant` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `org_id` int(11) NOT NULL DEFAULT '0',
-  `granter_id` int(11) NOT NULL DEFAULT '0',
-  `integral_id` int(11) NOT NULL DEFAULT '0',
-  `recipient_id` int(11) NOT NULL DEFAULT '0',
-  `integral_val` int(11) NOT NULL DEFAULT '0',
-  `granter_type` int(1) NOT NULL DEFAULT '0',
-  `usage` int(11) NOT NULL DEFAULT '0',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
@@ -388,6 +362,44 @@ INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `fiel
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `tbl_reward_points`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_reward_points` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `total` int(11) NOT NULL DEFAULT '0',
+  `usage` int(11) NOT NULL DEFAULT '0',
+  `org_id` int(11) NOT NULL DEFAULT '0',
+  `status` int(1) NOT NULL DEFAULT '0',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tbl_reward_point_grant`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_reward_point_grant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `org_id` int(11) NOT NULL DEFAULT '0',
+  `granter_id` int(11) NOT NULL DEFAULT '0',
+  `integral_id` int(11) NOT NULL DEFAULT '0',
+  `recipient_id` int(11) NOT NULL DEFAULT '0',
+  `integral_val` int(11) NOT NULL DEFAULT '0',
+  `granter_type` int(1) NOT NULL DEFAULT '0',
+  `usage` int(11) NOT NULL DEFAULT '0',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `tbl_users`
 --
 
@@ -421,7 +433,7 @@ INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `tel`, `activkey
 (2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '', '87ebc08a142bf24616e439c950d457f8', '2012-09-02 18:28:30', '2012-11-06 16:25:26', 0, 1, '', 0),
 (3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-02 19:35:06', '0000-00-00 00:00:00', 0, 1, '', 0),
 (4, 'jing', 'aa3f6926fe23b4cd15480ec872616581', 'jk_info@126.com', '', '26bc800dd291790b4eb5eeb91d73a86b', '2012-11-29 04:57:08', '2012-11-28 21:04:41', 0, 1, '', 0),
-(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-01 17:35:53', '2012-12-07 06:04:11', 0, 1, 'manager', 3);
+(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-01 17:35:53', '2012-12-11 05:27:41', 0, 1, 'manager', 3);
 
 --
 -- 限制导出的表

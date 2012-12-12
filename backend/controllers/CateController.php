@@ -1,6 +1,6 @@
 <?php
 
-class ProductController extends Controller {
+class CateController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -34,7 +34,8 @@ class ProductController extends Controller {
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
+//                'users' => array('admin'),
+                'roles' => array('manager'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -57,13 +58,16 @@ class ProductController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Product;
+        $model = new Category;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
-        if (isset($_POST['Product'])) {
-            $model->attributes = $_POST['Product'];
+//        echo Yii::app()->user->getId();
+//        Yii:app()->end();
+        if (isset($_POST['Category'])) {
+            $model->attributes = $_POST['Category'];
+            $model->user_id = Yii::app()->user->getId();
+            $model->org_id = Yii::app()->user->org_id;
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -84,8 +88,8 @@ class ProductController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Product'])) {
-            $model->attributes = $_POST['Product'];
+        if (isset($_POST['Category'])) {
+            $model->attributes = $_POST['Category'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -117,18 +121,7 @@ class ProductController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-
-        $dataProvider = new CActiveDataProvider('Product', array(
-                    'criteria' => array(
-                        'condition' => 'org_id=' . Yii::app()->user->org_id,
-                        'order' => 'create_at DESC',
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 5,
-                    ),
-                ));
-
-
+        $dataProvider = new CActiveDataProvider('Category');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -138,10 +131,10 @@ class ProductController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-        $model = new Product('search');
+        $model = new Category('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['Product']))
-            $model->attributes = $_GET['Product'];
+        if (isset($_GET['Category']))
+            $model->attributes = $_GET['Category'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -154,7 +147,7 @@ class ProductController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = Product::model()->findByPk($id);
+        $model = Category::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -165,7 +158,7 @@ class ProductController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'product-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'category-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }

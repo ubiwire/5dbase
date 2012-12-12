@@ -57,7 +57,7 @@ class SiteController extends Controller {
    //     Yii::app()->user->setState('org_id') = "asdf";
 //var_dump(Yii::app()->user->getState('org_id'));
 // Yii::app()->end();
-        $post = Post::model()->recentlyList();
+        $post = Post::model()->recentlyList(Yii::app()->user->org_id);
 //        var_dump(Yii::app()->user->id);
 //        Yii::app()->end();
         $this->render('index', array('post' => $post));
