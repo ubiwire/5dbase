@@ -110,6 +110,7 @@ class ProductController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
+            'categoryList' => $categoryList,
         ));
     }
 

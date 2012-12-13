@@ -2,7 +2,7 @@
 $this->breadcrumbs=array(
 	'Products'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	Yii::t('default','Update'),
 );
 
 $this->menu=array(
@@ -13,6 +13,9 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Product <?php echo $model->id; ?></h1>
-
-<?php echo $this->renderPartial('_form',array('model'=>$model, 'categoryList' => $categoryList)); ?>
+<div class="well">
+    <fieldset>
+        <legend style="font-size: 16px;font-weight: bold;"><?php echo Yii::t('product', 'Update Product'); ?></legend>
+        <?php echo $this->renderPartial('_form', array('model' => $model, 'categoryList' => $categoryList)); ?>
+    </fieldset>
+</div>

@@ -21,6 +21,7 @@ return array(
     'product manage' => '礼品管理',
     'Create' => '创建',
     'Save' => '保存',
+    'Update' => '修改',
     'team tools' => '团队工具',
     'Create At' => '创建日期',
     'Update At' => '修改日期',

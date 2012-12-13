@@ -16,6 +16,7 @@ return array(
     'Create Product' => '添加礼品',
     'List Product' => '礼品列表',
     'Manage Product' => '管理礼品',
+    'Update Product' => '修改礼品信息',
     'please create category before create product.' => '在添加礼品之前，请先创建礼品分类',
 );
 ?>
