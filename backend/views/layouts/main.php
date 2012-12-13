@@ -22,7 +22,7 @@
 
     <body>
         <?php if (Yii::app()->user->isGuest): ?>
-                    <?php echo $content; ?>
+            <?php echo $content; ?>
         <?php else: ?>
             <div class="container" id="page">
                 <?php
@@ -38,15 +38,24 @@
                             'items' => array(
                                 array('label' => Yii::t('default', 'index page'), 'url' => array('/site/index')),
                                 //array('label' => Yii::t('default', 'member manage'), 'url' => array('/site/page', 'view' => 'about')),
-                                array('label' => Yii::t('default', 'product manage'), 'url' => array('/product')),
-                                array('label' => Yii::t('default', 'reward point'), 'url' => '#'),
+                                //array('label' => Yii::t('default', 'product manage'), 'url' => array('/product')),
+                                array('label' => Yii::t('default', 'product manage'), 'items' => array(
+                                        array('label' => Yii::t('default', 'add product'), 'url' => array('/product/create')),
+                                        array('label' => Yii::t('default', 'product list'), 'url' => array('/product/list')),
+                                        array('label' => Yii::t('default', 'category manage'), 'url' => array('/news')),
+                                )),
+                                array('label' => Yii::t('default', 'reward point'), 'items' => array(
+                                        array('label' => Yii::t('default', 'reward list'), 'url' => '#'),
+                                        array('label' => Yii::t('default', 'reward grant'), 'url' => '#'),
+                                )),
                                 array('label' => Yii::t('default', 'team manage'), 'items' => array(
                                         array('label' => Yii::t('default', 'update team profile'), 'url' => array('/org/update')),
-                                    array('label' => Yii::t('default', 'team tools'), 'url' =>array( '/news')),
-                                        array('label' => Yii::t('default', 'member manage'), 'url' =>array( '/user')),
+                                        array('label' => Yii::t('default', 'team tools'), 'url' => array('/news')),
+                                        array('label' => Yii::t('default', 'member manage'), 'url' => array('/user')),
                                 )),
                                 array('label' => Yii::t('default', 'course manage'), 'items' => array(
-                                        array('label' => Yii::t('default', 'create course'), 'url' => '#')
+                                        array('label' => Yii::t('default', 'create course'), 'url' => '#'),
+                                        array('label' => Yii::t('default', 'course list'), 'url' => '#'),
                                 )),
                             ),
                         ),
@@ -106,7 +115,7 @@
                     <div id="footer">
                         Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
                         All Rights Reserved.<br/>
-                        <?php //echo Yii::powered();   ?>
+                        <?php //echo Yii::powered();      ?>
                     </div>
                     <!-- footer -->
                 </div>

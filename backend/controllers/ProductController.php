@@ -24,18 +24,19 @@ class ProductController extends Controller {
      */
     public function accessRules() {
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
+//            array('allow', // allow all users to perform 'index' and 'view' actions
+//                'actions' => array('index', 'view'),
+//                'users' => array('*'),
+//            ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
-                'users' => array('@'),
+                'actions' => array('create', 'update', 'index', 'view', 'admin', 'delete'),
+//                'users' => array('@'),
+                'roles' => array('manager'),
             ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
+//            array('allow', // allow admin user to perform 'admin' and 'delete' actions
+//                'actions' => array('admin', 'delete'),
+//               'users' => array('admin'),
+//            ),
             array('deny', // deny all users
                 'users' => array('*'),
             ),
@@ -57,6 +58,11 @@ class ProductController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
+        $categoryList = Category::getCategoryList();
+        if (empty($categoryList)) {
+            Yii::app()->user->setFlash('info', Yii::t('product', 'please create category before create product.'));
+            $this->redirect(array('/cate/create'));
+        }
         $model = new Product;
 
         // Uncomment the following line if AJAX validation is needed
@@ -64,19 +70,23 @@ class ProductController extends Controller {
 
         if (isset($_POST['Product'])) {
             $model->attributes = $_POST['Product'];
+            $model->org_id = Yii::app()->user->org_id;
 
             $image = CUploadedFile::getInstance($model, 'original_pic_path');
             if (is_object($image) && get_class($image) === 'CUploadedFile') {
                 $model->photo_path = mt_rand() . '.jpg';
             }
             if ($model->save()) {
-                $image->saveAs(Yii::app()->basePath . '/www/assets/uploads/products/' . $model->original_pic_path);
+                if (is_object($image) && get_class($image) === 'CUploadedFile') {
+                    $image->saveAs(Yii::app()->basePath . '/www/assets/uploads/products/' . $model->original_pic_path);
+                }
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
 
         $this->render('create', array(
             'model' => $model,
+            'categoryList' => $categoryList,
         ));
     }
 
@@ -86,6 +96,7 @@ class ProductController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
+        $categoryList = Category::getCategoryList();
         $model = $this->loadModel($id);
 
         // Uncomment the following line if AJAX validation is needed

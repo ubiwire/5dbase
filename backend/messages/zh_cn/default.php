@@ -8,6 +8,12 @@ return array(
     'Search' => '其实搜索很简单...',
     'member manage' => '队员管理',
     'team manage' => '团队管理',
+    'add product' => '添加礼品',
+    'product list' => '礼品列表',
+    'category manage' => '礼品分类管理',
+    'reward list' => '积分列表',
+    'reward grant' => '积分兑换',
+    'course list' => '课程列表',
     'course manage' => '课程管理',
     'create course' => '创建课程',
     'update team profile' => '修改团队信息',
@@ -18,6 +24,6 @@ return array(
     'team tools' => '团队工具',
     'Create At' => '创建日期',
     'Update At' => '修改日期',
-    'Fields with * are required.' => '带 * 号为必填项',
+    'Fields with * are required.' => '带 <span class="required">*</span> 号为必填项',
 );
 ?>

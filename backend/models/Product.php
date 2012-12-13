@@ -19,7 +19,7 @@
  */
 class Product extends CActiveRecord {
 
-    const STATUS_NOACTIVE = 0;
+    const STATUS_ACTIVE = 0;
     const STATUS_BANNED = 1;
 
     /**
@@ -45,9 +45,13 @@ class Product extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('create_at, price, org_id, inventory, category_id,status', 'required'),
+            array('name, price, org_id, inventory, category_id, status, descriptor', 'required'),
+            array('name', 'unique', 'message' => Yii::t('product', "This product's name already exists.")),
+            array('status', 'in', 'range' => array(self::STATUS_ACTIVE, self::STATUS_BANNED)),
             array('price, org_id, inventory, category_id, status', 'numerical', 'integerOnly' => true),
             array('name, original_pic_path, process_picture_path', 'length', 'max' => 255),
+            array('create_at', 'default', 'value' => date('Y-m-d H:i:s'), 'setOnEmpty' => true, 'on' => 'insert'),
+            array('update_at', 'default', 'value' => date('Y-m-d H:i:s'), 'setOnEmpty' => true, 'on' => 'insert'),
             array('descriptor, update_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
@@ -62,7 +66,7 @@ class Product extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'category'=>array(self::BELONGS_TO, 'Category', 'category_id'),
+            'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
         );
     }
 
@@ -124,7 +128,7 @@ class Product extends CActiveRecord {
             ),
         );
     }
-    
+
     protected function beforeSave() {
         if ($this->isNewRecord) {
             if ($this->hasAttribute('status')) {

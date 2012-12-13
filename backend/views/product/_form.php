@@ -6,7 +6,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ));
 ?>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<p class="help-block"><?php  echo Yii::t('default', 'Fields with * are required.')?></p>
 
 <?php echo $form->errorSummary($model); ?>
 <?php echo $form->textFieldRow($model, 'name', array('class' => 'span5', 'maxlength' => 255)); ?>
@@ -14,7 +14,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <?php echo $form->textAreaRow($model, 'descriptor', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
 <?php echo $form->fileFieldRow($model, 'original_pic_path'); ?>
 <?php echo $form->textFieldRow($model, 'inventory', array('class' => 'span5')); ?>
-<?php echo $form->dropDownListRow($model, 'category_id', Category::getCategoryList());
+<?php echo $form->dropDownListRow($model, 'category_id', $categoryList);
 ?>
 
 <div class="form-actions">
