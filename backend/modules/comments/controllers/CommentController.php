@@ -119,6 +119,8 @@ class CommentController extends Controller
                 if($comment->save())
                 {
                     $result['code'] = 'success';
+                    //评论添加成功后，需要去更新post中的comment_count字段
+                    $post = Post::model()->findByPk($pk);
                     $this->beginClip("list");
                         $this->widget('comments.widgets.ECommentsListWidget', array(
                             'model' => $comment->ownerModel,

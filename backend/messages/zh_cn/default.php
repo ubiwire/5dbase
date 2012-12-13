@@ -1,20 +1,23 @@
 <?php
-	return array(
-			'Project name' => '集结号团队管理',
-                        'index page' => '首页',
-                        'about us' => '关于我们',
-                        'contact' => '联系人',
-                        'Search' => '其实搜索很简单...',
-                        'member manage' => '队员管理',
-                        'team manage' => '团队管理',
-                        'course manage' => '课程管理',
-                        'create course' => '创建课程',
-                        'update team profile' => '修改团队信息',
-                        'reward point' => '积分管理',
-                       'product manage' => '礼品管理',
-                       'Create' => '创建',
-                       'Save' => '保存',
-                       'team tools' => '团队工具',
-		);
 
+return array(
+    'Project name' => '集结号团队管理',
+    'index page' => '首页',
+    'about us' => '关于我们',
+    'contact' => '联系人',
+    'Search' => '其实搜索很简单...',
+    'member manage' => '队员管理',
+    'team manage' => '团队管理',
+    'course manage' => '课程管理',
+    'create course' => '创建课程',
+    'update team profile' => '修改团队信息',
+    'reward point' => '积分管理',
+    'product manage' => '礼品管理',
+    'Create' => '创建',
+    'Save' => '保存',
+    'team tools' => '团队工具',
+    'Create At' => '创建日期',
+    'Update At' => '修改日期',
+    'Fields with * are required.' => '带 * 号为必填项',
+);
 ?>

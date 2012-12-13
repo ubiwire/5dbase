@@ -62,6 +62,7 @@ class Product extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'category'=>array(self::BELONGS_TO, 'Category', 'category_id'),
         );
     }
 
@@ -80,8 +81,8 @@ class Product extends CActiveRecord {
             'inventory' => Yii::t('product', 'Inventory'),
             'category_id' => Yii::t('product', 'Category'),
             'status' => Yii::t('product', 'Status'),
-            'create_at' => Yii::t('product', 'Create At'),
-            'update_at' => Yii::t('product', 'Update At'),
+            'create_at' => Yii::t('default', 'Create At'),
+            'update_at' => Yii::t('default', 'Update At'),
         );
     }
 

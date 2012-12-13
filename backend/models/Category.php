@@ -62,6 +62,7 @@ class Category extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'products' => array(self::HAS_MANY, 'Product', 'category_id'),
         );
     }
 
@@ -71,11 +72,11 @@ class Category extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'org_id' => 'Org',
-            'name' => 'Name',
-            'user_id' => 'User',
-            'create_at' => 'Create At',
-            'update_at' => 'Update At',
+            'org_id' => Yii::t('category', 'Org Id'),
+            'name' => Yii::t('category', 'Name'),
+            'user_id' => Yii::t('category', 'User Id'),
+            'create_at' => Yii::t('default', 'Create At'),
+            'update_at' => Yii::t('default', 'Update At'),
         );
     }
 
@@ -97,8 +98,8 @@ class Category extends CActiveRecord {
         $criteria->compare('update_at', $this->update_at, true);
 
         return new CActiveDataProvider($this, array(
-                    'criteria' => $criteria,
-                ));
+            'criteria' => $criteria,
+        ));
     }
 
 //    protected function beforeSave() {

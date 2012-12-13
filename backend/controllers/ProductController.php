@@ -64,8 +64,15 @@ class ProductController extends Controller {
 
         if (isset($_POST['Product'])) {
             $model->attributes = $_POST['Product'];
-            if ($model->save())
+
+            $image = CUploadedFile::getInstance($model, 'original_pic_path');
+            if (is_object($image) && get_class($image) === 'CUploadedFile') {
+                $model->photo_path = mt_rand() . '.jpg';
+            }
+            if ($model->save()) {
+                $image->saveAs(Yii::app()->basePath . '/www/assets/uploads/products/' . $model->original_pic_path);
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
@@ -124,7 +131,7 @@ class ProductController extends Controller {
                         'order' => 'create_at DESC',
                     ),
                     'pagination' => array(
-                        'pageSize' => 5,
+                        'pageSize' => 15,
                     ),
                 ));
 
