@@ -1,8 +1,7 @@
 <div style="width: 320px;padding: 114px 0 0;margin: auto; ">
-    <h2><?php echo UserModule::t("jjh backend login"); ?></h2>
-    <div style="font-weight: normal;border: 1px solid #E5E5E5;">
-
-
+    <p style="font-size: 20px;font-weight: bold;text-align:center;"><?php echo UserModule::t("jjh backend login"); ?></p>
+    <!--     <div style="font-weight: normal;border: 1px solid #E5E5E5;">-->
+    <div>
         <?php
         $this->pageTitle = Yii::app()->name . ' - ' . UserModule::t("Login");
         $this->breadcrumbs = array(
@@ -10,13 +9,12 @@
         );
         ?>
         <div class="login">
-
             <?php if (Yii::app()->user->hasFlash('loginMessage')): ?>
                 <div class="success">
                     <?php echo Yii::app()->user->getFlash('loginMessage'); ?>
                 </div>
             <?php endif; ?>
-    <!--    <p><?php //echo UserModule::t("Please fill out the following form with your login credentials:");   ?></p>-->
+<!--    <p><?php //echo UserModule::t("Please fill out the following form with your login credentials:");     ?></p>-->
             <?php
             /*
               $form = new CForm(array(

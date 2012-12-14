@@ -58,13 +58,14 @@ class ProductController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
+        //如果没有礼品分类，则先创建分类
         $categoryList = Category::getCategoryList();
         if (empty($categoryList)) {
             Yii::app()->user->setFlash('info', Yii::t('product', 'please create category before create product.'));
             $this->redirect(array('/cate/create'));
         }
+        
         $model = new Product;
-
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -74,7 +75,7 @@ class ProductController extends Controller {
 
             $image = CUploadedFile::getInstance($model, 'original_pic_path');
             if (is_object($image) && get_class($image) === 'CUploadedFile') {
-                $model->photo_path = mt_rand() . '.jpg';
+                $model->original_pic_path = time().mt_rand(100,999).'.'.$image->extensionName;
             }
             if ($model->save()) {
                 if (is_object($image) && get_class($image) === 'CUploadedFile') {

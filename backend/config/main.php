@@ -61,6 +61,7 @@ return CMap::mergeArray(
                 /* 'common.extensions.validators.*', */
                 'application.components.*',
                 'application.controllers.*',
+                'application.helpers.*',
                 'application.models.*',
                 'application.modules.user.models.*',
                 'application.modules.user.components.*',
@@ -140,9 +141,9 @@ return CMap::mergeArray(
                     'getSuggestMethod' => 'getSuggest',
                 ),
                 'api' => array(
-                   // 'apiPerPage'=>15,
+                    // 'apiPerPage'=>15,
                     'comment' => 'Comment',
-                    ),
+                ),
                 'gii' => array(
                     'class' => 'system.gii.GiiModule',
                     'password' => 'admin',
@@ -151,7 +152,6 @@ return CMap::mergeArray(
                     )
                 )
             ),
-            
             'components' => array(
                 'user' => array(
                     // enable cookie-based authentication
@@ -183,6 +183,13 @@ return CMap::mergeArray(
                     'urlSuffix' => '/',
                     'rules' => $params['url.rules']
                 ),
+                'image' => array(
+                    'class' => 'application.extensions.image.CImageComponent',
+                    // GD or ImageMagick
+                    'driver' => 'ImageMagick',
+                    // ImageMagick setup path
+                    'params' => array('directory' => '/opt/local/bin'),
+                ),
             /* make sure you have your cache set correctly before uncommenting */
             /* 'cache' => $params['cache.core'], */
             /* 'contentCache' => $params['cache.content'] */
@@ -199,7 +206,6 @@ return CMap::mergeArray(
             //                             ),
             //                        ),
             //                  ),
-
             ),
                 ), CMap::mergeArray($mainEnvConfiguration, $mainLocalConfiguration)
 );

@@ -130,12 +130,24 @@ class Product extends CActiveRecord {
     }
 
     protected function beforeSave() {
-        if ($this->isNewRecord) {
-            if ($this->hasAttribute('status')) {
-                $this->status = self::STATUS_BANNED;
-            }
-        }
+//        if ($this->isNewRecord) {
+//            if ($this->hasAttribute('status')) {
+//                $this->status = self::STATUS_BANNED;
+//            }
+//        }
         return parent::beforeSave();
+    }
+        public static function itemAlias($type, $code = NULL) {
+        $_items = array(
+            'ProductStatus' => array(
+                self::STATUS_ACTIVE => Yii::t('product', 'status active'),
+                self::STATUS_BANNED => Yii::t('product', 'status banned'),
+            ),
+        );
+        if (isset($code))
+            return isset($_items[$type][$code]) ? $_items[$type][$code] : false;
+        else
+            return isset($_items[$type]) ? $_items[$type] : false;
     }
 
 }

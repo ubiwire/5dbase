@@ -41,8 +41,8 @@
                                 //array('label' => Yii::t('default', 'product manage'), 'url' => array('/product')),
                                 array('label' => Yii::t('default', 'product manage'), 'items' => array(
                                         array('label' => Yii::t('default', 'add product'), 'url' => array('/product/create')),
-                                        array('label' => Yii::t('default', 'product list'), 'url' => array('/product/list')),
-                                        array('label' => Yii::t('default', 'category manage'), 'url' => array('/news')),
+                                        array('label' => Yii::t('default', 'product list'), 'url' => array('/product')),
+                                        array('label' => Yii::t('default', 'category manage'), 'url' => array('/cate')),
                                 )),
                                 array('label' => Yii::t('default', 'reward point'), 'items' => array(
                                         array('label' => Yii::t('default', 'reward list'), 'url' => '#'),
