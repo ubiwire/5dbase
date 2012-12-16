@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 12 月 16 日 06:13
+-- 生成日期: 2012 年 12 月 16 日 16:37
 -- 服务器版本: 5.5.16
 -- PHP 版本: 5.3.8
 
@@ -190,8 +190,8 @@ CREATE TABLE IF NOT EXISTS `tbl_messages` (
 
 INSERT INTO `tbl_messages` (`id`, `sender_id`, `receiver_id`, `subject`, `body`, `is_read`, `deleted_by`, `created_at`) VALUES
 (1, 1, 2, '第一封站内测试信', '第一封站内测试信\r\n内容。', '1', NULL, '2012-09-03 05:10:40'),
-(2, 2, 1, 'Re: 第一封站内测试信', '来信已收到。', '0', NULL, '2012-09-03 05:21:09'),
-(3, 2, 1, 'admin test ', 'test admin', '1', NULL, '2012-09-03 09:07:35');
+(2, 2, 1, 'Re: 第一封站内测试信', '来信已收到。', '0', 'receiver', '2012-09-03 05:21:09'),
+(3, 2, 1, 'admin test ', 'test admin', '1', 'receiver', '2012-09-03 09:07:35');
 
 -- --------------------------------------------------------
 
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `tbl_orgs` (
 INSERT INTO `tbl_orgs` (`id`, `name`, `slogan`, `photo_path`, `company_name`, `parent_id`, `create_at`, `update_at`) VALUES
 (1, '营销之道', NULL, '', '', 0, '2012-12-01 17:15:30', '0000-00-00 00:00:00'),
 (2, '营销计划', NULL, '', '', 0, '2012-12-01 17:31:57', '0000-00-00 00:00:00'),
-(3, '你我团队', '集结号就是口号', '66901790.jpg', '知正12341', 0, '2012-12-01 17:35:53', '0000-00-00 00:00:00');
+(3, '你我团队', '集结号就是口号', '1250130830.jpg', '知正12341', 0, '2012-12-01 17:35:53', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -325,6 +325,9 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
   `lastname` varchar(50) NOT NULL DEFAULT '',
   `firstname` varchar(50) NOT NULL DEFAULT '',
   `birthday` date NOT NULL DEFAULT '0000-00-00',
+  `reward_point` int(10) NOT NULL DEFAULT '0',
+  `surplus_total` int(10) NOT NULL DEFAULT '0',
+  `usage` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
@@ -332,12 +335,12 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
 -- 转存表中的数据 `tbl_profiles`
 --
 
-INSERT INTO `tbl_profiles` (`user_id`, `lastname`, `firstname`, `birthday`) VALUES
-(1, 'Admin', 'Administrator', '1979-10-27'),
-(2, 'Demo', 'Demorr', '0000-00-00'),
-(3, 'wang', 'john', '2012-09-19'),
-(4, 'fang', 'martin', '1988-06-06'),
-(7, 'fang', 'martin', '0000-00-00');
+INSERT INTO `tbl_profiles` (`user_id`, `lastname`, `firstname`, `birthday`, `reward_point`, `surplus_total`, `usage`) VALUES
+(1, 'Admin', 'Administrator', '1979-10-27', 0, 0, 0),
+(2, 'Demo', 'Demorr', '0000-00-00', 0, 0, 0),
+(3, 'wang', 'john', '2012-09-19', 0, 0, 0),
+(4, 'fang', 'martin', '1988-06-06', 0, 0, 0),
+(7, 'fang', 'martin', '0000-00-00', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -364,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
   `visible` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `varname` (`varname`,`widget`,`visible`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `tbl_profiles_fields`
@@ -373,7 +376,10 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
 INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`) VALUES
 (1, 'lastname', 'Last Name', 'VARCHAR', '50', '3', 1, '', '', 'Incorrect Last Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
 (2, 'firstname', 'First Name', 'VARCHAR', '50', '3', 1, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 0, 3),
-(3, 'birthday', 'Birthday', 'DATE', '0', '0', 0, '', '', '', '', '0000-00-00', 'UWjuidate', '{"ui-theme":"base","language":"en"}', 0, 3);
+(3, 'birthday', 'Birthday', 'DATE', '0', '0', 0, '', '', '', '', '0000-00-00', 'UWjuidate', '{"ui-theme":"base","language":"en"}', 0, 3),
+(4, 'reward_point', '积分总数', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 1),
+(5, 'surplus_total', '剩余总额', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 2),
+(6, 'usage', '消费总额', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -383,7 +389,7 @@ INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `fiel
 
 CREATE TABLE IF NOT EXISTS `tbl_reward_points` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` datetime NOT NULL,
+  `date` int(11) NOT NULL,
   `total` int(11) NOT NULL DEFAULT '0',
   `usage` int(11) NOT NULL DEFAULT '0',
   `org_id` int(11) NOT NULL DEFAULT '0',
@@ -391,7 +397,14 @@ CREATE TABLE IF NOT EXISTS `tbl_reward_points` (
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+
+--
+-- 转存表中的数据 `tbl_reward_points`
+--
+
+INSERT INTO `tbl_reward_points` (`id`, `date`, `total`, `usage`, `org_id`, `status`, `create_at`, `update_at`) VALUES
+(17, 1354579200, 2, 0, 3, 0, '2012-12-16 14:42:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -402,14 +415,14 @@ CREATE TABLE IF NOT EXISTS `tbl_reward_points` (
 CREATE TABLE IF NOT EXISTS `tbl_reward_point_grant` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `org_id` int(11) NOT NULL DEFAULT '0',
-  `granter_id` int(11) NOT NULL DEFAULT '0',
-  `integral_id` int(11) NOT NULL DEFAULT '0',
-  `recipient_id` int(11) NOT NULL DEFAULT '0',
-  `integral_val` int(11) NOT NULL DEFAULT '0',
-  `granter_type` int(1) NOT NULL DEFAULT '0',
-  `usage` int(11) NOT NULL DEFAULT '0',
+  `granter_id` int(11) NOT NULL DEFAULT '0' COMMENT '积分发放者id ，兑换时则为0 ',
+  `recipient_id` int(11) NOT NULL DEFAULT '0' COMMENT '积分操作对象，一般为队员id',
+  `reward_val` int(11) NOT NULL DEFAULT '0' COMMENT '所需积分值',
+  `granter_type` int(1) NOT NULL DEFAULT '0' COMMENT '定义是积分发放或积分兑换',
+  `usage` int(11) NOT NULL DEFAULT '0' COMMENT '积分用途，兑换的时候，一般为礼品id',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `reason` varchar(255) NOT NULL COMMENT '积分发放的理由，兑换则为空',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -449,7 +462,7 @@ INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `tel`, `activkey
 (2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '', '87ebc08a142bf24616e439c950d457f8', '2012-09-02 18:28:30', '2012-11-06 16:25:26', 0, 1, '', 0),
 (3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-02 19:35:06', '0000-00-00 00:00:00', 0, 1, '', 0),
 (4, 'jing', 'aa3f6926fe23b4cd15480ec872616581', 'jk_info@126.com', '', '26bc800dd291790b4eb5eeb91d73a86b', '2012-11-29 04:57:08', '2012-11-28 21:04:41', 0, 1, '', 0),
-(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-01 17:35:53', '2012-12-15 15:54:59', 0, 1, 'manager', 3);
+(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-01 17:35:53', '2012-12-16 07:06:36', 0, 1, 'manager', 3);
 
 --
 -- 限制导出的表

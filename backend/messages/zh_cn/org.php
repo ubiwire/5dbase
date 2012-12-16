@@ -3,7 +3,7 @@
 return array(
     'Name' => '团队名称',
     'Slogan' => '团队口号',
-    'Photo Path' => '图片路径',
+    'Photo Path' => '团队LOGO',
     'Company Name' => '公司名称',
     'Parent' => '父组织',
     

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- 主机: localhost:3306
--- 生成日期: 2012 年 11 月 22 日 22:34
--- 服务器版本: 5.5.21
--- PHP 版本: 5.3.17
+-- 主机: localhost
+-- 生成日期: 2012 年 12 月 16 日 06:13
+-- 服务器版本: 5.5.16
+-- PHP 版本: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,6 +23,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `tbl_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `org_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `tbl_categories`
+--
+
+INSERT INTO `tbl_categories` (`id`, `org_id`, `name`, `user_id`, `create_at`, `update_at`) VALUES
+(1, 3, '书籍', 7, '2012-12-12 14:56:22', '0000-00-00 00:00:00'),
+(2, 2, '旅游', 1, '2012-12-12 16:02:24', '0000-00-00 00:00:00'),
+(3, 3, '优惠券', 7, '2012-12-16 01:23:06', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `tbl_category`
 --
 
@@ -36,6 +61,43 @@ CREATE TABLE IF NOT EXISTS `tbl_category` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tbl_comments`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_comments` (
+  `owner_name` varchar(50) NOT NULL,
+  `owner_id` int(12) NOT NULL,
+  `comment_id` int(12) NOT NULL AUTO_INCREMENT,
+  `parent_comment_id` int(12) DEFAULT NULL,
+  `creator_id` int(12) DEFAULT NULL,
+  `user_name` varchar(128) DEFAULT NULL,
+  `user_email` varchar(128) DEFAULT NULL,
+  `comment_text` text,
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`comment_id`),
+  KEY `owner_name` (`owner_name`,`owner_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- 转存表中的数据 `tbl_comments`
+--
+
+INSERT INTO `tbl_comments` (`owner_name`, `owner_id`, `comment_id`, `parent_comment_id`, `creator_id`, `user_name`, `user_email`, `comment_text`, `create_time`, `update_time`, `status`) VALUES
+('Post', 2, 1, 0, 1, NULL, NULL, '122432423424', 1354888156, NULL, 0),
+('Post', 2, 2, 1, 1, NULL, NULL, '3134534r34r', 1354888176, NULL, 0),
+('Post', 2, 3, 0, 1, NULL, NULL, '1111111111111111', 1354888209, NULL, 0),
+('Post', 2, 4, 0, 1, NULL, NULL, '13r34r34', 1354888215, NULL, 0),
+('Post', 2, 5, 0, 1, NULL, NULL, '234t34f34r', 1354888222, NULL, 0),
+('Post', 2, 6, 0, 7, NULL, NULL, '1324r32r', 1354888429, NULL, 0),
+('Post', 2, 7, 5, 7, NULL, NULL, '32rrwerw', 1354888608, NULL, 0),
+('Post', 2, 8, 0, 7, NULL, NULL, 'ewfr23r', 1354888832, NULL, 0),
+('Post', 2, 9, 0, 7, NULL, NULL, 'sdf2rfwrf', 1355024289, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -77,6 +139,34 @@ CREATE TABLE IF NOT EXISTS `tbl_contacts_category` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `tbl_favorites`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_favorites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(1) NOT NULL DEFAULT '0',
+  `post_id` int(1) NOT NULL DEFAULT '0',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tbl_mentions`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_mentions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `tbl_messages`
 --
 
@@ -106,6 +196,127 @@ INSERT INTO `tbl_messages` (`id`, `sender_id`, `receiver_id`, `subject`, `body`,
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `tbl_news`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `news_type` int(11) NOT NULL DEFAULT '1',
+  `title` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `content` text CHARACTER SET utf8 NOT NULL,
+  `org_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `creaet_at` datetime NOT NULL,
+  `update_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `tbl_news`
+--
+
+INSERT INTO `tbl_news` (`id`, `news_type`, `title`, `content`, `org_id`, `user_id`, `creaet_at`, `update_at`) VALUES
+(1, 1, '团队工具', '团队工具团队工具', 3, 7, '2012-12-08 23:23:23', '2012-12-08 23:23:23');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tbl_orgs`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_orgs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `slogan` varchar(255) DEFAULT NULL,
+  `photo_path` varchar(255) NOT NULL DEFAULT '',
+  `company_name` varchar(255) NOT NULL DEFAULT '',
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `tbl_orgs`
+--
+
+INSERT INTO `tbl_orgs` (`id`, `name`, `slogan`, `photo_path`, `company_name`, `parent_id`, `create_at`, `update_at`) VALUES
+(1, '营销之道', NULL, '', '', 0, '2012-12-01 17:15:30', '0000-00-00 00:00:00'),
+(2, '营销计划', NULL, '', '', 0, '2012-12-01 17:31:57', '0000-00-00 00:00:00'),
+(3, '你我团队', '集结号就是口号', '66901790.jpg', '知正12341', 0, '2012-12-01 17:35:53', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tbl_posts`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contents` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `comments_count` int(11) NOT NULL DEFAULT '0',
+  `like_count` int(11) NOT NULL DEFAULT '0',
+  `favorite_count` int(11) NOT NULL DEFAULT '0',
+  `public` int(1) NOT NULL DEFAULT '0',
+  `wb_type` int(1) NOT NULL DEFAULT '0',
+  `refer_id` int(11) NOT NULL DEFAULT '0',
+  `org_id` int(11) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `file_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `tbl_posts`
+--
+
+INSERT INTO `tbl_posts` (`id`, `contents`, `user_id`, `comments_count`, `like_count`, `favorite_count`, `public`, `wb_type`, `refer_id`, `org_id`, `create_at`, `update_at`, `file_path`) VALUES
+(1, '大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-02 04:55:38', '0000-00-00 00:00:00', ''),
+(2, '大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。', 7, 1, 2, 3, 0, 0, 0, 3, '2012-12-02 04:55:46', '0000-00-00 00:00:00', '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tbl_productions`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_productions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `price` int(11) NOT NULL DEFAULT '0',
+  `descriptor` text,
+  `original_pic_path` varchar(255) NOT NULL DEFAULT '',
+  `process_picture_path` varchar(255) NOT NULL DEFAULT '',
+  `org_id` int(11) NOT NULL DEFAULT '0',
+  `inventory` int(11) NOT NULL DEFAULT '0',
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  `status` int(1) NOT NULL DEFAULT '0',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- 转存表中的数据 `tbl_productions`
+--
+
+INSERT INTO `tbl_productions` (`id`, `name`, `price`, `descriptor`, `original_pic_path`, `process_picture_path`, `org_id`, `inventory`, `category_id`, `status`, `create_at`, `update_at`) VALUES
+(1, '钢铁是怎样炼成的', 10, '钢铁是怎样炼成的 钢铁是怎样炼成的 钢铁是怎样炼成的', '', '', 3, 100, 1, 1, '2012-12-13 06:31:44', '0000-00-00 00:00:00'),
+(2, '钢铁是怎样炼成的22', 10, '钢铁是怎样炼成的钢铁是怎样炼成的钢铁是怎样炼成的钢铁是怎样炼成的', '', '', 0, 100, 1, 1, '2012-12-13 06:34:29', '0000-00-00 00:00:00'),
+(3, 'ruby 元编程', 20, 'ruby 元编程\r\nruby 元编程\r\nruby 元编程\r\n', '', '', 3, 10, 1, 1, '2012-12-13 06:39:38', '0000-00-00 00:00:00'),
+(4, '接口', 10, '接口', '1355489836919.jpg', '', 3, 1002, 1, 0, '2012-12-14 04:57:16', '0000-00-00 00:00:00'),
+(5, '素描', 13, '素描 素描 素描 素描 素描素描 素描素描', '1355579054462.jpg', '', 3, 11, 1, 0, '2012-12-15 05:44:14', '0000-00-00 00:00:00'),
+(6, '美女', 12, '美女 美女美女 美女美女 美女美女 美女美女 美女', '1355580544756.jpg', '', 3, 12, 1, 0, '2012-12-15 06:09:04', '0000-00-00 00:00:00'),
+(7, '风景', 10, '我希望将一个字符串限长显示,如果该字符串超过一定长数,就截取前n个字符,后加省略号... php字符串截取问题发布:dxy 字体:[增加 减小] 类型:转载 我希望将一个', '1355583562612.jpg', '', 3, 12, 1, 0, '2012-12-15 06:59:22', '0000-00-00 00:00:00'),
+(8, '创意', 10, '创意 创意创意创意 创意 创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意', '1355584503199.jpg', '', 3, 210, 1, 0, '2012-12-15 07:15:03', '0000-00-00 00:00:00'),
+(9, '千位刷', 1, '优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券\r\n优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券\r\n优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券\r\n优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券', '1355621097864.jpg', '', 3, 12, 3, 0, '2012-12-15 17:24:57', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `tbl_profiles`
 --
 
@@ -115,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
   `firstname` varchar(50) NOT NULL DEFAULT '',
   `birthday` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `tbl_profiles`
@@ -124,7 +335,9 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
 INSERT INTO `tbl_profiles` (`user_id`, `lastname`, `firstname`, `birthday`) VALUES
 (1, 'Admin', 'Administrator', '1979-10-27'),
 (2, 'Demo', 'Demorr', '0000-00-00'),
-(3, 'wang', 'john', '2012-09-19');
+(3, 'wang', 'john', '2012-09-19'),
+(4, 'fang', 'martin', '1988-06-06'),
+(7, 'fang', 'martin', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -165,6 +378,44 @@ INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `fiel
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `tbl_reward_points`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_reward_points` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `total` int(11) NOT NULL DEFAULT '0',
+  `usage` int(11) NOT NULL DEFAULT '0',
+  `org_id` int(11) NOT NULL DEFAULT '0',
+  `status` int(1) NOT NULL DEFAULT '0',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tbl_reward_point_grant`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_reward_point_grant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `org_id` int(11) NOT NULL DEFAULT '0',
+  `granter_id` int(11) NOT NULL DEFAULT '0',
+  `integral_id` int(11) NOT NULL DEFAULT '0',
+  `recipient_id` int(11) NOT NULL DEFAULT '0',
+  `integral_val` int(11) NOT NULL DEFAULT '0',
+  `granter_type` int(1) NOT NULL DEFAULT '0',
+  `usage` int(11) NOT NULL DEFAULT '0',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `tbl_users`
 --
 
@@ -173,26 +424,32 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
+  `tel` varchar(15) NOT NULL COMMENT '手机号',
   `activkey` varchar(128) NOT NULL DEFAULT '',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastvisit_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `superuser` int(1) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '0',
+  `roles` varchar(10) NOT NULL DEFAULT '''manager''',
+  `org_id` int(11) NOT NULL COMMENT '外键',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `status` (`status`),
-  KEY `superuser` (`superuser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  KEY `superuser` (`superuser`),
+  KEY `org_id` (`org_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `create_at`, `lastvisit_at`, `superuser`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a24eff8c15a6a141ece27eb6947da0f', '2012-09-03 02:28:54', '2012-11-07 00:26:11', 1, 1),
-(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '87ebc08a142bf24616e439c950d457f8', '2012-09-03 02:28:54', '2012-11-07 00:25:50', 0, 1),
-(3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-03 03:35:30', '0000-00-00 00:00:00', 0, 1);
+INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `tel`, `activkey`, `create_at`, `lastvisit_at`, `superuser`, `status`, `roles`, `org_id`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '', '9a24eff8c15a6a141ece27eb6947da0f', '2012-09-02 18:28:30', '2012-11-29 22:24:28', 1, 1, '', 0),
+(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '', '87ebc08a142bf24616e439c950d457f8', '2012-09-02 18:28:30', '2012-11-06 16:25:26', 0, 1, '', 0),
+(3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-02 19:35:06', '0000-00-00 00:00:00', 0, 1, '', 0),
+(4, 'jing', 'aa3f6926fe23b4cd15480ec872616581', 'jk_info@126.com', '', '26bc800dd291790b4eb5eeb91d73a86b', '2012-11-29 04:57:08', '2012-11-28 21:04:41', 0, 1, '', 0),
+(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-01 17:35:53', '2012-12-15 15:54:59', 0, 1, 'manager', 3);
 
 --
 -- 限制导出的表

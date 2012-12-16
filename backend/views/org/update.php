@@ -15,6 +15,9 @@ $this->breadcrumbs=array(
 //);
 ?>
 
-<h1><?php echo Yii::t('org', 'update org'); ?></h1>
-
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<div class="well">
+    <fieldset>
+        <legend style="font-size: 16px;font-weight: bold;"><?php echo Yii::t('org', 'update org'); ?></legend>
+        <?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+    </fieldset>
+</div>

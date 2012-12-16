@@ -31,11 +31,9 @@ $('.search-form form').submit(function(){
     #yw2_c7{width: 80px;}
 </style>
 <h3><?php echo Yii::t('product', 'Manage Product') ?></h3>
-
 <p>
     <?php echo Yii::t('default', 'You may optionally enter a comparison operator (&lt;,&lt;=, &gt;, &gt;=, &lt;&gt; or =) at the beginning of each of your search values to specify how the comparison should be done.'); ?>
 </p>
-
 <?php echo CHtml::link(Yii::t('default', 'Advanced Search'), '#', array('class' => 'search-button btn')); ?>
 <div class="search-form" style="display:none">
     <?php

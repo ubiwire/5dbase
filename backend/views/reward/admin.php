@@ -1,12 +1,13 @@
 <?php
-$this->breadcrumbs=array(
-	'Reward Points'=>array('index'),
-	'Manage',
+$this->breadcrumbs = array(
+    Yii::t('reward', 'Reward Points') => array('index'),
+    Yii::t('default', 'Manage'),
 );
 
-$this->menu=array(
-	array('label'=>'List RewardPoint','url'=>array('index')),
-	array('label'=>'Create RewardPoint','url'=>array('create')),
+$this->menu = array(
+//    array('label' => 'List RewardPoint', 'url' => array('index')),
+    array('label' => Yii::t('reward', 'Create RewardPoint'), 'url' => array('create')),
+    array('label' => Yii::t('reward', 'RewardGrant detail'), 'url' => '#'),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -22,38 +23,51 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-<h1>Manage Reward Points</h1>
+<style>
+  
+    #reward-point-grid_c4{width: 60px;}
+    
+</style>
+<h3><?php echo Yii::t('reward', 'Manage Reward Points') ?></h3>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+    <?php echo Yii::t('default', 'You may optionally enter a comparison operator (&lt;,&lt;=, &gt;, &gt;=, &lt;&gt; or =) at the beginning of each of your search values to specify how the comparison should be done.'); ?>
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link(Yii::t('default', 'Advanced Search'), '#', array('class' => 'search-button btn')); ?>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
+    <?php
+    $this->renderPartial('_search', array(
+        'model' => $model,
+    ));
+    ?>
 </div><!-- search-form -->
 
-<?php $this->widget('bootstrap.widgets.TbGridView',array(
-	'id'=>'reward-point-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'date',
-		'total',
-		'usage',
-		'org_id',
-		'status',
-		/*
-		'create_at',
-		'update_at',
-		*/
-		array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-		),
-	),
-)); ?>
+<?php
+$this->widget('bootstrap.widgets.TbGridView', array(
+    'id' => 'reward-point-grid',
+    'dataProvider' => $model->search(),
+    'filter' => $model,
+    'columns' => array(
+        'id',
+        array(
+            'name' => 'date',
+            'value' => 'date("Y-m", $data->date)',
+        ),
+        'total',
+        'usage',
+         array(
+            'name' => 'status',
+            'value' => 'RewardPoint::itemAlias("RewardPointStatus",$data->status)',
+            'filter' => RewardPoint::itemAlias("RewardPointStatus"),
+        ),
+       /* 'org_id',
+          'create_at',
+          'update_at',
+         */
+        array(
+            'class' => 'bootstrap.widgets.TbButtonColumn',
+        ),
+    ),
+));
+?>
