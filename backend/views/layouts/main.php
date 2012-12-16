@@ -45,9 +45,9 @@
                                         array('label' => Yii::t('default', 'category manage'), 'url' => array('/cate')),
                                 )),
                                 array('label' => Yii::t('default', 'reward point'), 'items' => array(
-                                        array('label' => Yii::t('default', 'reward list'), 'url' => '#'),
-                                        array('label' => Yii::t('default', 'reward grant'), 'url' => '#'),
-                                )),
+                                        array('label' => Yii::t('default', 'reward list'), 'url' => array('/reward')),
+                                        array('label' => Yii::t('default', 'reward grant'), 'url' => array('/rewardgrant')),
+                                )), 
                                 array('label' => Yii::t('default', 'team manage'), 'items' => array(
                                         array('label' => Yii::t('default', 'update team profile'), 'url' => array('/org/update')),
                                         array('label' => Yii::t('default', 'team tools'), 'url' => array('/news')),

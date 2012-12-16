@@ -127,6 +127,9 @@ class RewardController extends Controller
 	 */
 	public function actionIndex()
 	{
+            
+           echo Event::test();
+            Yii::app()->end();
 		$dataProvider=new CActiveDataProvider('RewardPoint');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

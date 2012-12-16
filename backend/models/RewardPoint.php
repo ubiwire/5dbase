@@ -41,7 +41,7 @@ class RewardPoint extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('date, create_at', 'required'),
+			array('date, total, status', 'required'),
 			array('total, usage, org_id, status', 'numerical', 'integerOnly'=>true),
 			array('update_at', 'safe'),
 			// The following rule is used by search().
@@ -58,6 +58,7 @@ class RewardPoint extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'org' => array(self::BELONGS_TO, 'Org', 'org_id')
 		);
 	}
 
