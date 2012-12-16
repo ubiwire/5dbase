@@ -1,5 +1,5 @@
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
-	'id'=>'reward-point-form',
+	'id'=>'reward-grant-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -7,15 +7,19 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<?php echo $form->textFieldRow($model,'date',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldRow($model,'total',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldRow($model,'usage',array('class'=>'span5')); ?>
-
 	<?php echo $form->textFieldRow($model,'org_id',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'status',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'granter_id',array('class'=>'span5')); ?>
+
+	<?php echo $form->textFieldRow($model,'integral_id',array('class'=>'span5')); ?>
+
+	<?php echo $form->textFieldRow($model,'recipient_id',array('class'=>'span5')); ?>
+
+	<?php echo $form->textFieldRow($model,'integral_val',array('class'=>'span5')); ?>
+
+	<?php echo $form->textFieldRow($model,'granter_type',array('class'=>'span5')); ?>
+
+	<?php echo $form->textFieldRow($model,'usage',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'create_at',array('class'=>'span5')); ?>
 

@@ -1,54 +1,21 @@
-<div class="view">
 
-    <b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-    <?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id' => $data->id)); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
-    <?php echo CHtml::encode($data->name); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('price')); ?>:</b>
-    <?php echo CHtml::encode($data->price); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('descriptor')); ?>:</b>
-    <?php echo CHtml::encode($data->descriptor); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('original_pic_path')); ?>:</b>
-    <?php echo CHtml::encode($data->original_pic_path); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('process_picture_path')); ?>:</b>
-    <?php echo CHtml::encode($data->process_picture_path); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('org_id')); ?>:</b>
-    <?php echo CHtml::encode($data->org_id); ?>
-    <br />
-
-    <?php /*
-      <b><?php echo CHtml::encode($data->getAttributeLabel('inventory')); ?>:</b>
-      <?php echo CHtml::encode($data->inventory); ?>
-      <br />
-
-      <b><?php echo CHtml::encode($data->getAttributeLabel('category_id')); ?>:</b>
-      <?php echo CHtml::encode($data->category_id); ?>
-      <br />
-
-      <b><?php echo CHtml::encode($data->getAttributeLabel('status')); ?>:</b>
-      <?php echo CHtml::encode($data->status); ?>
-      <br />
-
-      <b><?php echo CHtml::encode($data->getAttributeLabel('create_at')); ?>:</b>
-      <?php echo CHtml::encode($data->create_at); ?>
-      <br />
-
-      <b><?php echo CHtml::encode($data->getAttributeLabel('update_at')); ?>:</b>
-      <?php echo CHtml::encode($data->update_at); ?>
-      <br />
-
-     */ ?>
-
+<div class="thumbnail" style="height: 320px;float: left;line-height: 1;width: 23%;min-height: 28px;box-sizing: border-box;margin: 5px;">
+    <?php echo CHtml::image(Yii::app()->baseUrl . '/assets/uploads/products/' . $data->original_pic_path, '', array('style' => "width:140px;")) ?>
+    <div class="caption">
+        <h5> <?php echo CHtml::encode($data->name); ?></h5>
+        <p class="small-font" >
+            <?php
+            mb_internal_encoding("UTF-8");
+            $str = $data->descriptor;
+            if (strlen($str) > 40) {
+                echo mb_substr($str, 0, 40) . "...";
+            } else {
+                echo $str;
+            }
+            ?>
+        </p>
+        <p>
+        <?php echo CHtml::link(Yii::t('default', 'Detail'), array('view', 'id' => $data->id), array('class' => 'btn btn-primary btn-small')); ?>
+        </p>
+    </div>
 </div>

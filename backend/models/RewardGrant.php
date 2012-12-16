@@ -1,24 +1,26 @@
 <?php
 
 /**
- * This is the model class for table "{{reward_points}}".
+ * This is the model class for table "{{reward_point_grant}}".
  *
- * The followings are the available columns in table '{{reward_points}}':
+ * The followings are the available columns in table '{{reward_point_grant}}':
  * @property integer $id
- * @property string $date
- * @property integer $total
- * @property integer $usage
  * @property integer $org_id
- * @property integer $status
+ * @property integer $granter_id
+ * @property integer $integral_id
+ * @property integer $recipient_id
+ * @property integer $integral_val
+ * @property integer $granter_type
+ * @property integer $usage
  * @property string $create_at
  * @property string $update_at
  */
-class RewardPoint extends CActiveRecord
+class RewardGrant extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return RewardPoint the static model class
+	 * @return RewardGrant the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -30,7 +32,7 @@ class RewardPoint extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{reward_points}}';
+		return '{{reward_point_grant}}';
 	}
 
 	/**
@@ -41,12 +43,12 @@ class RewardPoint extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('date, create_at', 'required'),
-			array('total, usage, org_id, status', 'numerical', 'integerOnly'=>true),
+			array('create_at', 'required'),
+			array('org_id, granter_id, integral_id, recipient_id, integral_val, granter_type, usage', 'numerical', 'integerOnly'=>true),
 			array('update_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, date, total, usage, org_id, status, create_at, update_at', 'safe', 'on'=>'search'),
+			array('id, org_id, granter_id, integral_id, recipient_id, integral_val, granter_type, usage, create_at, update_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,11 +70,13 @@ class RewardPoint extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Date',
-			'total' => 'Total',
-			'usage' => 'Usage',
 			'org_id' => 'Org',
-			'status' => 'Status',
+			'granter_id' => 'Granter',
+			'integral_id' => 'Integral',
+			'recipient_id' => 'Recipient',
+			'integral_val' => 'Integral Val',
+			'granter_type' => 'Granter Type',
+			'usage' => 'Usage',
 			'create_at' => 'Create At',
 			'update_at' => 'Update At',
 		);
@@ -90,11 +94,13 @@ class RewardPoint extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('date',$this->date,true);
-		$criteria->compare('total',$this->total);
-		$criteria->compare('usage',$this->usage);
 		$criteria->compare('org_id',$this->org_id);
-		$criteria->compare('status',$this->status);
+		$criteria->compare('granter_id',$this->granter_id);
+		$criteria->compare('integral_id',$this->integral_id);
+		$criteria->compare('recipient_id',$this->recipient_id);
+		$criteria->compare('integral_val',$this->integral_val);
+		$criteria->compare('granter_type',$this->granter_type);
+		$criteria->compare('usage',$this->usage);
 		$criteria->compare('create_at',$this->create_at,true);
 		$criteria->compare('update_at',$this->update_at,true);
 

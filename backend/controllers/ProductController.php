@@ -64,7 +64,7 @@ class ProductController extends Controller {
             Yii::app()->user->setFlash('info', Yii::t('product', 'please create category before create product.'));
             $this->redirect(array('/cate/create'));
         }
-        
+
         $model = new Product;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -75,7 +75,7 @@ class ProductController extends Controller {
 
             $image = CUploadedFile::getInstance($model, 'original_pic_path');
             if (is_object($image) && get_class($image) === 'CUploadedFile') {
-                $model->original_pic_path = time().mt_rand(100,999).'.'.$image->extensionName;
+                $model->original_pic_path = time() . mt_rand(100, 999) . '.' . $image->extensionName;
             }
             if ($model->save()) {
                 if (is_object($image) && get_class($image) === 'CUploadedFile') {
@@ -133,6 +133,16 @@ class ProductController extends Controller {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
+    public function actionDeleteAll($yw2_c0) {
+        if (Yii::app()->request->isPostRequest) {
+            echo "hi";
+            Yii::app()->end();
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        }
+        else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
     /**
      * Lists all models.
      */
@@ -144,7 +154,7 @@ class ProductController extends Controller {
                         'order' => 'create_at DESC',
                     ),
                     'pagination' => array(
-                        'pageSize' => 15,
+                        'pageSize' => 8,
                     ),
                 ));
 

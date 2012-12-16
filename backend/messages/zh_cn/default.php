@@ -19,12 +19,17 @@ return array(
     'update team profile' => '修改团队信息',
     'reward point' => '积分管理',
     'product manage' => '礼品管理',
+    'Manage' => '管理',
     'Create' => '创建',
     'Save' => '保存',
     'Update' => '修改',
+    'Detail' => '详细',
+    'delete all' => '批量删除',
     'team tools' => '团队工具',
     'Create At' => '创建日期',
     'Update At' => '修改日期',
+    'Advanced Search' => '高级检索',
     'Fields with * are required.' => '带 <span class="required">*</span> 号为必填项',
+    'You may optionally enter a comparison operator (&lt;,&lt;=, &gt;, &gt;=, &lt;&gt; or =) at the beginning of each of your search values to specify how the comparison should be done.' => '你还可以在您搜索值前面输入一个比较运算符(<, <=, >, >=, <> or =)来指定搜索算法如何运算',
 );
 ?>

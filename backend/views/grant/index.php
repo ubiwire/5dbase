@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Reward Points',
+	'Reward Grants',
 );
 
 $this->menu=array(
-	array('label'=>'Create RewardPoint','url'=>array('create')),
-	array('label'=>'Manage RewardPoint','url'=>array('admin')),
+	array('label'=>'Create RewardGrant','url'=>array('create')),
+	array('label'=>'Manage RewardGrant','url'=>array('admin')),
 );
 ?>
 
-<h1>Reward Points</h1>
+<h1>Reward Grants</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 	'dataProvider'=>$dataProvider,

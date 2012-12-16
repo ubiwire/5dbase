@@ -1,6 +1,6 @@
 <?php
 
-class RewardController extends Controller
+class GrantController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -61,14 +61,14 @@ class RewardController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new RewardPoint;
+		$model=new RewardGrant;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['RewardPoint']))
+		if(isset($_POST['RewardGrant']))
 		{
-			$model->attributes=$_POST['RewardPoint'];
+			$model->attributes=$_POST['RewardGrant'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -90,9 +90,9 @@ class RewardController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['RewardPoint']))
+		if(isset($_POST['RewardGrant']))
 		{
-			$model->attributes=$_POST['RewardPoint'];
+			$model->attributes=$_POST['RewardGrant'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -127,7 +127,7 @@ class RewardController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('RewardPoint');
+		$dataProvider=new CActiveDataProvider('RewardGrant');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -138,10 +138,10 @@ class RewardController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new RewardPoint('search');
+		$model=new RewardGrant('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['RewardPoint']))
-			$model->attributes=$_GET['RewardPoint'];
+		if(isset($_GET['RewardGrant']))
+			$model->attributes=$_GET['RewardGrant'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -155,7 +155,7 @@ class RewardController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=RewardPoint::model()->findByPk($id);
+		$model=RewardGrant::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -167,7 +167,7 @@ class RewardController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='reward-point-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='reward-grant-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

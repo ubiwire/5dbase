@@ -104,14 +104,14 @@ class Product extends CActiveRecord {
         $criteria->compare('name', $this->name, true);
         $criteria->compare('price', $this->price);
         $criteria->compare('descriptor', $this->descriptor, true);
-        $criteria->compare('original_pic_path', $this->original_pic_path, true);
-        $criteria->compare('process_picture_path', $this->process_picture_path, true);
+//        $criteria->compare('original_pic_path', $this->original_pic_path, true);
+//        $criteria->compare('process_picture_path', $this->process_picture_path, true);
         $criteria->compare('org_id', $this->org_id);
         $criteria->compare('inventory', $this->inventory);
         $criteria->compare('category_id', $this->category_id);
         $criteria->compare('status', $this->status);
-        $criteria->compare('create_at', $this->create_at, true);
-        $criteria->compare('update_at', $this->update_at, true);
+//        $criteria->compare('create_at', $this->create_at, true);
+//        $criteria->compare('update_at', $this->update_at, true);
 
         return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,

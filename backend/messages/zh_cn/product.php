@@ -2,7 +2,7 @@
 
 return array(
     'Name' => '礼品名称',
-    'Price' => '所需兑换积分数',
+    'Price' => '所需积分数',
     'Descriptor' => '礼品描述',
     'Product detail' => '礼品详情',
     'Original Pic Path' => '礼品图片',
