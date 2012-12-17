@@ -18,6 +18,8 @@ class Category extends CActiveRecord {
      * @param string $className active record class name.
      * @return Category the static model class
      */
+    protected $_count;
+
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
@@ -49,10 +51,27 @@ class Category extends CActiveRecord {
             array('org_id, name, user_id', 'required'),
             array('org_id, user_id', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 25),
+            array('name', 'nameValidate', 'on' => 'create'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, org_id, name, user_id, create_at, update_at', 'safe', 'on' => 'search'),
         );
+    }
+
+    /**
+     * @return boolean for rules.
+     * 在同一个组织里，礼品分类不能重复
+     */
+    public function nameValidate($attribute, $params) {
+        if ($this->isNewRecord) {
+            
+            $_count = self::model()->count(array(
+                'condition' => 'org_id=:org_id and name=:name',
+                'params' => array(':org_id' => Yii::app()->user->org_id, ':name' => $this->name)));
+            if ($_count > 0) {
+                $this->addError('name', Yii::t('category', 'category name already exist !'));
+            }
+        }
     }
 
     /**
@@ -63,6 +82,7 @@ class Category extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'products' => array(self::HAS_MANY, 'Product', 'category_id'),
+            'org' => array(self::BELONGS_TO, 'Org', 'org_id'),
         );
     }
 
@@ -98,8 +118,8 @@ class Category extends CActiveRecord {
         $criteria->compare('update_at', $this->update_at, true);
 
         return new CActiveDataProvider($this, array(
-            'criteria' => $criteria,
-        ));
+                    'criteria' => $criteria,
+                ));
     }
 
 //    protected function beforeSave() {

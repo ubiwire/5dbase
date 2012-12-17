@@ -7,6 +7,7 @@ class CateController extends Controller {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = '//layouts/column2';
+    public $defaultAction = 'admin';
 
     /**
      * @return array action filters
@@ -24,13 +25,14 @@ class CateController extends Controller {
      */
     public function accessRules() {
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
+//            array('allow', // allow all users to perform 'index' and 'view' actions
+//                'actions' => array('index', 'view'),
+//                'users' => array('*'),
+//            ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
-                'users' => array('@'),
+                'actions' => array('create', 'update', 'index', 'view'),
+//                'users' => array('@'),
+                 'roles' => array('manager'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete'),
