@@ -63,6 +63,7 @@ class Org extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'users' => array(self::HAS_MANY, 'User', 'org_id'),
+            'news' => array(self::HAS_MANY, 'News', 'org_id'),
         );
     }
 

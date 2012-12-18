@@ -16,7 +16,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     $this->widget('bootstrap.widgets.TbButton', array(
         'buttonType' => 'submit',
         'type' => 'primary',
-        'label' => 'Search',
+        'label' => Yii::t('default', 'Search'),
     ));
     ?>
 </div>

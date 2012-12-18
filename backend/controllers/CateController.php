@@ -71,7 +71,8 @@ class CateController extends Controller {
             $model->user_id = Yii::app()->user->getId();
             $model->org_id = Yii::app()->user->org_id;
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+//                $this->redirect(array('view', 'id' => $model->id));
+            $this->redirect(array('admin'));
         }
 
         $this->render('create', array(

@@ -1,16 +1,22 @@
 <?php
 $this->breadcrumbs=array(
-	'Products'=>array('index'),
+	 Yii::t('product', 'Products')=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
 	Yii::t('default','Update'),
 );
 
-$this->menu=array(
-	array('label'=>'List Product','url'=>array('index')),
-	array('label'=>'Create Product','url'=>array('create')),
-	array('label'=>'View Product','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Product','url'=>array('admin')),
+$this->menu = array(
+    array('label' => Yii::t('product', 'Product Menu'), 'itemOptions' => array('class' => 'nav-header')),
+    array('label' => Yii::t('product', 'Create Product'), 'url' => array('create')),
+    array('label' => Yii::t('product', 'List Product'), 'url' => array('index')), 
+    array('label'=>Yii::t('product', 'View Product'),'url'=>array('view','id'=>$model->id)),
+    array('label' => Yii::t('product', 'Manage Product'), 'url' => array('admin')),
+    '---',
+    array('label' => Yii::t('category', 'Category'), 'itemOptions' => array('class' => 'nav-header')),
+    array('label' => Yii::t('category', 'Manage Category'), 'url' => array('/cate')),
 );
+
+
 ?>
 
 <div class="well">

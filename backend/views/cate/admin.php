@@ -17,6 +17,7 @@ $this->menu = array(
     array('label' => Yii::t('product', 'Product Menu'), 'itemOptions' => array('class' => 'nav-header')),
     array('label' => Yii::t('product', 'Manage Product'), 'url' => array('/product/admin')),
     array('label' => Yii::t('product', 'List Product'), 'url' => array('/product')),
+    array('label' => Yii::t('product', 'Create Product'), 'url' => array('/product/create')),
 );
 
 
@@ -34,31 +35,31 @@ return false;
 ");
 ?>
 <div class="well">
-<h3><?php echo Yii::t('default', 'Manage Category') ?></h3>
-<p>
-    <?php echo Yii::t('default', 'You may optionally enter a comparison operator (&lt;,&lt;=, &gt;, &gt;=, &lt;&gt; or =) at the beginning of each of your search values to specify how the comparison should be done.') ?>
-</p>
-<?php echo CHtml::link(Yii::t('default', 'Advanced Search'), '#', array('class' => 'search-button btn')); ?>
-<div class="search-form" style="display:none">
+    <h3><?php echo Yii::t('default', 'Manage Category') ?></h3>
+    <p>
+        <?php echo Yii::t('default', 'You may optionally enter a comparison operator (&lt;,&lt;=, &gt;, &gt;=, &lt;&gt; or =) at the beginning of each of your search values to specify how the comparison should be done.') ?>
+    </p>
+    <?php echo CHtml::link(Yii::t('default', 'Advanced Search'), '#', array('class' => 'search-button btn')); ?>
+    <div class="search-form" style="display:none">
+        <?php
+        $this->renderPartial('_search', array(
+            'model' => $model,
+        ));
+        ?>
+    </div><!-- search-form -->
+
     <?php
-    $this->renderPartial('_search', array(
-        'model' => $model,
+    $this->widget('bootstrap.widgets.TbGridView', array(
+        'id' => 'category-grid',
+        'dataProvider' => $model->search(),
+        'filter' => $model,
+        'columns' => array(
+            'id',
+            'name',
+            array(
+                'class' => 'bootstrap.widgets.TbButtonColumn',
+            ),
+        ),
     ));
     ?>
-</div><!-- search-form -->
-
-<?php
-$this->widget('bootstrap.widgets.TbGridView', array(
-    'id' => 'category-grid',
-    'dataProvider' => $model->search(),
-    'filter' => $model,
-    'columns' => array(
-        'id',
-        'name',
-        array(
-            'class' => 'bootstrap.widgets.TbButtonColumn',
-        ),
-    ),
-));
-?>
 </div>

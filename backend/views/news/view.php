@@ -24,7 +24,7 @@ $this->menu=array(
 		'content',
 		'org_id',
 		'user_id',
-		'creaet_at',
+		'create_at',
 		'update_at',
 	),
 )); ?>

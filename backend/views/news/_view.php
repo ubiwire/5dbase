@@ -24,8 +24,8 @@
 	<?php echo CHtml::encode($data->user_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('creaet_at')); ?>:</b>
-	<?php echo CHtml::encode($data->creaet_at); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('create_at')); ?>:</b>
+	<?php echo CHtml::encode($data->create_at); ?>
 	<br />
 
 	<?php /*

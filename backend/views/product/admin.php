@@ -5,8 +5,12 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
+    array('label' => Yii::t('product', 'Product Menu'), 'itemOptions' => array('class' => 'nav-header')),
     array('label' => Yii::t('product', 'List Product'), 'url' => array('index')),
     array('label' => Yii::t('product', 'Create Product'), 'url' => array('create')),
+    '---',
+    array('label' => Yii::t('category', 'Category'), 'itemOptions' => array('class' => 'nav-header')),
+    array('label' => Yii::t('category', 'Manage Category'), 'url' => array('/cate')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -29,6 +33,7 @@ $('.search-form form').submit(function(){
     #yw2_c5{width: 60px;}
     #yw2_c6{width: 80px;}
     #yw2_c7{width: 80px;}
+    .brand {font-size: 16px;}
 </style>
 <h3><?php echo Yii::t('product', 'Manage Product') ?></h3>
 <p>

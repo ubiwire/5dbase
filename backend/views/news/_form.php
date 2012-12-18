@@ -12,14 +12,7 @@
 	<?php echo $form->textFieldRow($model,'title',array('class'=>'span5','maxlength'=>128)); ?>
 
 	<?php echo $form->textAreaRow($model,'content',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
-<!-- 
-	<?php echo $form->textFieldRow($model,'org_id',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'user_id',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldRow($model,'creaet_at',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldRow($model,'update_at',array('class'=>'span5')); ?> -->
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(

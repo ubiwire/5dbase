@@ -16,6 +16,7 @@ $this->menu = array(
     array('label' => Yii::t('product', 'Product Menu'), 'itemOptions' => array('class' => 'nav-header')),
     array('label' => Yii::t('product', 'Manage Product'), 'url' => array('/product/admin')),
     array('label' => Yii::t('product', 'List Product'), 'url' => array('/product')),
+      array('label' => Yii::t('product', 'Create Product'), 'url' => array('/product/create')),
 );
 
 ?>

@@ -106,15 +106,19 @@ class Product extends CActiveRecord {
         $criteria->compare('descriptor', $this->descriptor, true);
 //        $criteria->compare('original_pic_path', $this->original_pic_path, true);
 //        $criteria->compare('process_picture_path', $this->process_picture_path, true);
-        $criteria->compare('org_id', $this->org_id);
+//        $criteria->compare('org_id', $this->org_id);
         $criteria->compare('inventory', $this->inventory);
         $criteria->compare('category_id', $this->category_id);
         $criteria->compare('status', $this->status);
 //        $criteria->compare('create_at', $this->create_at, true);
 //        $criteria->compare('update_at', $this->update_at, true);
+        $criteria->condition = 'org_id =' . Yii::app()->user->org_id;
 
         return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
+//                    'pagination' => array(
+//                        'pageSize' => 8,
+//                    ),
                 ));
     }
 
@@ -137,7 +141,8 @@ class Product extends CActiveRecord {
 //        }
         return parent::beforeSave();
     }
-        public static function itemAlias($type, $code = NULL) {
+
+    public static function itemAlias($type, $code = NULL) {
         $_items = array(
             'ProductStatus' => array(
                 self::STATUS_ACTIVE => Yii::t('product', 'status active'),
