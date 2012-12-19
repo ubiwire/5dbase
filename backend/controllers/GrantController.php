@@ -7,7 +7,7 @@ class GrantController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-
+        public $defaultAction = 'admin';
 	/**
 	 * @return array action filters
 	 */
@@ -36,7 +36,8 @@ class GrantController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+//				'users'=>array('admin'),
+                            'roles' => array('manager'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

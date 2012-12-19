@@ -51,7 +51,7 @@ $('.search-form form').submit(function(){
     <input type="submit" value="delete all" onclick="return confirm('asdfasdf')" />
 </form>-->
 <?php
-echo CHtml::beginForm('product/deleteall','post',array('id'=>'asdfasdapply-form'));
+//echo CHtml::beginForm('product/deleteall','post',array('id'=>'asdfasdapply-form'));
 $this->widget('bootstrap.widgets.TbExtendedGridView', array(
     'type' => 'striped bordered',
     'filter' => $model,
@@ -93,7 +93,7 @@ $this->widget('bootstrap.widgets.TbExtendedGridView', array(
         ),
     ),
 ));
-echo CHtml::endForm();
+//echo CHtml::endForm();
 ?>
 
 

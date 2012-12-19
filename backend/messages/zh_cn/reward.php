@@ -16,6 +16,13 @@ return array(
     'Usage' => '已发放积分数',
     'Create RewardPoint' => '添加积分',
     'RewardGrant detail' => '积分兑换详情',
+    'Reward Grants' => '积分兑换',
     'current month reward point already exist' => '当前选择的月份已创建积分信息，请重新选择月份！',
+    'Granter' => '操作者',
+    'Recipient' => '操作对象',
+    'Reward Val' => '积分值',
+    'Granter Type' => '操作类型',
+    'Usage' => '礼品ID',
+    'Reason' => '理由',
 );
 ?>

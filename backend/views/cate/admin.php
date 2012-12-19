@@ -34,6 +34,7 @@ return false;
 });
 ");
 ?>
+
 <div class="well">
     <h3><?php echo Yii::t('default', 'Manage Category') ?></h3>
     <p>

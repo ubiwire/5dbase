@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Reward Grants'=>array('index'),
-	'Manage',
+	Yii::t('reward', 'Reward Grants'),
+//	Yii::t('reward', 'Manage'),
 );
 
 $this->menu=array(
-	array('label'=>'List RewardGrant','url'=>array('index')),
-	array('label'=>'Create RewardGrant','url'=>array('create')),
+	array('label' => Yii::t('reward', 'Create RewardPoint'), 'url' => array('/reward/create')),
+    array('label' => Yii::t('reward', 'List RewardPoint'), 'url' => array('/reward')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -22,15 +22,15 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-<h1>Manage Reward Grants</h1>
+<div class="well">
+<h3><?php echo Yii::t('reward', 'Reward Grants'); ?></h3>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+    <?php echo Yii::t('default', 'You may optionally enter a comparison operator (&lt;,&lt;=, &gt;, &gt;=, &lt;&gt; or =) at the beginning of each of your search values to specify how the comparison should be done.'); ?>
+
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link(Yii::t('default', 'Advanced Search'),'#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -43,19 +43,20 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'org_id',
+
 		'granter_id',
-		'integral_id',
 		'recipient_id',
-		'integral_val',
-		/*
+		'reward_val',
 		'granter_type',
+		/*
 		'usage',
 		'create_at',
 		'update_at',
+		'reason',
 		*/
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),
 	),
 )); ?>
+</div>

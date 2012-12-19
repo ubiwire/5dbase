@@ -109,14 +109,14 @@ class Category extends CActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-
+ $criteria->condition = 'org_id ='.Yii::app()->user->org_id;
         $criteria->compare('id', $this->id);
 //        $criteria->compare('org_id', $this->org_id);
         $criteria->compare('name', $this->name, true);
         $criteria->compare('user_id', $this->user_id);
         $criteria->compare('create_at', $this->create_at, true);
         $criteria->compare('update_at', $this->update_at, true);
-        $criteria->condition = 'org_id ='.Yii::app()->user->org_id;
+//        $criteria->condition = 'org_id ='.Yii::app()->user->org_id;
         
 
         return new CActiveDataProvider($this, array(

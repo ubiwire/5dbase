@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 $this->menu = array(
 //    array('label' => 'List RewardPoint', 'url' => array('index')),
     array('label' => Yii::t('reward', 'Create RewardPoint'), 'url' => array('create')),
-    array('label' => Yii::t('reward', 'RewardGrant detail'), 'url' => '#'),
+    array('label' => Yii::t('reward', 'RewardGrant detail'), 'url' => array('grant')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

@@ -7,13 +7,13 @@
  * @property integer $id
  * @property integer $org_id
  * @property integer $granter_id
- * @property integer $integral_id
  * @property integer $recipient_id
- * @property integer $integral_val
+ * @property integer $reward_val
  * @property integer $granter_type
  * @property integer $usage
  * @property string $create_at
  * @property string $update_at
+ * @property string $reason
  */
 class RewardGrant extends CActiveRecord
 {
@@ -43,12 +43,13 @@ class RewardGrant extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('create_at', 'required'),
-			array('org_id, granter_id, integral_id, recipient_id, integral_val, granter_type, usage', 'numerical', 'integerOnly'=>true),
+			array('create_at, reason', 'required'),
+			array('org_id, granter_id, recipient_id, reward_val, granter_type, usage', 'numerical', 'integerOnly'=>true),
+			array('reason', 'length', 'max'=>255),
 			array('update_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, org_id, granter_id, integral_id, recipient_id, integral_val, granter_type, usage, create_at, update_at', 'safe', 'on'=>'search'),
+			array('id, org_id, granter_id, recipient_id, reward_val, granter_type, usage, create_at, update_at, reason', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,14 +72,14 @@ class RewardGrant extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'org_id' => 'Org',
-			'granter_id' => 'Granter',
-			'integral_id' => 'Integral',
-			'recipient_id' => 'Recipient',
-			'integral_val' => 'Integral Val',
-			'granter_type' => 'Granter Type',
-			'usage' => 'Usage',
+			'granter_id' => Yii::t('reward', 'Granter'),
+			'recipient_id' => Yii::t('reward', 'Recipient'),
+			'reward_val' => Yii::t('reward', 'Reward Val'),
+			'granter_type' => Yii::t('reward', 'Granter Type'),
+			'usage' => Yii::t('reward', 'Usage'),
 			'create_at' => 'Create At',
 			'update_at' => 'Update At',
+			'reason' => Yii::t('reward', 'Reason'),
 		);
 	}
 
@@ -96,13 +97,13 @@ class RewardGrant extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('org_id',$this->org_id);
 		$criteria->compare('granter_id',$this->granter_id);
-		$criteria->compare('integral_id',$this->integral_id);
 		$criteria->compare('recipient_id',$this->recipient_id);
-		$criteria->compare('integral_val',$this->integral_val);
+		$criteria->compare('reward_val',$this->reward_val);
 		$criteria->compare('granter_type',$this->granter_type);
 		$criteria->compare('usage',$this->usage);
 		$criteria->compare('create_at',$this->create_at,true);
 		$criteria->compare('update_at',$this->update_at,true);
+		$criteria->compare('reason',$this->reason,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

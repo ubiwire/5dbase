@@ -86,15 +86,16 @@ class RewardPoint extends CActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-
+        
+        $criteria->condition = 'org_id=' . Yii::app()->user->org_id;
         $criteria->compare('id', $this->id);
         $criteria->compare('date', $this->date, true);
         $criteria->compare('total', $this->total);
         $criteria->compare('usage', $this->usage);
-        $criteria->compare('org_id', $this->org_id);
+//        $criteria->compare('org_id', $this->org_id);
         $criteria->compare('status', $this->status);
-        $criteria->compare('create_at', $this->create_at, true);
-        $criteria->compare('update_at', $this->update_at, true);
+//        $criteria->compare('create_at', $this->create_at, true);
+//        $criteria->compare('update_at', $this->update_at, true);
 
         return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,

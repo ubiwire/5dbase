@@ -11,11 +11,9 @@
 
 	<?php echo $form->textFieldRow($model,'granter_id',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'integral_id',array('class'=>'span5')); ?>
-
 	<?php echo $form->textFieldRow($model,'recipient_id',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'integral_val',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'reward_val',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'granter_type',array('class'=>'span5')); ?>
 
@@ -24,6 +22,8 @@
 	<?php echo $form->textFieldRow($model,'create_at',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'update_at',array('class'=>'span5')); ?>
+
+	<?php echo $form->textFieldRow($model,'reason',array('class'=>'span5','maxlength'=>255)); ?>
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
