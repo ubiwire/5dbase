@@ -22,6 +22,8 @@ return array(
     'reward point' => '积分管理',
     'product manage' => '礼品管理',
     'Manage' => '管理',
+    'Menu' => '功能菜单',
+    'Posts' => '微博',
     'Create' => '创建',
     'Save' => '保存',
     'Update' => '修改',

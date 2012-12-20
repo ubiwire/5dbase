@@ -1,9 +1,9 @@
 
 <div class="well well-small">
     <?php echo $data->contents; ?>
-    <?php if (isset($date->file_path)): ?>
-        <div claa="image">
-            <?php CHtml::image($data->file_path,'image',array("width"=>220,"height"=>150)) ?>
+    <?php if (isset($data->file_path)): ?>
+        <div class="image">
+            <?php echo CHtml::image(Yii::app()->baseUrl . '/assets/uploads/posts/' . $data->file_path,'image',array("width"=>120)) ?>
         </div>
     <?php endif ?>
     <div>

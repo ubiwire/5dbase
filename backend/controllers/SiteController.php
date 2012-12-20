@@ -9,7 +9,7 @@
  */
 class SiteController extends Controller {
 
-   // public $layout = '//layouts/column2';
+    public $layout = '//layouts/column2';
 
     /**
      * @return array list of action filters (See CController::filter)
@@ -54,13 +54,9 @@ class SiteController extends Controller {
      * Renders index page
      */
     public function actionIndex() {
-   //     Yii::app()->user->setState('org_id') = "asdf";
-//var_dump(Yii::app()->user->getState('org_id'));
-// Yii::app()->end();
-        $post = Post::model()->recentlyList(Yii::app()->user->org_id);
-//        var_dump(Yii::app()->user->id);
-//        Yii::app()->end();
-        $this->render('index', array('post' => $post));
+//        $posts = Post::model()->recentlyList(Yii::app()->user->org_id);
+//        $this->render('index', array('post' => $posts));
+        $this->render('index');
     }
 
     /**
