@@ -45,8 +45,8 @@ class Product extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name, price, org_id, inventory, category_id, status, descriptor', 'required'),
-            array('name', 'unique', 'message' => Yii::t('product', "This product's name already exists.")),
+            array('name, price, org_id, inventory, category_id, status, descriptor, original_pic_path', 'required'),
+            array('name', 'nameValidate'),
             array('status', 'in', 'range' => array(self::STATUS_ACTIVE, self::STATUS_BANNED)),
             array('price, org_id, inventory, category_id, status', 'numerical', 'integerOnly' => true),
             array('name, original_pic_path, process_picture_path', 'length', 'max' => 255),
@@ -57,6 +57,22 @@ class Product extends CActiveRecord {
             // Please remove those attributes that should not be searched.
             array('id, name, price, descriptor, original_pic_path, process_picture_path, org_id, inventory, category_id, status, create_at, update_at', 'safe', 'on' => 'search'),
         );
+    }
+    
+      /**
+     * @return boolean for rules.
+     * 在同一个组织里，礼品分类不能重复
+     */
+    public function nameValidate($attribute, $params) {
+        if ($this->isNewRecord) {
+            
+            $_count = self::model()->count(array(
+                'condition' => 'org_id=:org_id and name=:name',
+                'params' => array(':org_id' => Yii::app()->user->org_id, ':name' => $this->name)));
+            if ($_count > 0) {
+                $this->addError('name', Yii::t('product', "This product's name already exists."));
+            }
+        }
     }
 
     /**

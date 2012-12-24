@@ -68,14 +68,14 @@ class RewardController extends Controller {
             $model->attributes = $_POST['RewardPoint'];
 //            $date = DateTime::createFromFormat('m/d/Y', $model->date);
 //            $model->date = $date->format('Y-m-d');
-            if ($model->checkDate(strtotime($model->date)) > 0) {
+            if ($model->checkDate(strtotime($model->date), Yii::app()->user->org_id) > 0) {
                 Yii::app()->user->setFlash('error', Yii::t('reward', 'current month reward point already exist'));
 //                $model->date = date("m/d/Y", $model->date);
             } else {
                 $model->org_id = Yii::app()->user->org_id;
                 $model->date = strtotime($model->date);
                 if ($model->save())
-                    $this->redirect(array('view', 'id' => $model->id));
+                    $this->redirect(array('admin'));
             }
         }
         $this->render('create', array(

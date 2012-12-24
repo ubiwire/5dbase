@@ -47,7 +47,7 @@
                                 )),
                                 array('label' => Yii::t('default', 'reward point'), 'items' => array(
                                         array('label' => Yii::t('default', 'reward list'), 'url' => array('/reward')),
-                                        array('label' => Yii::t('default', 'reward grant'), 'url' => array('/rewardgrant')),
+                                        array('label' => Yii::t('default', 'reward grant'), 'url' => array('/grant')),
                                 )), 
                                 array('label' => Yii::t('default', 'team manage'), 'items' => array(
                                         array('label' => Yii::t('default', 'update team profile'), 'url' => array('/org/update')),

@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 3.4.5
 -- http://www.phpmyadmin.net
 --
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `tbl_news` (
   `content` text CHARACTER SET utf8 NOT NULL,
   `org_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `creaet_at` datetime NOT NULL,
+  `create_at` datetime NOT NULL,
   `update_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
@@ -216,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `tbl_news` (
 -- 转存表中的数据 `tbl_news`
 --
 
-INSERT INTO `tbl_news` (`id`, `news_type`, `title`, `content`, `org_id`, `user_id`, `creaet_at`, `update_at`) VALUES
+INSERT INTO `tbl_news` (`id`, `news_type`, `title`, `content`, `org_id`, `user_id`, `create_at`, `update_at`) VALUES
 (1, 1, '团队工具', '团队工具团队工具', 3, 7, '2012-12-08 23:23:23', '2012-12-08 23:23:23');
 
 -- --------------------------------------------------------

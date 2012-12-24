@@ -99,14 +99,25 @@ class ProductController extends Controller {
     public function actionUpdate($id) {
         $categoryList = Category::getCategoryList();
         $model = $this->loadModel($id);
+        $original_pic_path = $model->original_pic_path;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Product'])) {
             $model->attributes = $_POST['Product'];
+            if (isset($original_pic_path)) {
+                $model->original_pic_path = $original_pic_path;
+            }
+            $image = CUploadedFile::getInstance($model, 'original_pic_path');
+            if (is_object($image) && get_class($image) === 'CUploadedFile') {
+                $model->original_pic_path = time() . mt_rand(100, 999) . '.' . $image->extensionName;
+            }
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                if (is_object($image) && get_class($image) === 'CUploadedFile') {
+                    $image->saveAs(Yii::app()->basePath . '/www/assets/uploads/products/' . $model->original_pic_path);
+                }
+            $this->redirect(array('view', 'id' => $model->id));
         }
 
         $this->render('update', array(

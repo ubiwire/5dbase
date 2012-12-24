@@ -126,7 +126,7 @@ class RewardPoint extends CActiveRecord {
         );
     }
 
-    public function checkDate($time) {
+    public function checkDate($time, $org_id) {
         $y = date("Y", $time);
         $m = date("m", $time);
 //        $d = date("d", $time);
@@ -139,7 +139,7 @@ class RewardPoint extends CActiveRecord {
 //        echo "to：";
 //        echo $t2 - $t1 . "<br>";
 
-        return self::model()->count(array('condition' => 'date>=:begintime and date<=:endtime', 'params' => array(':begintime' => $t1, ':endtime' => $t2)));
+        return self::model()->count(array('condition' => ' org_id=:org_id and date>=:begintime and date<=:endtime', 'params' => array(':begintime' => $t1, ':endtime' => $t2, ':org_id' => $org_id)));
 //        array('condition' => $attribute . '=:loginname', 'params' => array(':loginname' => $this->username));
 //        Yii::app()->end();
     }
