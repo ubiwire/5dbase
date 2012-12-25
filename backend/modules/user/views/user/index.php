@@ -15,7 +15,7 @@ $this->menu = array(
 //    array('label' => UserModule::t('Manage Profile Field'), 'url' => array('profileField/admin')),
 );
 ?>
-
+<div class="well">
 <h3><?php echo UserModule::t("List User"); ?></h3>
 
 <?php
@@ -32,3 +32,4 @@ $this->widget('zii.widgets.grid.CGridView', array(
     ),
 ));
 ?>
+</div>

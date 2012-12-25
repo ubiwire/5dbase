@@ -9,9 +9,11 @@ $this->menu=array(
 );
 ?>
 
-<h1>News</h1>
+<div class="well">
+<h3>News</h3>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>
+</div>

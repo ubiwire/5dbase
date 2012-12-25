@@ -6,6 +6,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
 //    array('label' => 'List RewardPoint', 'url' => array('index')),
+    array('label' => Yii::t('default', 'reward point'), 'itemOptions' => array('class' => 'nav-header')),
     array('label' => Yii::t('reward', 'Create RewardPoint'), 'url' => array('create')),
     array('label' => Yii::t('reward', 'RewardGrant detail'), 'url' => array('grant')),
 );
@@ -24,9 +25,9 @@ $('.search-form form').submit(function(){
 ");
 ?>
 <style>
-  
+
     #reward-point-grid_c4{width: 60px;}
-    
+
 </style>
 <h3><?php echo Yii::t('reward', 'Manage Reward Points') ?></h3>
 
@@ -56,12 +57,12 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         'total',
         'usage',
-         array(
+        array(
             'name' => 'status',
             'value' => 'RewardPoint::itemAlias("RewardPointStatus",$data->status)',
             'filter' => RewardPoint::itemAlias("RewardPointStatus"),
         ),
-       /* 'org_id',
+        /* 'org_id',
           'create_at',
           'update_at',
          */

@@ -1,30 +1,35 @@
 <?php
-$this->breadcrumbs=array(
-	'News'=>array('index'),
-	$model->title,
+$this->breadcrumbs = array(
+    Yii::t('news', 'News') => array('index'),
+    $model->title,
 );
 
-$this->menu=array(
-	array('label'=>'List News','url'=>array('index')),
-	array('label'=>'Create News','url'=>array('create')),
-	array('label'=>'Update News','url'=>array('update','id'=>$model->id)),
-	array('label'=>'Delete News','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage News','url'=>array('admin')),
+$this->menu = array(
+    array('label' => Yii::t('news', 'News'), 'itemOptions' => array('class' => 'nav-header')),
+    array('label' => Yii::t('news', 'Create News'), 'url' => array('create')),
+    array('label' => Yii::t('news', 'Update News'), 'url' => array('update', 'id' => $model->id)),
+    array('label' => Yii::t('news', 'Delete News'), 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => Yii::t('default', 'Are you sure you want to delete this item?'))),
+    array('label' => Yii::t('news', 'Manage News'), 'url' => array('admin')),
+    '---',
+    array('label' => Yii::t('default', 'team manage'), 'itemOptions' => array('class' => 'nav-header')),
+    array('label' => Yii::t('default', 'User List'), 'url' => array('/user')),
 );
 ?>
 
-<h1>View News #<?php echo $model->id; ?></h1>
+<div class="well">
+<h3><?php echo $model->title; ?></h3>
 
-<?php $this->widget('bootstrap.widgets.TbDetailView',array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'news_type',
-		'title',
-		'content',
-		'org_id',
-		'user_id',
-		'create_at',
-		'update_at',
-	),
-)); ?>
+<?php
+$this->widget('bootstrap.widgets.TbDetailView', array(
+    'data' => $model,
+    'attributes' => array(
+        array(
+          'name' => 'news_type',
+            'value' => News::itemAlias('NewsType', $model->news_type),
+        ),
+        'title',
+        'content',
+    ),
+));
+?>
+</div>

@@ -38,8 +38,7 @@ class UserController extends Controller {
         );
     }
 
-    
-     /**
+    /**
      * Displays a particular model.
      */
     public function actionConsole() {
@@ -48,7 +47,7 @@ class UserController extends Controller {
             'model' => $model,
         ));
     }
-    
+
     /**
      * Displays a particular model.
      */

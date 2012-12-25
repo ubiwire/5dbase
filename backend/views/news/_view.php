@@ -16,13 +16,6 @@
 	<?php echo CHtml::encode($data->content); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('org_id')); ?>:</b>
-	<?php echo CHtml::encode($data->org_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
-	<?php echo CHtml::encode($data->user_id); ?>
-	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('create_at')); ?>:</b>
 	<?php echo CHtml::encode($data->create_at); ?>

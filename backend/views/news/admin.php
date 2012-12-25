@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    Yii::t('news', 'News') => array('index'),
+    Yii::t('news', 'News') => array('admin'),
     Yii::t('default', 'Manage'),
 );
 

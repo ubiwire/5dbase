@@ -69,7 +69,7 @@ class NewsController extends Controller {
             $model->org_id = Yii::app()->user->org_id;
            // $model->create_at = $model->update_at = time();
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('admin'));
         }
 
         $this->render('create', array(

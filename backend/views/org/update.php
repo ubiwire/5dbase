@@ -2,9 +2,9 @@
 /* @var $this OrgController */
 /* @var $model Org */
 
-$this->breadcrumbs=array(
-	//'Orgs'=>array('index'),
-	$model->name,
+$this->breadcrumbs = array(
+    //'Orgs'=>array('index'),
+    $model->name,
 );
 
 //$this->menu=array(
@@ -13,6 +13,14 @@ $this->breadcrumbs=array(
 //	array('label'=>'View Org', 'url'=>array('view', 'id'=>$model->id)),
 //	array('label'=>'Manage Org', 'url'=>array('admin')),
 //);
+$this->menu = array(
+    array('label' => Yii::t('default', 'team manage'), 'itemOptions' => array('class' => 'nav-header')),
+    array('label' => Yii::t('default', 'User List'), 'url' => array('/user')),
+    '---',
+    array('label' => Yii::t('news', 'News'), 'itemOptions' => array('class' => 'nav-header')),
+    array('label' => Yii::t('news', 'Create News'), 'url' => array('/news/create')),
+    array('label' => Yii::t('news', 'Manage News'), 'url' => array('/news/admin')),
+);
 ?>
 
 <div class="well">
