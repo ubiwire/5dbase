@@ -50,6 +50,7 @@ return CMap::mergeArray(
             'import' => array(
                 'common.components.*',
                 'common.extensions.*',
+                'ext.editable.*',
                 /* uncomment if required */
                 /* 'common.extensions.behaviors.*', */
                 /* 'common.extensions.validators.*', */

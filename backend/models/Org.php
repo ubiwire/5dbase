@@ -39,7 +39,7 @@ class Org extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('name', 'required'),
-            array('parent_id', 'numerical', 'integerOnly' => true),
+            array('parent_id, creator_id', 'numerical', 'integerOnly' => true),
             array('name, slogan, photo_path, company_name', 'length', 'max' => 255),
             array('update_at', 'safe'),
             array('photo_path',
@@ -51,7 +51,7 @@ class Org extends CActiveRecord {
             ),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, slogan, company_name, parent_id, create_at, update_at', 'safe', 'on' => 'search'),
+            array('id, name, slogan, company_name, parent_id, create_at, update_at, creator_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -80,6 +80,7 @@ class Org extends CActiveRecord {
             'parent_id' => Yii::t("org", 'Parent'),
             'create_at' => Yii::t("org", 'Create At'),
             'update_at' => Yii::t("org", 'Update At'),
+            'creator_id'  => Yii::t("org", 'Creator'),
         );
     }
 

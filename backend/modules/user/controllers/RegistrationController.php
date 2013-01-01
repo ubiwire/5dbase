@@ -55,6 +55,8 @@ class RegistrationController extends Controller {
                             $model->roles = User::ROLES_MANAGER;
                             if ($model->save()) {
                                 $profile->user_id = $model->id;
+                                $org->creator_id = $model->id;
+                                $org->save();
                                 $profile->save();
                                  $this->redirect(Yii::app()->controller->module->loginUrl);
                                 

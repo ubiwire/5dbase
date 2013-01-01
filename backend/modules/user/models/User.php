@@ -8,11 +8,10 @@ class User extends CActiveRecord {
 
     //TODO: Delete for next version (backward compatibility)
     const STATUS_BANED = -1;
-
     const ROLES_ADMIN = 'admin';
     const ROLES_MANAGER = 'manager';
     const ROLES_MEMBER = 'member';
-    
+
     /**
      * The followings are the available columns in table 'users':
      * @var integer $id
@@ -108,6 +107,7 @@ class User extends CActiveRecord {
             'status' => UserModule::t("Status"),
             'tel' => UserModule::t("tel"),
             'org_id' => UserModule::t("org id"),
+            'roles' => UserModule::t("roles"),
         );
     }
 
@@ -148,6 +148,11 @@ class User extends CActiveRecord {
             'AdminStatus' => array(
                 '0' => UserModule::t('No'),
                 '1' => UserModule::t('Yes'),
+            ),
+            'UserRoles' => array(
+              //  self::ROLES_ADMIN => UserModule::t('admin'),
+                self::ROLES_MANAGER => UserModule::t('manager'),
+                self::ROLES_MEMBER => UserModule::t('member'),
             ),
         );
         if (isset($code))

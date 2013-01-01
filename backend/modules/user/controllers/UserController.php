@@ -24,7 +24,7 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'console'),
+                'actions' => array('index', 'view', 'console', 'update', 'create'),
 //				'users'=>array('*'),
                 'roles' => array('manager'),
             ),
@@ -41,11 +41,15 @@ class UserController extends Controller {
     /**
      * Displays a particular model.
      */
-    public function actionConsole() {
-        $model = $this->loadModel();
-        $this->render('console', array(
-            'model' => $model,
-        ));
+    public function actionCreate() {
+        $model = new User;
+        if (isset($_POST['RegistrationForm'])) {
+            
+        } else {
+            $this->render('create', array(
+                'model' => $model,
+            ));
+        }
     }
 
     /**
@@ -73,6 +77,23 @@ class UserController extends Controller {
 
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+        ));
+    }
+
+    public function actionUpdate($id) {
+        $model = $this->loadModel($id);
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            if ($model->save())
+                $this->redirect(array('/user'));
+        }
+
+        $this->render('/user/update', array(
+            'model' => $model,
         ));
     }
 

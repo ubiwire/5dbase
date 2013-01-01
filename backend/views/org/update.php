@@ -4,6 +4,7 @@
 
 $this->breadcrumbs = array(
     //'Orgs'=>array('index'),
+    Yii::t('default', 'team manage') => array('/user/user'),
     $model->name,
 );
 
@@ -15,7 +16,7 @@ $this->breadcrumbs = array(
 //);
 $this->menu = array(
     array('label' => Yii::t('default', 'team manage'), 'itemOptions' => array('class' => 'nav-header')),
-    array('label' => Yii::t('default', 'User List'), 'url' => array('/user')),
+    array('label' => Yii::t('default', 'member manage'), 'url' => array('/user/user')),
     '---',
     array('label' => Yii::t('news', 'News'), 'itemOptions' => array('class' => 'nav-header')),
     array('label' => Yii::t('news', 'Create News'), 'url' => array('/news/create')),
