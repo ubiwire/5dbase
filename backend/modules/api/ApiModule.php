@@ -1,6 +1,7 @@
 <?php
 
 class ApiModule extends CWebModule {
+
     public $comment = 'Comment';
 
     public function init() {
@@ -106,7 +107,10 @@ class ApiModule extends CWebModule {
         // Check if we have the USERNAME and PASSWORD HTTP headers set?
         if (!(isset($_SERVER['HTTP_PHP_AUTH_USER']) and isset($_SERVER['HTTP_PHP_AUTH_PW']))) {
             // Error: Unauthorized
-            $this->_sendResponse(401);
+            $rows = array();
+            $rows['code'] = 401;
+            $rows['message'] = 'User or Password is not empty';
+            $this->_sendResponse(401, CJSON::encode($rows));
         }
         // $username = $_SERVER['HTTP_X_USERNAME'];
         // $password = $_SERVER['HTTP_X_PASSWORD'];

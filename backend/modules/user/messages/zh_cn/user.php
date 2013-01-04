@@ -68,7 +68,7 @@ return array(
     'Banned' => '禁止',
     'Please fill out the following form with your login credentials:' => '请用你的登录信息填写下面的表单',
     'Fields with <span class="required">*</span> are required.' => '<span class="required">*</span> 标示该字段必填。',
-    'List User' => '用户列表',
+    'List User' => '队员列表',
     'Edit' => '编辑',
     'Edit profile' => '编辑个人信息',
     'Create User' => '创建用户',
@@ -77,8 +77,8 @@ return array(
     'Manage User' => '用户管理',
     'Manage Users' => '用户管理',
     'Users' => '用户',
-    'Update User' => '更新用户',
-    'Delete User' => '删除用户',
+    'Update User' => '修改队员信息',
+    'Delete User' => '删除队员',
     'Delete file' => '删除文件',
     'View User' => '查看用户',
     'Are you sure to delete this item?' => '你确定删除该条目吗？',
@@ -134,4 +134,5 @@ return array(
     'manager' => '管理者',
     'member' => '成员',
     'Add User' => '添加队员',
+    
 );

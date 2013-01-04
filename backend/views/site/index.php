@@ -8,7 +8,7 @@ $this->menu = array(
     array('label' => Yii::t('default', 'Menu'), 'itemOptions' => array('class' => 'nav-header')),
     array('label' => Yii::t('default', 'product manage'), 'url' => array('/product')),
     array('label' => Yii::t('default', 'reward point'), 'url' => array('/reward')),
-    array('label' => Yii::t('default', 'team manage'), 'url' => array('/user')),
+    array('label' => Yii::t('default', 'team manage'), 'url' => array('/user/user')),
     array('label' => Yii::t('default', 'course manage'), 'url' => array('#')),
 );
 ?>

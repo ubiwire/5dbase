@@ -4,19 +4,25 @@ class PostController extends Controller {
 
     public function actionList() {
         $user = Yii::app()->controller->module->_checkAuth();
-        
-       // Yii::app()->end();
+
+        // Yii::app()->end();
         $models = Post::model()->recentlyList($user->org_id);
         // Did we get some results?
+        $rows = array(); //output json
         if (empty($models)) {
             // No
-            Yii::app()->controller->module->_sendResponse(200,
-                    sprintf('No items where found for model post'));
+            $rows['code'] = 1; //no data
+            $rows['message'] = 'no data';
+            Yii::app()->controller->module->_sendResponse(200, CJSON::encode($rows));
         } else {
             // Prepare response
-            $rows = array();
+            $rows['code'] = 0;
+            $rows['message'] = 'ok';
+            $data = array();
             foreach ($models as $model)
-                $rows[] = $model->attributes;
+                $data[] = $model->attributes;
+            // $data[] = $model->id;
+            $rows['post'] = $data;
             // Send the response
             Yii::app()->controller->module->_sendResponse(200, CJSON::encode($rows));
         }

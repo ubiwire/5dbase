@@ -130,7 +130,7 @@ class Post extends CActiveRecord {
         $dataProvider = new CActiveDataProvider('Post', array(
                     'criteria' => array(
                         'condition' => 'org_id=' . $org_id,
-                        'order' => 'create_at DESC',
+                        'order' => 'id DESC',
                     ),
                     'pagination' => array(
                         'pageSize' => 15,

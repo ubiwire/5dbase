@@ -74,13 +74,12 @@ class PostController extends Controller {
                 $model->file_path = time() . mt_rand(100, 999) . '.' . $image->extensionName;
             }
 
-            if ($model->save())
-                
+            if ($model->save()) {
                 if (is_object($image) && get_class($image) === 'CUploadedFile') {
                     $image->saveAs(Yii::app()->basePath . '/www/assets/uploads/posts/' . $model->file_path);
                 }
-                
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(

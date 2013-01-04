@@ -29,8 +29,13 @@ class DefaultController extends Controller {
 
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
+            if ($_POST['User']['roles'] == 'admin') {
+                $model->roles = 'member';
+            } else {
+                $model->roles = $_POST['User']['roles'];
+            }
             if ($model->save())
-                $this->redirect(array('/user'));
+                $this->redirect(array('/user/user'));
         }
 
         $this->render('/user/update', array(

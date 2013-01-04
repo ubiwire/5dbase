@@ -24,7 +24,7 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'console', 'update', 'create'),
+                'actions' => array('index', 'view', 'console', 'update', 'create', 'delete'),
 //				'users'=>array('*'),
                 'roles' => array('manager'),
             ),
@@ -42,14 +42,78 @@ class UserController extends Controller {
      * Displays a particular model.
      */
     public function actionCreate() {
-        $model = new User;
-        if (isset($_POST['RegistrationForm'])) {
-            
-        } else {
-            $this->render('create', array(
-                'model' => $model,
-            ));
+        $model = new CreateUser;
+        $profile = new Profile;
+        if (isset($_POST['CreateUser'])) {
+            $model->attributes = $_POST['CreateUser'];
+//            $profile->attributes = ((isset($_POST['Profile']) ? $_POST['Profile'] : array()));
+//            if ($model->validate() && $profile->validate()) {
+//            echo $model->roles;
+//            Yii::app()->end();
+            if ($model->validate()) {
+//                Yii::app()->end();
+                $model->activkey = UserModule::encrypting(microtime() . $model->password);
+                $model->password = UserModule::encrypting($model->password);
+                $model->superuser = 0;
+                $model->status = 1;
+                $model->org_id = Yii::app()->user->org_id;
+                // 防止恶意修改参数
+                if ($_POST['CreateUser']['roles'] == 'admin') {
+                    $model->roles = 'member';
+                } else {
+                    $model->roles = $_POST['CreateUser']['roles'];
+                }
+                if ($model->save()) {
+                    $profile->user_id = $model->id;
+                    $profile->save(false);
+                    $this->redirect(array('/user/user'));
+                }
+            }
         }
+        $this->render('create', array('model' => $model, 'profile' => $profile));
+    }
+
+    public function actionUpdate($id) {
+        $model = $this->loadModel($id);
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            if ($_POST['User']['roles'] == 'admin') {
+                $model->roles = 'member';
+            } else {
+                $model->roles = $_POST['User']['roles'];
+            }
+            if ($model->save())
+                $this->redirect(array('/user/user'));
+        }
+
+        $this->render('/user/update', array(
+            'model' => $model,
+        ));
+    }
+
+    public function actionDelete($id) {
+        if (Yii::app()->request->isPostRequest) {
+            // we only allow deletion via POST request
+//            $this->loadModel($id)->delete();
+            // you can't delete your self
+            if ($id == Yii::app()->user->id) {
+                Yii::app()->user->setFlash('info', UserModule::t('you can\'t delete your self'));
+                //给出提示，目前还没有做到，原生态的ajax可以实现，在这里不知道怎么用。先留着
+            } else {
+                $model = $this->loadModel($id);
+                $model->org_id = 0;//不属于任何组织，，游离状态
+                $model->save();
+            }
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if (!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        }
+        else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
     /**
@@ -77,23 +141,6 @@ class UserController extends Controller {
 
         $this->render('index', array(
             'dataProvider' => $dataProvider,
-        ));
-    }
-
-    public function actionUpdate($id) {
-        $model = $this->loadModel($id);
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
-        if (isset($_POST['User'])) {
-            $model->attributes = $_POST['User'];
-            if ($model->save())
-                $this->redirect(array('/user'));
-        }
-
-        $this->render('/user/update', array(
-            'model' => $model,
         ));
     }
 

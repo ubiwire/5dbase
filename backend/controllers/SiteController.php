@@ -27,7 +27,8 @@ class SiteController extends Controller {
                 'actions' => array('login', 'logout', 'contact', 'captcha', 'error', 'page', 'test'),
             ),
             array('allow', // Allow all actions for logged in users ("@")
-                'users' => array('@'),
+//                'users' => array('@'),
+                'roles' => array('manager'),
             ),
             array('deny'), // Deny anything else
         );

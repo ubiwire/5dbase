@@ -11,7 +11,8 @@ $this->breadcrumbs = array(
 $this->menu = array(
     array('label' => Yii::t('default', 'member manage'), 'itemOptions' => array('class' => 'nav-header')),
     array('label' => UserModule::t( 'Add User'), 'url' => array('create')),
-    
+    array('label' => UserModule::t( 'Delete User'),  'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => Yii::t('default', 'Are you sure you want to delete this item?'))),
+    array('label' => UserModule::t( 'List User'), 'url' => array('/user/user')),
     '---',
     array('label' => Yii::t('default', 'team manage'), 'itemOptions' => array('class' => 'nav-header')),
     array('label' => Yii::t('default', 'team tools'), 'url' => array('/news/admin')),
@@ -21,7 +22,7 @@ $this->menu = array(
 
 <div class="well">
     <fieldset>
-        <legend style="font-size: 16px;font-weight: bold;"><?php echo Yii::t('product', 'Update Product'); ?></legend>
+        <legend style="font-size: 16px;font-weight: bold;"><?php echo UserModule::t('Update User'); ?></legend>
 
 <?php
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(

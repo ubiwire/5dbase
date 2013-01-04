@@ -7,7 +7,6 @@ class User extends CActiveRecord {
     const STATUS_BANNED = -1;
 
     //TODO: Delete for next version (backward compatibility)
-    const STATUS_BANED = -1;
     const ROLES_ADMIN = 'admin';
     const ROLES_MANAGER = 'manager';
     const ROLES_MEMBER = 'member';
@@ -151,8 +150,9 @@ class User extends CActiveRecord {
             ),
             'UserRoles' => array(
               //  self::ROLES_ADMIN => UserModule::t('admin'),
-                self::ROLES_MANAGER => UserModule::t('manager'),
                 self::ROLES_MEMBER => UserModule::t('member'),
+                self::ROLES_MANAGER => UserModule::t('manager'),
+                
             ),
         );
         if (isset($code))
@@ -207,7 +207,7 @@ class User extends CActiveRecord {
         $this->lastvisit_at = date('Y-m-d H:i:s', $value);
     }
 
-    // class User
+    //message for class User
     public function getFullName() {
         return $this->username;
     }
