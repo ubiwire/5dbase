@@ -160,6 +160,23 @@ class User extends CActiveRecord {
         else
             return isset($_items[$type]) ? $_items[$type] : false;
     }
+    
+     /* 查询当前组织下所有的队员id 列表
+     * @return  array()
+     */
+
+    public static function orgUsers($org_id) {
+        $criteria = new CDbCriteria;
+        $criteria->select = 'id';
+        $criteria->condition = 'org_id=:org_id';
+        $criteria->params = array(':org_id' => $org_id);
+        $users = self::model()->findAll($criteria);
+        $a = array();
+        foreach($users as $user){
+            array_push($a, $user->id);
+        }
+        return $a;
+    }
 
     /**
      * Retrieves a list of models based on the current search/filter conditions.

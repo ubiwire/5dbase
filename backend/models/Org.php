@@ -80,7 +80,7 @@ class Org extends CActiveRecord {
             'parent_id' => Yii::t("org", 'Parent'),
             'create_at' => Yii::t("org", 'Create At'),
             'update_at' => Yii::t("org", 'Update At'),
-            'creator_id'  => Yii::t("org", 'Creator'),
+            'creator_id' => Yii::t("org", 'Creator'),
         );
     }
 
@@ -107,5 +107,7 @@ class Org extends CActiveRecord {
                     'criteria' => $criteria,
                 ));
     }
+
+   
 
 }

@@ -103,9 +103,10 @@ class UserController extends Controller {
             if ($id == Yii::app()->user->id) {
                 Yii::app()->user->setFlash('info', UserModule::t('you can\'t delete your self'));
                 //给出提示，目前还没有做到，原生态的ajax可以实现，在这里不知道怎么用。先留着
-            } else {
+                
+            } elseif (in_array($id, User::orgUsers(Yii::app()->user->org_id))) {
                 $model = $this->loadModel($id);
-                $model->org_id = 0;//不属于任何组织，，游离状态
+                $model->org_id = 0; //不属于任何组织，，游离状态
                 $model->save();
             }
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -130,6 +131,9 @@ class UserController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
+     //   var_dump(User::model()->findAll('org_id=:org_id', array(':org_id'=>3)));
+//        var_dump(User::orgUsers(Yii::app()->user->org_id));
+//        Yii::app()->end();
         $dataProvider = new CActiveDataProvider('User', array(
                     'criteria' => array(
                         'condition' => 'status>' . User::STATUS_BANNED . ' and org_id=' . Yii::app()->user->org_id,

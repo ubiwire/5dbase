@@ -24,5 +24,6 @@ return array(
     'Granter Type' => '操作类型',
     'Usage' => '礼品ID',
     'Reason' => '理由',
+    'Update Reward' => '修改积分',
 );
 ?>

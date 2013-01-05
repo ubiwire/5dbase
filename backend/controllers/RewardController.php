@@ -90,14 +90,21 @@ class RewardController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $model->date = date('Y-m', $model->date);
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['RewardPoint'])) {
             $model->attributes = $_POST['RewardPoint'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+            if ($model->checkDate(strtotime($model->date), Yii::app()->user->org_id) > 0) {
+                Yii::app()->user->setFlash('error', Yii::t('reward', 'current month reward point already exist'));
+//                $model->date = date("m/d/Y", $model->date);
+            } else {
+                $model->date = strtotime($model->date);
+                if ($model->save())
+                    $this->redirect(array('admin'));
+            }
         }
 
         $this->render('update', array(
