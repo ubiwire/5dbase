@@ -39,5 +39,9 @@ return array(
     'Fields with * are required.' => '带 <span class="required">*</span> 号为必填项',
     'You may optionally enter a comparison operator (&lt;,&lt;=, &gt;, &gt;=, &lt;&gt; or =) at the beginning of each of your search values to specify how the comparison should be done.' => '你还可以在您搜索值前面输入一个比较运算符(<, <=, >, >=, <> or =)来指定搜索算法如何运算',
     'Are you sure you want to delete this item?' => '确定要删除这条数据吗？',
+    'Profile' => '我的主页',
+    'Change password' => '修改密码',
+    'Setting' => '设置',
+    'Logout' => '退出',
 );
 ?>

@@ -70,6 +70,7 @@ return CMap::mergeArray(
                 'application.modules.message.components.*',
                 'application.modules.comments.models.*',
                 'application.modules.comments.components.*',
+                'application.modules.sms.models.*',
             ),
             /* uncomment and set if required */
             // @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
@@ -145,6 +146,7 @@ return CMap::mergeArray(
                     // 'apiPerPage'=>15,
                     'comment' => 'Comment',
                 ),
+                'sms',
                 'gii' => array(
                     'class' => 'system.gii.GiiModule',
                     'password' => 'admin',

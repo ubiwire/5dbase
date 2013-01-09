@@ -15,13 +15,13 @@
 
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
-        
+
 
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
 
     <body>
-        
+
         <?php if (Yii::app()->user->isGuest): ?>
             <?php echo $content; ?>
         <?php else: ?>
@@ -48,7 +48,7 @@
                                 array('label' => Yii::t('default', 'reward point'), 'items' => array(
                                         array('label' => Yii::t('default', 'reward list'), 'url' => array('/reward')),
                                         array('label' => Yii::t('default', 'reward grant'), 'url' => array('/grant')),
-                                )), 
+                                )),
                                 array('label' => Yii::t('default', 'team manage'), 'items' => array(
                                         array('label' => Yii::t('default', 'update team profile'), 'url' => array('/org/update')),
                                         array('label' => Yii::t('default', 'team tools'), 'url' => array('/news/admin')),
@@ -77,11 +77,11 @@
                                 '--',
                                 array('label' => 'Registration', 'icon' => 'plus', 'url' => array('/user/registration'), 'visible' => Yii::app()->user->isGuest),
                                 array('label' => Yii::app()->user->name, 'icon' => 'user', 'url' => '#', 'visible' => !Yii::app()->user->isGuest, 'items' => array(
-                                        array('label' => 'Profile', 'url' => array('/user/profile'),),
-                                        array('label' => 'Change password', 'url' => array('/user/profile/changepassword')),
-                                        array('label' => 'Setting', 'url' => array('/user/profile/edit')),
+                                        array('label' => Yii::t('default', 'Profile'), 'url' => array('/user/profile'),),
+                                        array('label' => Yii::t('default', 'Change password'), 'url' => array('/user/profile/changepassword')),
+                                        array('label' => Yii::t('default', 'Setting'), 'url' => array('/user/profile/edit')),
                                         '---',
-                                        array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
+                                        array('label' => Yii::t('default', 'Logout'), 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
                                 )),
                             ),
                         ),
