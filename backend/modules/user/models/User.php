@@ -149,10 +149,9 @@ class User extends CActiveRecord {
                 '1' => UserModule::t('Yes'),
             ),
             'UserRoles' => array(
-              //  self::ROLES_ADMIN => UserModule::t('admin'),
+                //  self::ROLES_ADMIN => UserModule::t('admin'),
                 self::ROLES_MEMBER => UserModule::t('member'),
                 self::ROLES_MANAGER => UserModule::t('manager'),
-                
             ),
         );
         if (isset($code))
@@ -160,8 +159,8 @@ class User extends CActiveRecord {
         else
             return isset($_items[$type]) ? $_items[$type] : false;
     }
-    
-     /* 查询当前组织下所有的队员id 列表
+
+    /* 查询当前组织下所有的队员id 列表
      * @return  array()
      */
 
@@ -172,10 +171,29 @@ class User extends CActiveRecord {
         $criteria->params = array(':org_id' => $org_id);
         $users = self::model()->findAll($criteria);
         $a = array();
-        foreach($users as $user){
+        foreach ($users as $user) {
             array_push($a, $user->id);
         }
         return $a;
+    }
+
+    public function hasFave($notice) {
+        $fave = Fave::model()->find("notice_id= :notice_id and user_id = :user_id  ", array(':notice_id' => $notice->id, ":user_id" => $this->id));
+        return ((is_null($fave)) ? false : true);
+    }
+
+    public function faveCount() {
+        $count = Fave::model()->count("user_id=:user_id", array(':user_id' => $this->id));
+        return (int) $count;
+    }
+
+    public function noticeCount() {
+        
+    }
+    
+    public function getCurrentNotice () {
+        $notice = Notice::model()->findBySql('SELECT * FROM `tbl_notice` WHERE user_id=:user_id order by id desc limit 1;',array(':user_id'=>$this->id));
+        return $notice;
     }
 
     /**

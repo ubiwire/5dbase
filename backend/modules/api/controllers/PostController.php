@@ -2,11 +2,26 @@
 
 class PostController extends Controller {
 
-    public function actionList() {
-        $user = Yii::app()->controller->module->_checkAuth();
+    public function filters() {
+        return array(
+            array(
+                'HttpAuthFilter',
+                'users' => array('admin' => 'admin'),
+                'realm' => 'Admin section'
+            )
+        );
+    }
 
-        // Yii::app()->end();
-        $models = Post::model()->recentlyList($user->org_id);
+    public function actionList() {
+        //  $user = Yii::app()->controller->module->_checkAuth();
+        $user = Yii::app()->user;
+        var_dump($user);
+        
+         Yii::app()->end();
+        $models = array();
+        if ($user->org_id) {
+            $models = Post::model()->recentlyList($user->org_id);
+        }
         // Did we get some results?
         $rows = array(); //output json
         if (empty($models)) {

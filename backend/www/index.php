@@ -26,6 +26,7 @@ require_once($common.'/lib/Yii/yii.php');
 $config=require('backend/config/main.php');
 require_once($common.'/components/WebApplication.php');
 require_once('common/lib/global.php');
+require_once('common/lib/util.php');
 
 
 $app = Yii::createApplication('WebApplication', $config);
