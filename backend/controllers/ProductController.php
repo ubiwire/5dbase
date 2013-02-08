@@ -158,7 +158,6 @@ class ProductController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-
         $dataProvider = new CActiveDataProvider('Product', array(
                     'criteria' => array(
                         'condition' => 'org_id=' . Yii::app()->user->org_id,
@@ -168,7 +167,6 @@ class ProductController extends Controller {
                         'pageSize' => 8,
                     ),
                 ));
-
 
         $this->render('index', array(
             'dataProvider' => $dataProvider,

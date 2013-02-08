@@ -26,7 +26,7 @@ $dataProvider = new CActiveDataProvider('Post', array(
                 'order' => 'id DESC',
             ),
             'pagination' => array(
-                'pageSize' => 15,
+                'pageSize' => 3,
             ),
         ));
 ?>

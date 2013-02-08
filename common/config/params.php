@@ -45,7 +45,10 @@ return CMap::mergeArray(array(
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 //简单方式先处理来自api的访问方式
-                '<module:\w+>/<controller:\w+>/<action:\w+>.json' => '<module>/<controller>/<action>',
+               // '<module:\w+>/<controller:\w+>/<action:\w+>.json' => '<module>/<controller>/<action>',
+               'api/favorites/<id:\d+>.json' => 'api/favorites',
+               'api/favorites.json' => 'api/favorites',
+              //array( 'api/favorites', 'pattern' => '<module:\w+>/<controller:\w+>/<action:\w+>'),
             // add rest api by fsn
             // array('api/preflight', 'pattern'=>'api/*', 'verb'=>'OPTIONS'),
             //        array('api/index', 'pattern'=>'api/*', 'verb'=>'GET'),
