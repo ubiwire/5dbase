@@ -36,6 +36,7 @@ class FavoritesController extends Controller {
         if (isset($page)) {
             $Favortes_page = $page;
         }
+        
     }
 
     /*

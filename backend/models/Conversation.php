@@ -89,7 +89,7 @@ class Conversation extends CActiveRecord {
         $conv->created = strftime('%Y-%m-%d %H:%M:%S', time());
         $conv->modified = time();
         if ($conv->save()) {
-            $conv->uri = Yii::app()->baseUrl . 'index.php/conversation/' . $conv->id;
+            $conv->uri = Yii::app()->baseUrl . '/index.php/conversation/' . $conv->id;
             $conv->save();
               return $conv;
         }else{

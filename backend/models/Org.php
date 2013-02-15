@@ -64,6 +64,7 @@ class Org extends CActiveRecord {
         return array(
             'users' => array(self::HAS_MANY, 'User', 'org_id'),
             'news' => array(self::HAS_MANY, 'News', 'org_id'),
+            'notices' => array(self::HAS_MANY, 'Notice', 'org_id', 'order' => 'id DESC', 'limit' => 20),
         );
     }
 

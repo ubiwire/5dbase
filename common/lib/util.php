@@ -667,7 +667,7 @@ function common_linkify_mention($mention)
  * @param string $text
  * @param Notice $notice notice in whose context we're building links
  *
- * @return array
+ * @return array 
  *
  * @access private
  */

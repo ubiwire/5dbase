@@ -2,10 +2,10 @@
 -- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- ä¸»æœº: localhost
--- ç”Ÿæˆæ—¥æœŸ: 2012 å¹´ 12 æœˆ 16 æ—¥ 06:13
--- æœåŠ¡å™¨ç‰ˆæœ¬: 5.5.16
--- PHP ç‰ˆæœ¬: 5.3.8
+-- Ö÷»ú: localhost
+-- Éú³ÉÈÕÆÚ: 2013 Äê 02 ÔÂ 08 ÈÕ 02:16
+-- ·şÎñÆ÷°æ±¾: 5.5.16
+-- PHP °æ±¾: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- æ•°æ®åº“: `5d`
+-- Êı¾İ¿â: `5d`
 --
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_categories`
+-- ±íµÄ½á¹¹ `tbl_categories`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_categories` (
@@ -34,21 +34,26 @@ CREATE TABLE IF NOT EXISTS `tbl_categories` (
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_categories`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_categories`
 --
 
 INSERT INTO `tbl_categories` (`id`, `org_id`, `name`, `user_id`, `create_at`, `update_at`) VALUES
-(1, 3, 'ä¹¦ç±', 7, '2012-12-12 14:56:22', '0000-00-00 00:00:00'),
-(2, 2, 'æ—…æ¸¸', 1, '2012-12-12 16:02:24', '0000-00-00 00:00:00'),
-(3, 3, 'ä¼˜æƒ åˆ¸', 7, '2012-12-16 01:23:06', '0000-00-00 00:00:00');
+(1, 3, 'Êé¼®', 7, '2012-12-12 14:56:22', '0000-00-00 00:00:00'),
+(2, 2, 'ÂÃÓÎ', 1, '2012-12-12 16:02:24', '0000-00-00 00:00:00'),
+(3, 3, 'ÓÅ»İÈ¯', 7, '2012-12-16 01:23:06', '0000-00-00 00:00:00'),
+(4, 3, 'Êé¼®', 7, '2012-12-17 15:24:21', '0000-00-00 00:00:00'),
+(5, 3, 'Êé¼® 1', 7, '2012-12-17 15:31:44', '0000-00-00 00:00:00'),
+(6, 3, '¹·Æ¨·ÖÀà', 7, '2012-12-18 15:12:42', '0000-00-00 00:00:00'),
+(7, 3, 'ÂÃÓÎ', 7, '2012-12-18 15:14:49', '0000-00-00 00:00:00'),
+(8, 3, 'Ìí¼Ó·ÖÀà', 7, '2012-12-19 14:46:45', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_category`
+-- ±íµÄ½á¹¹ `tbl_category`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_category` (
@@ -65,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `tbl_category` (
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_comments`
+-- ±íµÄ½á¹¹ `tbl_comments`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_comments` (
@@ -85,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `tbl_comments` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_comments`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_comments`
 --
 
 INSERT INTO `tbl_comments` (`owner_name`, `owner_id`, `comment_id`, `parent_comment_id`, `creator_id`, `user_name`, `user_email`, `comment_text`, `create_time`, `update_time`, `status`) VALUES
@@ -102,7 +107,7 @@ INSERT INTO `tbl_comments` (`owner_name`, `owner_id`, `comment_id`, `parent_comm
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_contacts`
+-- ±íµÄ½á¹¹ `tbl_contacts`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_contacts` (
@@ -128,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `tbl_contacts` (
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_contacts_category`
+-- ±íµÄ½á¹¹ `tbl_contacts_category`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_contacts_category` (
@@ -139,7 +144,48 @@ CREATE TABLE IF NOT EXISTS `tbl_contacts_category` (
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_favorites`
+-- ±íµÄ½á¹¹ `tbl_conversation`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_conversation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'unique identifier',
+  `uri` varchar(225) COLLATE utf8_bin DEFAULT NULL COMMENT 'URI of the conversation',
+  `created` datetime NOT NULL COMMENT 'date this record was created',
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'date this record was modified',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `conversation_uri_key` (`uri`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+
+--
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_conversation`
+--
+
+INSERT INTO `tbl_conversation` (`id`, `uri`, `created`, `modified`) VALUES
+(1, '/5dbase/backend/wwwindex.php/conversation/1', '2013-01-21 16:00:02', '0000-00-00 00:00:00'),
+(2, '/5dbase/backend/wwwindex.php/conversation/2', '2013-01-21 16:05:35', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- ±íµÄ½á¹¹ `tbl_fave`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_fave` (
+  `notice_id` int(11) NOT NULL COMMENT 'notice that is the favorite',
+  `user_id` int(11) NOT NULL COMMENT 'user who likes this notice',
+  `uri` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT 'universally unique identifier, usually a tag URI',
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'date this record was modified',
+  PRIMARY KEY (`notice_id`,`user_id`),
+  UNIQUE KEY `fave_uri_key` (`uri`),
+  KEY `fave_notice_id_idx` (`notice_id`),
+  KEY `fave_user_id_idx` (`user_id`,`modified`),
+  KEY `fave_modified_idx` (`modified`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- ±íµÄ½á¹¹ `tbl_favorites`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_favorites` (
@@ -154,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `tbl_favorites` (
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_mentions`
+-- ±íµÄ½á¹¹ `tbl_mentions`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_mentions` (
@@ -167,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `tbl_mentions` (
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_messages`
+-- ±íµÄ½á¹¹ `tbl_messages`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_messages` (
@@ -185,18 +231,18 @@ CREATE TABLE IF NOT EXISTS `tbl_messages` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_messages`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_messages`
 --
 
 INSERT INTO `tbl_messages` (`id`, `sender_id`, `receiver_id`, `subject`, `body`, `is_read`, `deleted_by`, `created_at`) VALUES
-(1, 1, 2, 'ç¬¬ä¸€å°ç«™å†…æµ‹è¯•ä¿¡', 'ç¬¬ä¸€å°ç«™å†…æµ‹è¯•ä¿¡\r\nå†…å®¹ã€‚', '1', NULL, '2012-09-03 05:10:40'),
-(2, 2, 1, 'Re: ç¬¬ä¸€å°ç«™å†…æµ‹è¯•ä¿¡', 'æ¥ä¿¡å·²æ”¶åˆ°ã€‚', '0', NULL, '2012-09-03 05:21:09'),
-(3, 2, 1, 'admin test ', 'test admin', '1', NULL, '2012-09-03 09:07:35');
+(1, 1, 2, 'µÚÒ»·âÕ¾ÄÚ²âÊÔĞÅ', 'µÚÒ»·âÕ¾ÄÚ²âÊÔĞÅ\r\nÄÚÈİ¡£', '1', NULL, '2012-09-03 05:10:40'),
+(2, 2, 1, 'Re: µÚÒ»·âÕ¾ÄÚ²âÊÔĞÅ', 'À´ĞÅÒÑÊÕµ½¡£', '0', 'receiver', '2012-09-03 05:21:09'),
+(3, 2, 1, 'admin test ', 'test admin', '1', 'receiver', '2012-09-03 09:07:35');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_news`
+-- ±íµÄ½á¹¹ `tbl_news`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_news` (
@@ -206,23 +252,70 @@ CREATE TABLE IF NOT EXISTS `tbl_news` (
   `content` text CHARACTER SET utf8 NOT NULL,
   `org_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `creaet_at` datetime NOT NULL,
+  `create_at` datetime NOT NULL,
   `update_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_news`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_news`
 --
 
-INSERT INTO `tbl_news` (`id`, `news_type`, `title`, `content`, `org_id`, `user_id`, `creaet_at`, `update_at`) VALUES
-(1, 1, 'å›¢é˜Ÿå·¥å…·', 'å›¢é˜Ÿå·¥å…·å›¢é˜Ÿå·¥å…·', 3, 7, '2012-12-08 23:23:23', '2012-12-08 23:23:23');
+INSERT INTO `tbl_news` (`id`, `news_type`, `title`, `content`, `org_id`, `user_id`, `create_at`, `update_at`) VALUES
+(1, 1, 'ÍÅ¶Ó¹¤¾ß', 'ÍÅ¶Ó¹¤¾ßÍÅ¶Ó¹¤¾ß', 3, 7, '2012-12-08 23:23:23', '2012-12-08 23:23:23'),
+(2, 2, 'ÃûÑÔ', 'ÃûÑÔÃûÑÔÃûÑÔÃûÑÔÃûÑÔ', 3, 7, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 3, 'Ğ¡ÓÎÏ·', 'Ğ¡ÓÎÏ· Ğ¡ÓÎÏ· Ğ¡ÓÎÏ· Ğ¡ÓÎÏ· Ğ¡ÓÎÏ· Ğ¡ÓÎÏ· Ğ¡ÓÎÏ· Ğ¡ÓÎÏ· Ğ¡ÓÎÏ· Ğ¡ÓÎÏ· ', 3, 7, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_orgs`
+-- ±íµÄ½á¹¹ `tbl_notice`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_notice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'unique identifier',
+  `user_id` int(11) NOT NULL COMMENT 'who made the update',
+  `org_id` int(11) NOT NULL COMMENT 'belongs to org',
+  `uri` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT 'universally unique identifier, usually a tag URI',
+  `content` text CHARACTER SET utf8 COMMENT 'update content',
+  `rendered` text COLLATE utf8_bin COMMENT 'HTML version of the content',
+  `url` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT 'URL of any attachment (image, video, bookmark, whatever)',
+  `created` datetime NOT NULL COMMENT 'date this record was created',
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'date this record was modified',
+  `reply_to` int(11) DEFAULT NULL COMMENT 'notice replied to (usually a guess)',
+  `is_local` tinyint(4) DEFAULT '0' COMMENT 'notice was generated by a user',
+  `source` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT 'source of comment, like "web", "im", or "clientname"',
+  `conversation` int(11) DEFAULT NULL COMMENT 'id of root notice in this conversation',
+  `lat` decimal(10,7) DEFAULT NULL COMMENT 'latitude',
+  `lon` decimal(10,7) DEFAULT NULL COMMENT 'longitude',
+  `location_id` int(11) DEFAULT NULL COMMENT 'location id if possible',
+  `location_ns` int(11) DEFAULT NULL COMMENT 'namespace for location',
+  `repeat_of` int(11) DEFAULT NULL COMMENT 'notice this is a repeat of',
+  `object_type` varchar(255) COLLATE utf8_bin DEFAULT 'http://activitystrea.ms/schema/1.0/note' COMMENT 'URI representing activity streams object type',
+  `verb` varchar(255) COLLATE utf8_bin DEFAULT 'http://activitystrea.ms/schema/1.0/post' COMMENT 'URI representing activity streams verb',
+  `scope` int(11) DEFAULT NULL COMMENT 'bit map for distribution scope; 0 = everywhere; 1 = this server only; 2 = addressees; 4 = followers; null = default',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `notice_uri_key` (`uri`),
+  KEY `notice_created_id_is_local_idx` (`created`,`id`,`is_local`),
+  KEY `notice_profile_id_idx` (`user_id`,`created`,`id`),
+  KEY `notice_repeat_of_created_id_idx` (`repeat_of`,`created`,`id`),
+  KEY `notice_conversation_created_id_idx` (`conversation`,`created`,`id`),
+  KEY `notice_replyto_idx` (`reply_to`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+
+--
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_notice`
+--
+
+INSERT INTO `tbl_notice` (`id`, `user_id`, `org_id`, `uri`, `content`, `rendered`, `url`, `created`, `modified`, `reply_to`, `is_local`, `source`, `conversation`, `lat`, `lon`, `location_id`, `location_ns`, `repeat_of`, `object_type`, `verb`, `scope`) VALUES
+(2, 7, 3, '/5dbase/backend/www/index.php/notice/2', 'ssssssfsfs', 0x73737373737366736673, NULL, '2013-01-21 16:00:02', '0000-00-00 00:00:00', NULL, 0, 'api', 1, 23.2342340, 23.2342340, NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0),
+(3, 7, 3, '/5dbase/backend/www/index.php/notice/3', 'last', 0x73737373737366736673, NULL, '2013-01-21 16:05:35', '2013-01-30 14:08:12', NULL, 0, 'api', 2, 23.2342340, 23.2342340, NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0);
+
+-- --------------------------------------------------------
+
+--
+-- ±íµÄ½á¹¹ `tbl_orgs`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_orgs` (
@@ -234,22 +327,24 @@ CREATE TABLE IF NOT EXISTS `tbl_orgs` (
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `creator_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_orgs`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_orgs`
 --
 
-INSERT INTO `tbl_orgs` (`id`, `name`, `slogan`, `photo_path`, `company_name`, `parent_id`, `create_at`, `update_at`) VALUES
-(1, 'è¥é”€ä¹‹é“', NULL, '', '', 0, '2012-12-01 17:15:30', '0000-00-00 00:00:00'),
-(2, 'è¥é”€è®¡åˆ’', NULL, '', '', 0, '2012-12-01 17:31:57', '0000-00-00 00:00:00'),
-(3, 'ä½ æˆ‘å›¢é˜Ÿ', 'é›†ç»“å·å°±æ˜¯å£å·', '66901790.jpg', 'çŸ¥æ­£12341', 0, '2012-12-01 17:35:53', '0000-00-00 00:00:00');
+INSERT INTO `tbl_orgs` (`id`, `name`, `slogan`, `photo_path`, `company_name`, `parent_id`, `create_at`, `update_at`, `creator_id`) VALUES
+(1, 'ÓªÏúÖ®µÀ', NULL, '', '', 0, '2012-12-01 17:15:30', '0000-00-00 00:00:00', 0),
+(2, 'ÓªÏú¼Æ»®', NULL, '', '', 0, '2012-12-01 17:31:57', '0000-00-00 00:00:00', 0),
+(3, 'ÄãÎÒÍÅ¶Ó', '¼¯½áºÅ¾ÍÊÇ¿ÚºÅ', '1250130830.jpg', 'ÖªÕı12341', 0, '2012-12-01 17:35:53', '0000-00-00 00:00:00', 0),
+(4, 'appĞ­»á', NULL, '', '', 0, '2013-01-05 13:25:14', '0000-00-00 00:00:00', 17);
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_posts`
+-- ±íµÄ½á¹¹ `tbl_posts`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_posts` (
@@ -267,20 +362,25 @@ CREATE TABLE IF NOT EXISTS `tbl_posts` (
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `file_path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_posts`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_posts`
 --
 
 INSERT INTO `tbl_posts` (`id`, `contents`, `user_id`, `comments_count`, `like_count`, `favorite_count`, `public`, `wb_type`, `refer_id`, `org_id`, `create_at`, `update_at`, `file_path`) VALUES
-(1, 'å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-02 04:55:38', '0000-00-00 00:00:00', ''),
-(2, 'å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚å¤§å®¶å¥½ï¼Œï¼Œç¬¬ä¸€æ¡å¾®åšã€‚', 7, 1, 2, 3, 0, 0, 0, 3, '2012-12-02 04:55:46', '0000-00-00 00:00:00', '');
+(1, '´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-02 04:55:38', '0000-00-00 00:00:00', ''),
+(2, '´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£´ó¼ÒºÃ£¬£¬µÚÒ»ÌõÎ¢²©¡£', 7, 1, 2, 3, 0, 0, 0, 3, '2012-12-02 04:55:46', '0000-00-00 00:00:00', ''),
+(3, 'µÚ¶şÌõÎ¢²© µÚ¶şÌõÎ¢²© µÚ¶şÌõÎ¢²© µÚ¶şÌõÎ¢²©\r\nµÚ¶şÌõÎ¢²©¡¢µÚ¶şÌõÎ¢²©µÚ¶şÌõÎ¢²©', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-19 16:00:00', '0000-00-00 00:00:00', NULL),
+(4, 'asdffwefwef', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(5, 'sfadw3efsdfsadf', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(6, 'Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©Ê×Ò³ Î¢Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©²©', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(7, 'Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©Ê×Ò³ Î¢²©', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1356018593751.jpg');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_productions`
+-- ±íµÄ½á¹¹ `tbl_productions`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_productions` (
@@ -297,27 +397,28 @@ CREATE TABLE IF NOT EXISTS `tbl_productions` (
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_productions`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_productions`
 --
 
 INSERT INTO `tbl_productions` (`id`, `name`, `price`, `descriptor`, `original_pic_path`, `process_picture_path`, `org_id`, `inventory`, `category_id`, `status`, `create_at`, `update_at`) VALUES
-(1, 'é’¢é“æ˜¯æ€æ ·ç‚¼æˆçš„', 10, 'é’¢é“æ˜¯æ€æ ·ç‚¼æˆçš„ é’¢é“æ˜¯æ€æ ·ç‚¼æˆçš„ é’¢é“æ˜¯æ€æ ·ç‚¼æˆçš„', '', '', 3, 100, 1, 1, '2012-12-13 06:31:44', '0000-00-00 00:00:00'),
-(2, 'é’¢é“æ˜¯æ€æ ·ç‚¼æˆçš„22', 10, 'é’¢é“æ˜¯æ€æ ·ç‚¼æˆçš„é’¢é“æ˜¯æ€æ ·ç‚¼æˆçš„é’¢é“æ˜¯æ€æ ·ç‚¼æˆçš„é’¢é“æ˜¯æ€æ ·ç‚¼æˆçš„', '', '', 0, 100, 1, 1, '2012-12-13 06:34:29', '0000-00-00 00:00:00'),
-(3, 'ruby å…ƒç¼–ç¨‹', 20, 'ruby å…ƒç¼–ç¨‹\r\nruby å…ƒç¼–ç¨‹\r\nruby å…ƒç¼–ç¨‹\r\n', '', '', 3, 10, 1, 1, '2012-12-13 06:39:38', '0000-00-00 00:00:00'),
-(4, 'æ¥å£', 10, 'æ¥å£', '1355489836919.jpg', '', 3, 1002, 1, 0, '2012-12-14 04:57:16', '0000-00-00 00:00:00'),
-(5, 'ç´ æ', 13, 'ç´ æ ç´ æ ç´ æ ç´ æ ç´ æç´ æ ç´ æç´ æ', '1355579054462.jpg', '', 3, 11, 1, 0, '2012-12-15 05:44:14', '0000-00-00 00:00:00'),
-(6, 'ç¾å¥³', 12, 'ç¾å¥³ ç¾å¥³ç¾å¥³ ç¾å¥³ç¾å¥³ ç¾å¥³ç¾å¥³ ç¾å¥³ç¾å¥³ ç¾å¥³', '1355580544756.jpg', '', 3, 12, 1, 0, '2012-12-15 06:09:04', '0000-00-00 00:00:00'),
-(7, 'é£æ™¯', 10, 'æˆ‘å¸Œæœ›å°†ä¸€ä¸ªå­—ç¬¦ä¸²é™é•¿æ˜¾ç¤º,å¦‚æœè¯¥å­—ç¬¦ä¸²è¶…è¿‡ä¸€å®šé•¿æ•°,å°±æˆªå–å‰nä¸ªå­—ç¬¦,ååŠ çœç•¥å·... phpå­—ç¬¦ä¸²æˆªå–é—®é¢˜å‘å¸ƒ:dxy å­—ä½“:[å¢åŠ  å‡å°] ç±»å‹:è½¬è½½ æˆ‘å¸Œæœ›å°†ä¸€ä¸ª', '1355583562612.jpg', '', 3, 12, 1, 0, '2012-12-15 06:59:22', '0000-00-00 00:00:00'),
-(8, 'åˆ›æ„', 10, 'åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„ åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„ åˆ›æ„åˆ›æ„åˆ›æ„ åˆ›æ„', '1355584503199.jpg', '', 3, 210, 1, 0, '2012-12-15 07:15:03', '0000-00-00 00:00:00'),
-(9, 'åƒä½åˆ·', 1, 'ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸\r\nä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸\r\nä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸\r\nä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸ ä¼˜æƒ åˆ¸', '1355621097864.jpg', '', 3, 12, 3, 0, '2012-12-15 17:24:57', '0000-00-00 00:00:00');
+(1, '¸ÖÌúÊÇÔõÑùÁ¶³ÉµÄ', 10, '¸ÖÌúÊÇÔõÑùÁ¶³ÉµÄ ¸ÖÌúÊÇÔõÑùÁ¶³ÉµÄ ¸ÖÌúÊÇÔõÑùÁ¶³ÉµÄ', '', '', 3, 100, 1, 1, '2012-12-13 06:31:44', '0000-00-00 00:00:00'),
+(2, '¸ÖÌúÊÇÔõÑùÁ¶³ÉµÄ22', 10, '¸ÖÌúÊÇÔõÑùÁ¶³ÉµÄ¸ÖÌúÊÇÔõÑùÁ¶³ÉµÄ¸ÖÌúÊÇÔõÑùÁ¶³ÉµÄ¸ÖÌúÊÇÔõÑùÁ¶³ÉµÄ', '', '', 0, 100, 1, 1, '2012-12-13 06:34:29', '0000-00-00 00:00:00'),
+(3, 'ruby Ôª±à³Ì', 20, 'ruby Ôª±à³Ì\r\nruby Ôª±à³Ì\r\nruby Ôª±à³Ì\r\n', '', '', 3, 10, 1, 1, '2012-12-13 06:39:38', '0000-00-00 00:00:00'),
+(4, '½Ó¿Ú', 10, '½Ó¿Ú', '1355489836919.jpg', '', 3, 1002, 1, 0, '2012-12-14 04:57:16', '0000-00-00 00:00:00'),
+(5, 'ËØÃè', 13, 'ËØÃè ËØÃè ËØÃè ËØÃè ËØÃèËØÃè ËØÃèËØÃè', '1355579054462.jpg', '', 3, 11, 1, 0, '2012-12-15 05:44:14', '0000-00-00 00:00:00'),
+(6, 'ÃÀÅ®', 12, 'ÃÀÅ® ÃÀÅ®ÃÀÅ® ÃÀÅ®ÃÀÅ® ÃÀÅ®ÃÀÅ® ÃÀÅ®ÃÀÅ® ÃÀÅ®', '1355580544756.jpg', '', 3, 12, 1, 0, '2012-12-15 06:09:04', '0000-00-00 00:00:00'),
+(7, '·ç¾°', 10, 'ÎÒÏ£Íû½«Ò»¸ö×Ö·û´®ÏŞ³¤ÏÔÊ¾,Èç¹û¸Ã×Ö·û´®³¬¹ıÒ»¶¨³¤Êı,¾Í½ØÈ¡Ç°n¸ö×Ö·û,ºó¼ÓÊ¡ÂÔºÅ... php×Ö·û´®½ØÈ¡ÎÊÌâ·¢²¼:dxy ×ÖÌå:[Ôö¼Ó ¼õĞ¡] ÀàĞÍ:×ªÔØ ÎÒÏ£Íû½«Ò»¸ö', '1355583562612.jpg', '', 3, 12, 1, 0, '2012-12-15 06:59:22', '0000-00-00 00:00:00'),
+(8, '´´Òâ', 10, '´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ´´Òâ ´´Òâ´´Òâ´´Òâ ´´Òâ', '1357649959321.jpg', '', 3, 210, 1, 0, '2012-12-15 07:15:03', '0000-00-00 00:00:00'),
+(9, 'Ç§Î»Ë¢', 1, 'ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯\r\nÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯\r\nÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯\r\nÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯ ÓÅ»İÈ¯', '1355621097864.jpg', '', 3, 12, 3, 0, '2012-12-15 17:24:57', '0000-00-00 00:00:00'),
+(10, '¾øÎ¶Ñ¼²±', 10, '¾øÎ¶Ñ¼²± ¾øÎ¶Ñ¼²±\r\n¾øÎ¶Ñ¼²±\r\n¾øÎ¶Ñ¼²±\r\n¾øÎ¶Ñ¼²±', '1355842000152.jpg', '', 3, 110, 3, 0, '2012-12-18 06:46:40', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_profiles`
+-- ±íµÄ½á¹¹ `tbl_profiles`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_profiles` (
@@ -325,24 +426,34 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
   `lastname` varchar(50) NOT NULL DEFAULT '',
   `firstname` varchar(50) NOT NULL DEFAULT '',
   `birthday` date NOT NULL DEFAULT '0000-00-00',
+  `reward_point` int(10) NOT NULL DEFAULT '0',
+  `surplus_total` int(10) NOT NULL DEFAULT '0',
+  `usage` int(10) NOT NULL DEFAULT '0',
+  `photo_path` varchar(100) NOT NULL DEFAULT '',
+  `nickname` varchar(25) NOT NULL DEFAULT '',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_profiles`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_profiles`
 --
 
-INSERT INTO `tbl_profiles` (`user_id`, `lastname`, `firstname`, `birthday`) VALUES
-(1, 'Admin', 'Administrator', '1979-10-27'),
-(2, 'Demo', 'Demorr', '0000-00-00'),
-(3, 'wang', 'john', '2012-09-19'),
-(4, 'fang', 'martin', '1988-06-06'),
-(7, 'fang', 'martin', '0000-00-00');
+INSERT INTO `tbl_profiles` (`user_id`, `lastname`, `firstname`, `birthday`, `reward_point`, `surplus_total`, `usage`, `photo_path`, `nickname`) VALUES
+(1, 'Admin', 'Administrator', '1979-10-27', 0, 0, 0, '', ''),
+(2, 'Demo', 'Demorr', '0000-00-00', 0, 0, 0, '', ''),
+(3, 'wang', 'john', '2012-09-19', 0, 0, 0, '', ''),
+(4, 'fang', 'martin', '1988-06-06', 0, 0, 0, '', ''),
+(7, 'fang', 'martin', '1989-07-13', 0, 0, 0, '1357652133636.jpg', ''),
+(8, '', '', '0000-00-00', 0, 0, 0, '', ''),
+(14, '', '', '0000-00-00', 0, 0, 0, '', ''),
+(15, '', '', '0000-00-00', 0, 0, 0, '', ''),
+(16, '', '', '0000-00-00', 0, 0, 0, '', ''),
+(17, 'yan', 'june', '0000-00-00', 0, 0, 0, '', '');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_profiles_fields`
+-- ±íµÄ½á¹¹ `tbl_profiles_fields`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
@@ -364,26 +475,49 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
   `visible` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `varname` (`varname`,`widget`,`visible`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_profiles_fields`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_profiles_fields`
 --
 
 INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`) VALUES
 (1, 'lastname', 'Last Name', 'VARCHAR', '50', '3', 1, '', '', 'Incorrect Last Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
 (2, 'firstname', 'First Name', 'VARCHAR', '50', '3', 1, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 0, 3),
-(3, 'birthday', 'Birthday', 'DATE', '0', '0', 0, '', '', '', '', '0000-00-00', 'UWjuidate', '{"ui-theme":"base","language":"en"}', 0, 3);
+(3, 'birthday', 'ÉúÈÕ', 'DATE', '0', '0', 0, '', '', 'ÉúÈÕ¸ñÊ½²»ÕıÈ·', '', '0000-00-00', 'UWjuidate', '{"ui-theme":"base","language":"en"}', 0, 3),
+(4, 'reward_point', '»ı·Ö×ÜÊı', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 1),
+(5, 'surplus_total', 'Ê£Óà×Ü¶î', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 2),
+(6, 'usage', 'Ïû·Ñ×Ü¶î', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 2),
+(7, 'photo_path', 'ÕÕÆ¬', 'VARCHAR', '100', '0', 2, '', '', 'ÎÄ¼ş¸ñÊ½²»ÕıÈ·', '{"file":{"allowEmpty":"true","types":"jpg, gif, png"}}', '', 'UWfile', '{"path":"E:/fsn_workspace/xampp/htdocs/5dbase/backend/www/assets/uploads/profiles"}', 0, 3),
+(8, 'nickname', 'êÇ³Æ', 'VARCHAR', '25', '0', 0, '', '', '', '', '', '', '', 0, 3);
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_reward_points`
+-- ±íµÄ½á¹¹ `tbl_reply`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_reply` (
+  `notice_id` int(11) NOT NULL COMMENT 'notice that is the reply',
+  `profile_id` int(11) NOT NULL COMMENT 'profile replied to',
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'date this record was modified',
+  `replied_id` int(11) DEFAULT NULL COMMENT 'notice replied to (not used, see notice.reply_to)',
+  PRIMARY KEY (`notice_id`,`profile_id`),
+  KEY `reply_notice_id_idx` (`notice_id`),
+  KEY `reply_profile_id_idx` (`profile_id`),
+  KEY `reply_replied_id_idx` (`replied_id`),
+  KEY `reply_profile_id_modified_notice_id_idx` (`profile_id`,`modified`,`notice_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- ±íµÄ½á¹¹ `tbl_reward_points`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_reward_points` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` datetime NOT NULL,
+  `date` int(11) NOT NULL,
   `total` int(11) NOT NULL DEFAULT '0',
   `usage` int(11) NOT NULL DEFAULT '0',
   `org_id` int(11) NOT NULL DEFAULT '0',
@@ -391,72 +525,130 @@ CREATE TABLE IF NOT EXISTS `tbl_reward_points` (
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+
+--
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_reward_points`
+--
+
+INSERT INTO `tbl_reward_points` (`id`, `date`, `total`, `usage`, `org_id`, `status`, `create_at`, `update_at`) VALUES
+(17, 1354579200, 2, 0, 3, 0, '2012-12-16 14:42:52', '0000-00-00 00:00:00'),
+(18, 1357603200, 110, 0, 4, 0, '2013-01-05 13:27:58', '0000-00-00 00:00:00'),
+(19, 1360108800, 110, 0, 4, 0, '2013-01-05 14:28:22', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_reward_point_grant`
+-- ±íµÄ½á¹¹ `tbl_reward_point_grant`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_reward_point_grant` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `org_id` int(11) NOT NULL DEFAULT '0',
-  `granter_id` int(11) NOT NULL DEFAULT '0',
-  `integral_id` int(11) NOT NULL DEFAULT '0',
-  `recipient_id` int(11) NOT NULL DEFAULT '0',
-  `integral_val` int(11) NOT NULL DEFAULT '0',
-  `granter_type` int(1) NOT NULL DEFAULT '0',
-  `usage` int(11) NOT NULL DEFAULT '0',
+  `granter_id` int(11) NOT NULL DEFAULT '0' COMMENT '»ı·Ö·¢·ÅÕßid £¬¶Ò»»Ê±ÔòÎª0 ',
+  `recipient_id` int(11) NOT NULL DEFAULT '0' COMMENT '»ı·Ö²Ù×÷¶ÔÏó£¬Ò»°ãÎª¶ÓÔ±id',
+  `reward_val` int(11) NOT NULL DEFAULT '0' COMMENT 'ËùĞè»ı·ÖÖµ',
+  `granter_type` int(1) NOT NULL DEFAULT '0' COMMENT '¶¨ÒåÊÇ»ı·Ö·¢·Å»ò»ı·Ö¶Ò»»',
+  `usage` int(11) NOT NULL DEFAULT '0' COMMENT '»ı·ÖÓÃÍ¾£¬¶Ò»»µÄÊ±ºò£¬Ò»°ãÎªÀñÆ·id',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `reason` varchar(255) NOT NULL COMMENT '»ı·Ö·¢·ÅµÄÀíÓÉ£¬¶Ò»»ÔòÎª¿Õ',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `tbl_users`
+-- ±íµÄ½á¹¹ `tbl_sms`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_sms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_uid` int(11) DEFAULT '0',
+  `to_uid` int(11) DEFAULT NULL,
+  `mobile` varchar(11) DEFAULT NULL,
+  `content` text,
+  `sendtime` datetime DEFAULT NULL,
+  `status` text,
+  `remark` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+
+-- --------------------------------------------------------
+
+--
+-- ±íµÄ½á¹¹ `tbl_sms_setup`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_sms_setup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `username` varchar(64) DEFAULT NULL,
+  `password` varchar(64) DEFAULT NULL,
+  `providertype` varchar(32) DEFAULT NULL,
+  `parameters` text,
+  `isactive` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `sms_setup_schools_fk_1` (`user_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_sms_setup`
+--
+
+INSERT INTO `tbl_sms_setup` (`id`, `user_id`, `username`, `password`, `providertype`, `parameters`, `isactive`) VALUES
+(1, 7, 'snfang', 'admin', 'ShangTong', NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- ±íµÄ½á¹¹ `tbl_users`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `email` varchar(128) NOT NULL,
-  `tel` varchar(15) NOT NULL COMMENT 'æ‰‹æœºå·',
+  `email` varchar(128) DEFAULT NULL,
+  `tel` varchar(15) NOT NULL COMMENT 'ÊÖ»úºÅ',
   `activkey` varchar(128) NOT NULL DEFAULT '',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastvisit_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `superuser` int(1) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '0',
-  `roles` varchar(10) NOT NULL DEFAULT '''manager''',
-  `org_id` int(11) NOT NULL COMMENT 'å¤–é”®',
+  `roles` varchar(10) CHARACTER SET utf8 NOT NULL DEFAULT 'manager',
+  `org_id` int(11) NOT NULL COMMENT 'Íâ¼ü',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `status` (`status`),
   KEY `superuser` (`superuser`),
   KEY `org_id` (`org_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
--- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `tbl_users`
+-- ×ª´æ±íÖĞµÄÊı¾İ `tbl_users`
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `tel`, `activkey`, `create_at`, `lastvisit_at`, `superuser`, `status`, `roles`, `org_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '', '9a24eff8c15a6a141ece27eb6947da0f', '2012-09-02 18:28:30', '2012-11-29 22:24:28', 1, 1, '', 0),
-(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '', '87ebc08a142bf24616e439c950d457f8', '2012-09-02 18:28:30', '2012-11-06 16:25:26', 0, 1, '', 0),
-(3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-02 19:35:06', '0000-00-00 00:00:00', 0, 1, '', 0),
-(4, 'jing', 'aa3f6926fe23b4cd15480ec872616581', 'jk_info@126.com', '', '26bc800dd291790b4eb5eeb91d73a86b', '2012-11-29 04:57:08', '2012-11-28 21:04:41', 0, 1, '', 0),
-(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-01 17:35:53', '2012-12-15 15:54:59', 0, 1, 'manager', 3);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '', '9a24eff8c15a6a141ece27eb6947da0f', '2012-09-02 18:28:30', '2012-11-29 22:24:28', 1, 1, 'admin', 0),
+(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '', '87ebc08a142bf24616e439c950d457f8', '2012-09-02 18:28:30', '2012-11-06 16:25:26', 0, 1, '0', 0),
+(3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-02 19:35:06', '0000-00-00 00:00:00', 0, 1, '0', 0),
+(4, 'jing', 'aa3f6926fe23b4cd15480ec872616581', 'jk_info@126.com', '', '26bc800dd291790b4eb5eeb91d73a86b', '2012-11-29 04:57:08', '2012-11-28 21:04:41', 0, 1, '0', 0),
+(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-01 17:35:53', '2013-02-06 23:07:28', 0, 1, 'manager', 3),
+(8, 'snfang001', 'e10adc3949ba59abbe56e057f20f883e', '', '13665567887', '2549b8b41a2b823d09812e7d31a813d4', '2013-01-04 14:42:12', '0000-00-00 00:00:00', 0, 1, 'manager', 0),
+(13, 'snfang002', 'e10adc3949ba59abbe56e057f20f883e', 'asdfs@asdf.com', '13454345454', '61aa7d82fa071a1f672b70e7bc63db77', '2013-01-04 15:11:32', '0000-00-00 00:00:00', 0, 1, 'manager', 0),
+(14, 'snfang003', 'e10adc3949ba59abbe56e057f20f883e', NULL, '13567345654', '133c53fadc3cff4b1bad2d99a7a58aff', '2013-01-04 15:13:09', '0000-00-00 00:00:00', 0, 1, 'manager', 0),
+(15, 'snfang004', 'e10adc3949ba59abbe56e057f20f883e', NULL, '13478457845', '15c95c20a639ca13418ae10cb4cb0138', '2013-01-04 15:17:37', '0000-00-00 00:00:00', 0, 1, 'member', 3),
+(16, 'snfang007', 'e10adc3949ba59abbe56e057f20f883e', NULL, '13548754561', 'c02d581473ddd84e3d689facd96a5245', '2013-01-04 15:29:02', '0000-00-00 00:00:00', 0, 1, 'member', 0),
+(17, 'jing008', '21232f297a57a5a743894a0e4a801fc3', 'asd@a.com', '13547854785', '6c9167c90cadc75c88f26d293aeaa68a', '2013-01-05 13:25:15', '2013-01-05 05:25:29', 0, 1, 'manager', 4);
 
 --
--- é™åˆ¶å¯¼å‡ºçš„è¡¨
+-- ÏŞÖÆµ¼³öµÄ±í
 --
 
 --
--- é™åˆ¶è¡¨ `tbl_profiles`
+-- ÏŞÖÆ±í `tbl_profiles`
 --
 ALTER TABLE `tbl_profiles`
   ADD CONSTRAINT `user_profile_id` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`id`) ON DELETE CASCADE;

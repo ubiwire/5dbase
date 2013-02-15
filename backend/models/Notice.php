@@ -41,8 +41,17 @@ class Notice extends CActiveRecord {
     const POST = 'http://activitystrea.ms/schema/1.0/post';
     const NOTE = 'http://activitystrea.ms/schema/1.0/note';
     const COMMENT = 'http://activitystrea.ms/schema/1.0/comment';
+    const DISPLAY_FMT = '[0-9a-zA-Z_]{1,64}';
 
     protected $_profile = -1;
+    protected $_reply = null;
+
+    const CANONICAL_FMT = '[0-9a-z]{1,64}';
+
+    /**
+     * Maximum number of characters in a canonical-form nickname.
+     */
+    const MAX_LEN = 64;
 
     /**
      * Returns the static model of the specified AR class.
@@ -178,13 +187,13 @@ class Notice extends CActiveRecord {
         if (!empty($options) && is_array($options)) {
             $options = array_merge($defaults, $options);
             // extract($options);
-        }else {
+        } else {
             $options = $defaults;
         }
 
         $notice = new Notice;
         $notice->attributes = $options;
-        
+
 //        var_dump($options);
 //        echo "==============";
 //        var_dump($notice->attributes);
@@ -202,6 +211,7 @@ class Notice extends CActiveRecord {
                 $notice->object_type = self::COMMENT;
                 $notice->reply_to = $reply->id;
                 $notice->conversation = $reply->conversation;
+                $notice->_reply = $reply;
             } else {
                 throw new Exception('Parent notice not found.', 400);
             }
@@ -217,7 +227,7 @@ class Notice extends CActiveRecord {
         $notice->modified = time();
 //        var_dump($notice->attributes);
 //        Yii::app()->end();
-        
+
         if ($notice->save()) {
             if (empty($notice->uri)) {
                 $notice->uri = Yii::app()->baseUrl . '/index.php/notice/' . $notice->id;
@@ -226,15 +236,36 @@ class Notice extends CActiveRecord {
                 $conv = Conversation::create();
                 $notice->conversation = $conv->id;
             }
+            $notice->saveReplies();
             $notice->save();
-        }else{
+        } else {
             throw new Exception(var_dump($notice->errors), 500);
         }
         return $notice;
     }
 
-    function showNotice($include_user = true) {
+    //先过滤消息中的@ 然后如果是回复的话，在user_ids中加上回复对象的id,然后循环保存replies.
+    function saveReplies() {
+        // $user_ids = array();
+        $user_ids = self::common_find_mentions($this->content, $this);
+        //加上原帖回复的user_id
+        if ($this->_reply) {
+            $user_ids[] = $this->_reply->user_id;
+        }
+        $user_ids = array_unique($user_ids);
+//        var_dump($user_ids);
+//        Yii::app()->end();
 
+        foreach ($user_ids as $user_id) {
+            $reply = new Reply();
+            $reply->notice_id = $this->id;
+            $reply->profile_id = $user_id;
+            $reply->modified = $this->created;
+            $reply->save();
+        }
+    }
+
+    function showNotice($include_user = true) {
         $profile = $this->user;
         $twitter_status = array();
         $twitter_status['text'] = $this->content;
@@ -254,7 +285,7 @@ class Notice extends CActiveRecord {
         }
 
         $twitter_status['in_reply_to_user_id'] =
-                ($replier_profile) ? intval($replier_profile->id) : null;
+                ($replier_profile) ? intval($replier_profile) : null;
         $twitter_status['in_reply_to_screen_name'] =
                 ($replier_profile) ? $reply->user->username : null;
 
@@ -378,11 +409,82 @@ class Notice extends CActiveRecord {
         return $twitter_user;
     }
 
-   public static function dateTwitter($dt) {
+    public static function dateTwitter($dt) {
         $dateStr = date('d F Y H:i:s', strtotime($dt));
         $d = new DateTime($dateStr, new DateTimeZone('UTC'));
         $d->setTimezone(new DateTimeZone('Asia/Shanghai'));
         return $d->format('D M d H:i:s O Y');
     }
 
+    //返回array user_ids
+    public static function common_find_mentions($text, $notice) {
+        $sender = $notice->user;
+        $user_ids = array();
+        $nicknames = self::common_find_mentions_raw($text);
+//        Yii::app()->end();
+        foreach ($nicknames as $nickname) {
+            //如果回复中的@是回复原帖作者，则不将原帖作者的id加入数组中
+//            if ($sender->profile->nickname == $nickname) {
+//                   echo '---++--';
+//                continue;
+//            }
+            $profile = Profile::model()->find('nickname=:nickname', array(':nickname' => $nickname));
+            // var_dump($profile);
+            if ($profile) {
+                $user_ids[] = $profile->user_id;
+            }
+        }
+//        var_dump($user_ids);
+//         Yii::app()->end();
+        return $user_ids;
+    }
+
+    public static function normalize($str) {
+        if (mb_strlen($str) > self::MAX_LEN) {
+            // Display forms must also fit!
+            throw new Exception();
+        }
+
+        $str = trim($str);
+        $str = str_replace('_', '', $str);
+        $str = mb_strtolower($str);
+
+        if (mb_strlen($str) < 1) {
+            throw new Exception();
+        }
+        if (!self::isCanonical($str)) {
+            throw new Exception();
+        }
+
+        return $str;
+    }
+
+    /**
+     * Is the given string a valid canonical nickname form?
+     *
+     * @param string $str
+     * @return boolean
+     */
+    public static function isCanonical($str) {
+        return preg_match('/^(?:' . self::CANONICAL_FMT . ')$/', $str);
+    }
+
+    //找到content中@过的用户nickname
+    //返回array eg: [['snfang'],['xiaojing'],['镜头']
+    public static function common_find_mentions_raw($text) {
+        $mentions = array();
+        $tmatches = array();
+        preg_match_all('/^T (' . self::DISPLAY_FMT . ') /u', $text, $tmatches, PREG_OFFSET_CAPTURE);
+
+        $atmatches = array();
+        preg_match_all('/(?:^|\s+)@(' . self::DISPLAY_FMT . ')\b/u', $text, $atmatches, PREG_OFFSET_CAPTURE);
+
+        $matches = array_merge($tmatches[1], $atmatches[1]);
+        foreach ($matches as $m) {
+            $mentions[] = $m[0];
+        }
+        return $mentions;
+    }
+
 }
+

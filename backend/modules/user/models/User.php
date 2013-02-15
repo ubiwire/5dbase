@@ -84,6 +84,8 @@ class User extends CActiveRecord {
         if (!isset($relations['profile']))
             $relations['profile'] = array(self::HAS_ONE, 'Profile', 'user_id');
         $relations['org'] = array(self::BELONGS_TO, 'Org', 'org_id');
+        $relations['notices'] = array(self::HAS_MANY, 'Notice', 'user_id');
+        $relations['mentions'] = array(self::MANY_MANY, 'Notice', 'tbl_reply(profile_id,notice_id)', 'order' => 'id DESC', 'limit' => 20);
         return $relations;
     }
 
@@ -190,9 +192,9 @@ class User extends CActiveRecord {
     public function noticeCount() {
         
     }
-    
-    public function getCurrentNotice () {
-        $notice = Notice::model()->findBySql('SELECT * FROM `tbl_notice` WHERE user_id=:user_id order by id desc limit 1;',array(':user_id'=>$this->id));
+
+    public function getCurrentNotice() {
+        $notice = Notice::model()->findBySql('SELECT * FROM `tbl_notice` WHERE user_id=:user_id order by id desc limit 1;', array(':user_id' => $this->id));
         return $notice;
     }
 

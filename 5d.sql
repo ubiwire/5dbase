@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 02 月 08 日 02:16
--- 服务器版本: 5.5.16
--- PHP 版本: 5.3.8
+-- 生成日期: 2013 年 02 月 15 日 03:21
+-- 服务器版本: 5.1.37
+-- PHP 版本: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -41,14 +40,14 @@ CREATE TABLE IF NOT EXISTS `tbl_categories` (
 --
 
 INSERT INTO `tbl_categories` (`id`, `org_id`, `name`, `user_id`, `create_at`, `update_at`) VALUES
-(1, 3, '书籍', 7, '2012-12-12 14:56:22', '0000-00-00 00:00:00'),
-(2, 2, '旅游', 1, '2012-12-12 16:02:24', '0000-00-00 00:00:00'),
-(3, 3, '优惠券', 7, '2012-12-16 01:23:06', '0000-00-00 00:00:00'),
-(4, 3, '书籍', 7, '2012-12-17 15:24:21', '0000-00-00 00:00:00'),
-(5, 3, '书籍 1', 7, '2012-12-17 15:31:44', '0000-00-00 00:00:00'),
-(6, 3, '狗屁分类', 7, '2012-12-18 15:12:42', '0000-00-00 00:00:00'),
-(7, 3, '旅游', 7, '2012-12-18 15:14:49', '0000-00-00 00:00:00'),
-(8, 3, '添加分类', 7, '2012-12-19 14:46:45', '0000-00-00 00:00:00');
+(1, 3, '', 7, '2012-12-12 14:55:58', '0000-00-00 00:00:00'),
+(2, 2, '', 1, '2012-12-12 16:02:00', '0000-00-00 00:00:00'),
+(3, 3, '', 7, '2012-12-16 01:22:42', '0000-00-00 00:00:00'),
+(4, 3, '', 7, '2012-12-17 15:23:57', '0000-00-00 00:00:00'),
+(5, 3, '', 7, '2012-12-17 15:31:20', '0000-00-00 00:00:00'),
+(6, 3, '', 7, '2012-12-18 15:12:18', '0000-00-00 00:00:00'),
+(7, 3, '', 7, '2012-12-18 15:14:25', '0000-00-00 00:00:00'),
+(8, 3, '', 7, '2012-12-19 14:46:21', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -66,6 +65,11 @@ CREATE TABLE IF NOT EXISTS `tbl_category` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `tbl_category`
+--
+
 
 -- --------------------------------------------------------
 
@@ -130,6 +134,11 @@ CREATE TABLE IF NOT EXISTS `tbl_contacts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 转存表中的数据 `tbl_contacts`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -140,6 +149,11 @@ CREATE TABLE IF NOT EXISTS `tbl_contacts_category` (
   `category_id` int(11) DEFAULT NULL,
   `contact_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `tbl_contacts_category`
+--
+
 
 -- --------------------------------------------------------
 
@@ -154,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `tbl_conversation` (
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'date this record was modified',
   PRIMARY KEY (`id`),
   UNIQUE KEY `conversation_uri_key` (`uri`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=10 ;
 
 --
 -- 转存表中的数据 `tbl_conversation`
@@ -162,7 +176,14 @@ CREATE TABLE IF NOT EXISTS `tbl_conversation` (
 
 INSERT INTO `tbl_conversation` (`id`, `uri`, `created`, `modified`) VALUES
 (1, '/5dbase/backend/wwwindex.php/conversation/1', '2013-01-21 16:00:02', '0000-00-00 00:00:00'),
-(2, '/5dbase/backend/wwwindex.php/conversation/2', '2013-01-21 16:05:35', '0000-00-00 00:00:00');
+(2, '/5dbase/backend/wwwindex.php/conversation/2', '2013-01-21 16:05:35', '0000-00-00 00:00:00'),
+(3, 'index.php/conversation/3', '2013-02-13 18:22:32', '0000-00-00 00:00:00'),
+(4, 'index.php/conversation/4', '2013-02-13 18:24:02', '0000-00-00 00:00:00'),
+(5, 'index.php/conversation/5', '2013-02-13 18:24:10', '0000-00-00 00:00:00'),
+(6, 'index.php/conversation/6', '2013-02-13 18:52:47', '0000-00-00 00:00:00'),
+(7, '/index.php/conversation/7', '2013-02-15 00:08:24', '0000-00-00 00:00:00'),
+(8, '/index.php/conversation/8', '2013-02-15 00:09:39', '0000-00-00 00:00:00'),
+(9, '/index.php/conversation/9', '2013-02-15 00:10:29', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -182,6 +203,11 @@ CREATE TABLE IF NOT EXISTS `tbl_fave` (
   KEY `fave_modified_idx` (`modified`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- 转存表中的数据 `tbl_fave`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -197,6 +223,11 @@ CREATE TABLE IF NOT EXISTS `tbl_favorites` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 转存表中的数据 `tbl_favorites`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -209,6 +240,11 @@ CREATE TABLE IF NOT EXISTS `tbl_mentions` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `tbl_mentions`
+--
+
 
 -- --------------------------------------------------------
 
@@ -235,8 +271,8 @@ CREATE TABLE IF NOT EXISTS `tbl_messages` (
 --
 
 INSERT INTO `tbl_messages` (`id`, `sender_id`, `receiver_id`, `subject`, `body`, `is_read`, `deleted_by`, `created_at`) VALUES
-(1, 1, 2, '第一封站内测试信', '第一封站内测试信\r\n内容。', '1', NULL, '2012-09-03 05:10:40'),
-(2, 2, 1, 'Re: 第一封站内测试信', '来信已收到。', '0', 'receiver', '2012-09-03 05:21:09'),
+(1, 1, 2, '', '', '1', NULL, '2012-09-03 05:10:40'),
+(2, 2, 1, 'Re: ', '', '0', 'receiver', '2012-09-03 05:21:09'),
 (3, 2, 1, 'admin test ', 'test admin', '1', 'receiver', '2012-09-03 09:07:35');
 
 -- --------------------------------------------------------
@@ -263,9 +299,9 @@ CREATE TABLE IF NOT EXISTS `tbl_news` (
 --
 
 INSERT INTO `tbl_news` (`id`, `news_type`, `title`, `content`, `org_id`, `user_id`, `create_at`, `update_at`) VALUES
-(1, 1, '团队工具', '团队工具团队工具', 3, 7, '2012-12-08 23:23:23', '2012-12-08 23:23:23'),
-(2, 2, '名言', '名言名言名言名言名言', 3, 7, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 3, '小游戏', '小游戏 小游戏 小游戏 小游戏 小游戏 小游戏 小游戏 小游戏 小游戏 小游戏 ', 3, 7, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 1, '', '', 3, 7, '2012-12-08 23:23:23', '2012-12-08 23:23:23'),
+(2, 2, '', '', 3, 7, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 3, 'С', 'С', 3, 7, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -302,15 +338,54 @@ CREATE TABLE IF NOT EXISTS `tbl_notice` (
   KEY `notice_repeat_of_created_id_idx` (`repeat_of`,`created`,`id`),
   KEY `notice_conversation_created_id_idx` (`conversation`,`created`,`id`),
   KEY `notice_replyto_idx` (`reply_to`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=45 ;
 
 --
 -- 转存表中的数据 `tbl_notice`
 --
 
 INSERT INTO `tbl_notice` (`id`, `user_id`, `org_id`, `uri`, `content`, `rendered`, `url`, `created`, `modified`, `reply_to`, `is_local`, `source`, `conversation`, `lat`, `lon`, `location_id`, `location_ns`, `repeat_of`, `object_type`, `verb`, `scope`) VALUES
-(2, 7, 3, '/5dbase/backend/www/index.php/notice/2', 'ssssssfsfs', 0x73737373737366736673, NULL, '2013-01-21 16:00:02', '0000-00-00 00:00:00', NULL, 0, 'api', 1, 23.2342340, 23.2342340, NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0),
-(3, 7, 3, '/5dbase/backend/www/index.php/notice/3', 'last', 0x73737373737366736673, NULL, '2013-01-21 16:05:35', '2013-01-30 14:08:12', NULL, 0, 'api', 2, 23.2342340, 23.2342340, NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0);
+(4, 7, 3, '/index.php/notice/4', 'hello everyone', 'hello everyone', NULL, '2013-02-13 18:22:32', '0000-00-00 00:00:00', NULL, 0, 'api', 3, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0),
+(5, 7, 3, '/index.php/notice/5', 'hello everyone two', 'hello everyone two', NULL, '2013-02-13 18:24:02', '0000-00-00 00:00:00', NULL, 0, 'api', 4, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0),
+(6, 7, 3, '/index.php/notice/6', 'hello everyone three', 'hello everyone three', NULL, '2013-02-13 18:24:10', '0000-00-00 00:00:00', NULL, 0, 'api', 5, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0),
+(7, 15, 3, '/index.php/notice/7', 'hello everyone four', 'hello everyone four', NULL, '2013-02-13 18:52:47', '0000-00-00 00:00:00', NULL, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0),
+(8, 15, 3, '/index.php/notice/8', '@snfang reply for notice6', '@snfang reply for notice6', NULL, '2013-02-13 18:55:31', '0000-00-00 00:00:00', 6, 0, 'api', 5, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(9, 15, 3, '/index.php/notice/9', '@snfang reply for notice6', '@snfang reply for notice6', NULL, '2013-02-13 18:59:30', '0000-00-00 00:00:00', 6, 0, 'api', 5, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(10, 15, 3, NULL, '@snfang reply for notice6', '@snfang reply for notice6', NULL, '2013-02-13 19:58:48', '0000-00-00 00:00:00', 6, 0, 'api', 5, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(11, 15, 3, NULL, '@snfang reply for notice6', '@snfang reply for notice6', NULL, '2013-02-13 20:00:05', '0000-00-00 00:00:00', 6, 0, 'api', 5, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(12, 15, 3, '/index.php/notice/12', '@snfang reply for notice6', '@snfang reply for notice6', NULL, '2013-02-13 20:01:23', '0000-00-00 00:00:00', 6, 0, 'api', 5, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(13, 7, 3, NULL, 'asdfasdf', 'asdfasdf', NULL, '2013-02-15 00:08:24', '0000-00-00 00:00:00', NULL, 0, 'api', NULL, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0),
+(14, 7, 3, NULL, 'asdfasdf', 'asdfasdf', NULL, '2013-02-15 00:09:39', '0000-00-00 00:00:00', NULL, 0, 'api', NULL, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0),
+(15, 7, 3, '/index.php/notice/15', 'asdfasdf', 'asdfasdf', NULL, '2013-02-15 00:10:29', '0000-00-00 00:00:00', NULL, 0, 'api', 9, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/note', 'http://activitystrea.ms/schema/1.0/post', 0),
+(16, 7, 3, '/index.php/notice/16', '@jack1 asdfasdf', '@jack1 asdfasdf', NULL, '2013-02-15 00:13:39', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(17, 7, 3, NULL, '@jack1 asdfasdf', '@jack1 asdfasdf', NULL, '2013-02-15 00:15:24', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(18, 7, 3, NULL, '@jack1 asdfasdf', '@jack1 asdfasdf', NULL, '2013-02-15 00:16:27', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(19, 7, 3, NULL, '@jack1 asdfasdf', '@jack1 asdfasdf', NULL, '2013-02-15 00:18:08', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(20, 7, 3, NULL, '@jack1 asdfasdf', '@jack1 asdfasdf', NULL, '2013-02-15 00:19:01', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(21, 7, 3, NULL, '@jack1 asdfasdf', '@jack1 asdfasdf', NULL, '2013-02-15 00:19:19', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(22, 7, 3, NULL, '@jack1 asdfasdf', '@jack1 asdfasdf', NULL, '2013-02-15 00:20:17', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(23, 7, 3, '/index.php/notice/23', '@jack1 rp7', '@jack1 rp7', NULL, '2013-02-15 00:21:11', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(24, 7, 3, NULL, '@jack1 rp7 ', '@jack1 rp7 ', NULL, '2013-02-15 00:23:12', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(25, 7, 3, NULL, '@jack1 rp7 ', '@jack1 rp7 ', NULL, '2013-02-15 00:24:11', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(26, 7, 3, NULL, '@jack1 rp7 ', '@jack1 rp7 ', NULL, '2013-02-15 00:24:51', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(27, 7, 3, NULL, '@jack1 rp7 ', '@jack1 rp7 ', NULL, '2013-02-15 00:25:39', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(28, 7, 3, NULL, '@jack1 rp7 ', '@jack1 rp7 ', NULL, '2013-02-15 00:25:52', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(29, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 00:27:49', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(30, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 00:28:07', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(31, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 00:29:12', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(32, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 00:30:47', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(33, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 00:36:19', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(34, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 00:37:06', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(35, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 00:42:14', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(36, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 01:07:25', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(37, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 01:10:27', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(38, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 01:11:22', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(39, 7, 3, NULL, '@jack1  rp7 ', '@jack1  rp7 ', NULL, '2013-02-15 01:12:20', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(40, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 01:14:16', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(41, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 01:16:55', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(42, 7, 3, NULL, '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 01:18:11', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(43, 7, 3, '/index.php/notice/43', '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 01:18:45', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0),
+(44, 7, 3, '/index.php/notice/44', '@jack1 @jack2 rp7 ', '@jack1 @jack2 rp7 ', NULL, '2013-02-15 03:15:45', '0000-00-00 00:00:00', 7, 0, 'api', 6, '0.0000000', '0.0000000', NULL, NULL, NULL, 'http://activitystrea.ms/schema/1.0/comment', 'http://activitystrea.ms/schema/1.0/post', 0);
 
 -- --------------------------------------------------------
 
@@ -336,10 +411,10 @@ CREATE TABLE IF NOT EXISTS `tbl_orgs` (
 --
 
 INSERT INTO `tbl_orgs` (`id`, `name`, `slogan`, `photo_path`, `company_name`, `parent_id`, `create_at`, `update_at`, `creator_id`) VALUES
-(1, '营销之道', NULL, '', '', 0, '2012-12-01 17:15:30', '0000-00-00 00:00:00', 0),
-(2, '营销计划', NULL, '', '', 0, '2012-12-01 17:31:57', '0000-00-00 00:00:00', 0),
-(3, '你我团队', '集结号就是口号', '1250130830.jpg', '知正12341', 0, '2012-12-01 17:35:53', '0000-00-00 00:00:00', 0),
-(4, 'app协会', NULL, '', '', 0, '2013-01-05 13:25:14', '0000-00-00 00:00:00', 17);
+(1, 'Ӫ', NULL, '', '', 0, '2012-12-01 17:15:06', '0000-00-00 00:00:00', 0),
+(2, 'Ӫ', NULL, '', '', 0, '2012-12-01 17:31:33', '0000-00-00 00:00:00', 0),
+(3, '', '', '1250130830.jpg', '֪', 0, '2012-12-01 17:35:29', '0000-00-00 00:00:00', 0),
+(4, 'appЭ', NULL, '', '', 0, '2013-01-05 13:24:50', '0000-00-00 00:00:00', 17);
 
 -- --------------------------------------------------------
 
@@ -369,13 +444,13 @@ CREATE TABLE IF NOT EXISTS `tbl_posts` (
 --
 
 INSERT INTO `tbl_posts` (`id`, `contents`, `user_id`, `comments_count`, `like_count`, `favorite_count`, `public`, `wb_type`, `refer_id`, `org_id`, `create_at`, `update_at`, `file_path`) VALUES
-(1, '大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-02 04:55:38', '0000-00-00 00:00:00', ''),
-(2, '大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。大家好，，第一条微博。', 7, 1, 2, 3, 0, 0, 0, 3, '2012-12-02 04:55:46', '0000-00-00 00:00:00', ''),
-(3, '第二条微博 第二条微博 第二条微博 第二条微博\r\n第二条微博、第二条微博第二条微博', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-19 16:00:00', '0000-00-00 00:00:00', NULL),
+(1, '', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-02 04:55:14', '0000-00-00 00:00:00', ''),
+(2, '', 7, 1, 2, 3, 0, 0, 0, 3, '2012-12-02 04:55:22', '0000-00-00 00:00:00', ''),
+(3, '', 7, 0, 0, 0, 0, 0, 0, 3, '2012-12-19 15:59:36', '0000-00-00 00:00:00', NULL),
 (4, 'asdffwefwef', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (5, 'sfadw3efsdfsadf', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(6, '首页 微博首页 微博首页 微博首页 微博首页 微博首页 微首页 微博首页 微博博', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, '首页 微博首页 微博首页 微博首页 微博首页 微博首页 微博', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1356018593751.jpg');
+(6, '', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(7, '', 7, 0, 0, 0, 0, 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1356018593751.jpg');
 
 -- --------------------------------------------------------
 
@@ -404,16 +479,16 @@ CREATE TABLE IF NOT EXISTS `tbl_productions` (
 --
 
 INSERT INTO `tbl_productions` (`id`, `name`, `price`, `descriptor`, `original_pic_path`, `process_picture_path`, `org_id`, `inventory`, `category_id`, `status`, `create_at`, `update_at`) VALUES
-(1, '钢铁是怎样炼成的', 10, '钢铁是怎样炼成的 钢铁是怎样炼成的 钢铁是怎样炼成的', '', '', 3, 100, 1, 1, '2012-12-13 06:31:44', '0000-00-00 00:00:00'),
-(2, '钢铁是怎样炼成的22', 10, '钢铁是怎样炼成的钢铁是怎样炼成的钢铁是怎样炼成的钢铁是怎样炼成的', '', '', 0, 100, 1, 1, '2012-12-13 06:34:29', '0000-00-00 00:00:00'),
-(3, 'ruby 元编程', 20, 'ruby 元编程\r\nruby 元编程\r\nruby 元编程\r\n', '', '', 3, 10, 1, 1, '2012-12-13 06:39:38', '0000-00-00 00:00:00'),
-(4, '接口', 10, '接口', '1355489836919.jpg', '', 3, 1002, 1, 0, '2012-12-14 04:57:16', '0000-00-00 00:00:00'),
-(5, '素描', 13, '素描 素描 素描 素描 素描素描 素描素描', '1355579054462.jpg', '', 3, 11, 1, 0, '2012-12-15 05:44:14', '0000-00-00 00:00:00'),
-(6, '美女', 12, '美女 美女美女 美女美女 美女美女 美女美女 美女', '1355580544756.jpg', '', 3, 12, 1, 0, '2012-12-15 06:09:04', '0000-00-00 00:00:00'),
-(7, '风景', 10, '我希望将一个字符串限长显示,如果该字符串超过一定长数,就截取前n个字符,后加省略号... php字符串截取问题发布:dxy 字体:[增加 减小] 类型:转载 我希望将一个', '1355583562612.jpg', '', 3, 12, 1, 0, '2012-12-15 06:59:22', '0000-00-00 00:00:00'),
-(8, '创意', 10, '创意 创意创意创意 创意 创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意创意 创意创意创意 创意', '1357649959321.jpg', '', 3, 210, 1, 0, '2012-12-15 07:15:03', '0000-00-00 00:00:00'),
-(9, '千位刷', 1, '优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券\r\n优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券\r\n优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券\r\n优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券 优惠券', '1355621097864.jpg', '', 3, 12, 3, 0, '2012-12-15 17:24:57', '0000-00-00 00:00:00'),
-(10, '绝味鸭脖', 10, '绝味鸭脖 绝味鸭脖\r\n绝味鸭脖\r\n绝味鸭脖\r\n绝味鸭脖', '1355842000152.jpg', '', 3, 110, 3, 0, '2012-12-18 06:46:40', '0000-00-00 00:00:00');
+(1, '', 10, '', '', '', 3, 100, 1, 1, '2012-12-13 06:31:20', '0000-00-00 00:00:00'),
+(2, '', 10, '', '', '', 0, 100, 1, 1, '2012-12-13 06:34:05', '0000-00-00 00:00:00'),
+(3, 'ruby Ԫ', 20, 'ruby Ԫ', '', '', 3, 10, 1, 1, '2012-12-13 06:39:14', '0000-00-00 00:00:00'),
+(4, '', 10, '', '1355489836919.jpg', '', 3, 1002, 1, 0, '2012-12-14 04:56:52', '0000-00-00 00:00:00'),
+(5, '', 13, '', '1355579054462.jpg', '', 3, 11, 1, 0, '2012-12-15 05:43:50', '0000-00-00 00:00:00'),
+(6, '', 12, '', '1355580544756.jpg', '', 3, 12, 1, 0, '2012-12-15 06:08:40', '0000-00-00 00:00:00'),
+(7, '', 10, '', '1355583562612.jpg', '', 3, 12, 1, 0, '2012-12-15 06:58:58', '0000-00-00 00:00:00'),
+(8, '', 10, '', '1357649959321.jpg', '', 3, 210, 1, 0, '2012-12-15 07:14:39', '0000-00-00 00:00:00'),
+(9, 'ǧλˢ', 1, '', '1355621097864.jpg', '', 3, 12, 3, 0, '2012-12-15 17:24:33', '0000-00-00 00:00:00'),
+(10, '', 10, '', '1355842000152.jpg', '', 3, 110, 3, 0, '2012-12-18 06:46:16', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -443,10 +518,10 @@ INSERT INTO `tbl_profiles` (`user_id`, `lastname`, `firstname`, `birthday`, `rew
 (2, 'Demo', 'Demorr', '0000-00-00', 0, 0, 0, '', ''),
 (3, 'wang', 'john', '2012-09-19', 0, 0, 0, '', ''),
 (4, 'fang', 'martin', '1988-06-06', 0, 0, 0, '', ''),
-(7, 'fang', 'martin', '1989-07-13', 0, 0, 0, '1357652133636.jpg', ''),
+(7, 'fang', 'martin', '1989-07-13', 0, 0, 0, '1357652133636.jpg', 'jack1'),
 (8, '', '', '0000-00-00', 0, 0, 0, '', ''),
 (14, '', '', '0000-00-00', 0, 0, 0, '', ''),
-(15, '', '', '0000-00-00', 0, 0, 0, '', ''),
+(15, '', '', '0000-00-00', 0, 0, 0, '', 'jack2'),
 (16, '', '', '0000-00-00', 0, 0, 0, '', ''),
 (17, 'yan', 'june', '0000-00-00', 0, 0, 0, '', '');
 
@@ -484,12 +559,12 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
 INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`) VALUES
 (1, 'lastname', 'Last Name', 'VARCHAR', '50', '3', 1, '', '', 'Incorrect Last Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
 (2, 'firstname', 'First Name', 'VARCHAR', '50', '3', 1, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 0, 3),
-(3, 'birthday', '生日', 'DATE', '0', '0', 0, '', '', '生日格式不正确', '', '0000-00-00', 'UWjuidate', '{"ui-theme":"base","language":"en"}', 0, 3),
-(4, 'reward_point', '积分总数', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 1),
-(5, 'surplus_total', '剩余总额', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 2),
-(6, 'usage', '消费总额', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 2),
-(7, 'photo_path', '照片', 'VARCHAR', '100', '0', 2, '', '', '文件格式不正确', '{"file":{"allowEmpty":"true","types":"jpg, gif, png"}}', '', 'UWfile', '{"path":"E:/fsn_workspace/xampp/htdocs/5dbase/backend/www/assets/uploads/profiles"}', 0, 3),
-(8, 'nickname', '昵称', 'VARCHAR', '25', '0', 0, '', '', '', '', '', '', '', 0, 3);
+(3, 'birthday', '', 'DATE', '0', '0', 0, '', '', '', '', '0000-00-00', 'UWjuidate', '{"ui-theme":"base","language":"en"}', 0, 3),
+(4, 'reward_point', '', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 1),
+(5, 'surplus_total', 'ʣ', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 2),
+(6, 'usage', '', 'INTEGER', '10', '0', 0, '', '', '', '', '0', '', '', 0, 2),
+(7, 'photo_path', '', 'VARCHAR', '100', '0', 2, '', '', '', '{"file":{"allowEmpty":"true","types":"jpg, gif, png"}}', '', 'UWfile', '{"path":"E:/fsn_workspace/xampp/htdocs/5dbase/backend/www/assets/uploads/profiles"}', 0, 3),
+(8, 'nickname', '', 'VARCHAR', '25', '0', 0, '', '', '', '', '', '', '', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -508,6 +583,18 @@ CREATE TABLE IF NOT EXISTS `tbl_reply` (
   KEY `reply_replied_id_idx` (`replied_id`),
   KEY `reply_profile_id_modified_notice_id_idx` (`profile_id`,`modified`,`notice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- 转存表中的数据 `tbl_reply`
+--
+
+INSERT INTO `tbl_reply` (`notice_id`, `profile_id`, `modified`, `replied_id`) VALUES
+(12, 15, '2013-02-13 20:01:23', NULL),
+(23, 15, '2013-02-15 00:21:11', NULL),
+(43, 7, '2013-02-15 01:18:45', NULL),
+(43, 15, '2013-02-15 01:18:45', NULL),
+(44, 7, '2013-02-15 03:15:45', NULL),
+(44, 15, '2013-02-15 03:15:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -532,9 +619,9 @@ CREATE TABLE IF NOT EXISTS `tbl_reward_points` (
 --
 
 INSERT INTO `tbl_reward_points` (`id`, `date`, `total`, `usage`, `org_id`, `status`, `create_at`, `update_at`) VALUES
-(17, 1354579200, 2, 0, 3, 0, '2012-12-16 14:42:52', '0000-00-00 00:00:00'),
-(18, 1357603200, 110, 0, 4, 0, '2013-01-05 13:27:58', '0000-00-00 00:00:00'),
-(19, 1360108800, 110, 0, 4, 0, '2013-01-05 14:28:22', '0000-00-00 00:00:00');
+(17, 1354579200, 2, 0, 3, 0, '2012-12-16 14:42:28', '0000-00-00 00:00:00'),
+(18, 1357603200, 110, 0, 4, 0, '2013-01-05 13:27:34', '0000-00-00 00:00:00'),
+(19, 1360108800, 110, 0, 4, 0, '2013-01-05 14:27:58', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -545,16 +632,21 @@ INSERT INTO `tbl_reward_points` (`id`, `date`, `total`, `usage`, `org_id`, `stat
 CREATE TABLE IF NOT EXISTS `tbl_reward_point_grant` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `org_id` int(11) NOT NULL DEFAULT '0',
-  `granter_id` int(11) NOT NULL DEFAULT '0' COMMENT '积分发放者id ，兑换时则为0 ',
-  `recipient_id` int(11) NOT NULL DEFAULT '0' COMMENT '积分操作对象，一般为队员id',
-  `reward_val` int(11) NOT NULL DEFAULT '0' COMMENT '所需积分值',
-  `granter_type` int(1) NOT NULL DEFAULT '0' COMMENT '定义是积分发放或积分兑换',
-  `usage` int(11) NOT NULL DEFAULT '0' COMMENT '积分用途，兑换的时候，一般为礼品id',
+  `granter_id` int(11) NOT NULL DEFAULT '0' COMMENT '���ַ�����id ���һ�ʱ��Ϊ0 ',
+  `recipient_id` int(11) NOT NULL DEFAULT '0' COMMENT '���ֲ�������һ��Ϊ��Աid',
+  `reward_val` int(11) NOT NULL DEFAULT '0' COMMENT '�������ֵ',
+  `granter_type` int(1) NOT NULL DEFAULT '0' COMMENT '�����ǻ��ַ��Ż���ֶһ�',
+  `usage` int(11) NOT NULL DEFAULT '0' COMMENT '������;���һ���ʱ��һ��Ϊ��Ʒid',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `reason` varchar(255) NOT NULL COMMENT '积分发放的理由，兑换则为空',
+  `reason` varchar(255) NOT NULL COMMENT '���ַ��ŵ����ɣ��һ���Ϊ��',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `tbl_reward_point_grant`
+--
+
 
 -- --------------------------------------------------------
 
@@ -573,6 +665,11 @@ CREATE TABLE IF NOT EXISTS `tbl_sms` (
   `remark` text,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+
+--
+-- 转存表中的数据 `tbl_sms`
+--
+
 
 -- --------------------------------------------------------
 
@@ -610,14 +707,14 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(128) NOT NULL,
   `email` varchar(128) DEFAULT NULL,
-  `tel` varchar(15) NOT NULL COMMENT '手机号',
+  `tel` varchar(15) NOT NULL COMMENT '�ֻ���',
   `activkey` varchar(128) NOT NULL DEFAULT '',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastvisit_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `superuser` int(1) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '0',
-  `roles` varchar(10) CHARACTER SET utf32 NOT NULL DEFAULT 'manager',
-  `org_id` int(11) NOT NULL COMMENT '外键',
+  `roles` varchar(10) NOT NULL DEFAULT 'manager',
+  `org_id` int(11) NOT NULL COMMENT '���',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
@@ -631,17 +728,17 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `tel`, `activkey`, `create_at`, `lastvisit_at`, `superuser`, `status`, `roles`, `org_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '', '9a24eff8c15a6a141ece27eb6947da0f', '2012-09-02 18:28:30', '2012-11-29 22:24:28', 1, 1, 'admin', 0),
-(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '', '87ebc08a142bf24616e439c950d457f8', '2012-09-02 18:28:30', '2012-11-06 16:25:26', 0, 1, '0', 0),
-(3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-02 19:35:06', '0000-00-00 00:00:00', 0, 1, '0', 0),
-(4, 'jing', 'aa3f6926fe23b4cd15480ec872616581', 'jk_info@126.com', '', '26bc800dd291790b4eb5eeb91d73a86b', '2012-11-29 04:57:08', '2012-11-28 21:04:41', 0, 1, '0', 0),
-(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-01 17:35:53', '2013-02-06 23:07:28', 0, 1, 'manager', 3),
-(8, 'snfang001', 'e10adc3949ba59abbe56e057f20f883e', '', '13665567887', '2549b8b41a2b823d09812e7d31a813d4', '2013-01-04 14:42:12', '0000-00-00 00:00:00', 0, 1, 'manager', 0),
-(13, 'snfang002', 'e10adc3949ba59abbe56e057f20f883e', 'asdfs@asdf.com', '13454345454', '61aa7d82fa071a1f672b70e7bc63db77', '2013-01-04 15:11:32', '0000-00-00 00:00:00', 0, 1, 'manager', 0),
-(14, 'snfang003', 'e10adc3949ba59abbe56e057f20f883e', NULL, '13567345654', '133c53fadc3cff4b1bad2d99a7a58aff', '2013-01-04 15:13:09', '0000-00-00 00:00:00', 0, 1, 'manager', 0),
-(15, 'snfang004', 'e10adc3949ba59abbe56e057f20f883e', NULL, '13478457845', '15c95c20a639ca13418ae10cb4cb0138', '2013-01-04 15:17:37', '0000-00-00 00:00:00', 0, 1, 'member', 3),
-(16, 'snfang007', 'e10adc3949ba59abbe56e057f20f883e', NULL, '13548754561', 'c02d581473ddd84e3d689facd96a5245', '2013-01-04 15:29:02', '0000-00-00 00:00:00', 0, 1, 'member', 0),
-(17, 'jing008', '21232f297a57a5a743894a0e4a801fc3', 'asd@a.com', '13547854785', '6c9167c90cadc75c88f26d293aeaa68a', '2013-01-05 13:25:15', '2013-01-05 05:25:29', 0, 1, 'manager', 4);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '', '9a24eff8c15a6a141ece27eb6947da0f', '2012-09-02 18:28:06', '2012-11-29 22:24:04', 1, 1, 'admin', 0),
+(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '', '87ebc08a142bf24616e439c950d457f8', '2012-09-02 18:28:06', '2012-11-06 16:25:02', 0, 1, '0', 0),
+(3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gg.com', '', '5f9430e37c215dcb8b49cfc6654bd1d1', '2012-09-02 19:34:42', '0000-00-00 00:00:00', 0, 1, '0', 0),
+(4, 'jing', 'aa3f6926fe23b4cd15480ec872616581', 'jk_info@126.com', '', '26bc800dd291790b4eb5eeb91d73a86b', '2012-11-29 04:56:44', '2012-11-28 21:04:17', 0, 1, '0', 3),
+(7, 'snfang', '21232f297a57a5a743894a0e4a801fc3', 'sn_funnily@gmail.com', '13662272337', '1ad09be7e1e827a8970bb650cfde9672', '2012-12-01 17:35:29', '2013-02-08 01:48:10', 0, 1, 'manager', 3),
+(8, 'snfang001', 'e10adc3949ba59abbe56e057f20f883e', '', '13665567887', '2549b8b41a2b823d09812e7d31a813d4', '2013-01-04 14:41:48', '0000-00-00 00:00:00', 0, 1, 'manager', 0),
+(13, 'snfang002', 'e10adc3949ba59abbe56e057f20f883e', 'asdfs@asdf.com', '13454345454', '61aa7d82fa071a1f672b70e7bc63db77', '2013-01-04 15:11:08', '0000-00-00 00:00:00', 0, 1, 'manager', 0),
+(14, 'snfang003', 'e10adc3949ba59abbe56e057f20f883e', NULL, '13567345654', '133c53fadc3cff4b1bad2d99a7a58aff', '2013-01-04 15:12:45', '0000-00-00 00:00:00', 0, 1, 'manager', 0),
+(15, 'snfang004', 'e10adc3949ba59abbe56e057f20f883e', NULL, '13478457845', '15c95c20a639ca13418ae10cb4cb0138', '2013-01-04 15:17:13', '0000-00-00 00:00:00', 0, 1, 'manager', 3),
+(16, 'snfang007', 'e10adc3949ba59abbe56e057f20f883e', NULL, '13548754561', 'c02d581473ddd84e3d689facd96a5245', '2013-01-04 15:28:38', '0000-00-00 00:00:00', 0, 1, 'member', 0),
+(17, 'jing008', '21232f297a57a5a743894a0e4a801fc3', 'asd@a.com', '13547854785', '6c9167c90cadc75c88f26d293aeaa68a', '2013-01-05 13:24:51', '2013-01-05 05:25:05', 0, 1, 'manager', 4);
 
 --
 -- 限制导出的表
